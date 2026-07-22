@@ -100,6 +100,18 @@ img { max-width: 100%; display: block; }
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
 .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Botón de tema (claro/oscuro) */
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--texto-inv);
+  font-size: 1.05rem; line-height: 1; cursor: pointer;
+  transition: background var(--trans), transform var(--trans);
+}
+.theme-toggle:hover { background: rgba(255, 255, 255, 0.18); transform: rotate(-18deg); }
+
 /* ══════════ HERO ══════════ */
 .hero {
   position: relative;
@@ -412,6 +424,7 @@ img { max-width: 100%; display: block; }
 }
 @media (max-width: 780px) {
   .nav-toggle { display: flex; }
+  .theme-toggle { margin-left: auto; }
   .nav-links {
     position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0;
     background: var(--carbon-2); border-bottom: 1px solid var(--linea-inv); padding: 8px 5vw 16px; display: none;
@@ -489,6 +502,66 @@ body { background: #0F1116; color: var(--texto-inv); }
 /* Pasos: número amarillo (el círculo carbón se perdería) */
 .step-num { background: var(--amarillo); color: var(--carbon); }
 .tip-num { color: var(--carbon); }
+
+/* ═══════════════════════════════════════════════════════
+   MODO CLARO (activado con el botón de tema)
+   Nav, hero y footer permanecen oscuros; cambian las secciones
+   ═══════════════════════════════════════════════════════ */
+[data-theme="light"] body { background: #EEF1F6; color: var(--texto); }
+
+[data-theme="light"] .section {
+  color: var(--texto);
+  --tarjeta: #FFFFFF;
+  --linea: rgba(20, 22, 28, 0.09);
+  border-top: 1px solid rgba(20, 22, 28, 0.05);
+}
+[data-theme="light"] .section.bg-a { background: radial-gradient(circle at 85% -10%, #E4EEFB 0%, #F2F5FB 55%); }
+[data-theme="light"] .section.bg-b { background: radial-gradient(circle at 12% -5%, #EEE9FB 0%, #F4F3FA 55%); }
+[data-theme="light"] .section.bg-c { background: radial-gradient(circle at 88% 112%, rgba(255,201,30,0.20) 0%, #FBF7EC 55%); }
+
+[data-theme="light"] .section-tag { color: var(--amarillo-osc); }
+[data-theme="light"] .section-title { color: var(--texto); }
+[data-theme="light"] .section-lead,
+[data-theme="light"] .note { color: var(--muted); }
+
+[data-theme="light"] .card,
+[data-theme="light"] .speed,
+[data-theme="light"] .doc,
+[data-theme="light"] .tip,
+[data-theme="light"] .step { background: var(--tarjeta); border-color: rgba(20, 22, 28, 0.09); }
+
+[data-theme="light"] .card h3,
+[data-theme="light"] .doc h3,
+[data-theme="light"] .tip h3,
+[data-theme="light"] .step h3,
+[data-theme="light"] .speed-zone,
+[data-theme="light"] .emerg-name { color: var(--texto); }
+
+[data-theme="light"] .card p,
+[data-theme="light"] .doc p,
+[data-theme="light"] .tip p,
+[data-theme="light"] .step p,
+[data-theme="light"] .card.infraction li,
+[data-theme="light"] .speed-desc,
+[data-theme="light"] .emerg-sub { color: var(--muted); }
+
+[data-theme="light"] .card:hover,
+[data-theme="light"] .speed:hover,
+[data-theme="light"] .doc:hover,
+[data-theme="light"] .tip:hover,
+[data-theme="light"] .step:hover { background: #fff; box-shadow: var(--sombra-lg); }
+[data-theme="light"] .card:hover { box-shadow: 0 22px 44px color-mix(in srgb, var(--accent, var(--amarillo)) 18%, transparent); }
+
+[data-theme="light"] .card-icon,
+[data-theme="light"] .doc-icon,
+[data-theme="light"] .emerg-icon { background: color-mix(in srgb, var(--accent, var(--amarillo)) 15%, transparent); }
+
+[data-theme="light"] .tab { background: #fff; color: var(--muted); border-color: rgba(20, 22, 28, 0.09); }
+[data-theme="light"] .tab:hover { color: var(--texto); border-color: var(--amarillo); }
+[data-theme="light"] .tab.active { background: var(--carbon); color: var(--amarillo); border-color: var(--carbon); }
+[data-theme="light"] .tab-desc { color: var(--muted); }
+
+[data-theme="light"] .step-num { background: var(--carbon); color: var(--amarillo); }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }

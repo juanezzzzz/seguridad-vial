@@ -297,6 +297,23 @@ function observeReveals() {
   document.querySelectorAll(".reveal:not(.active)").forEach(el => revealObserver.observe(el));
 }
 
+function setupTheme() {
+  const btn = $("#themeToggle");
+  if (!btn) return;
+  const apply = (t) => {
+    document.documentElement.setAttribute("data-theme", t);
+    btn.textContent = t === "light" ? "🌙" : "☀️";
+    btn.title = t === "light" ? "Cambiar a modo oscuro" : "Cambiar a modo claro";
+  };
+  let theme = document.documentElement.getAttribute("data-theme") || "dark";
+  apply(theme);
+  btn.addEventListener("click", () => {
+    theme = theme === "light" ? "dark" : "light";
+    try { localStorage.setItem("yopvial_theme", theme); } catch (e) {}
+    apply(theme);
+  });
+}
+
 function setupMenu() {
   const toggle = $("#navToggle");
   const links = $("#navLinks");
@@ -359,6 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const year = $("#year");
   if (year) year.textContent = new Date().getFullYear();
 
+  setupTheme();
   setupMenu();
   setupScrollUI();
   observeReveals();
