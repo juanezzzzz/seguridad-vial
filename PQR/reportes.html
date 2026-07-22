@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Reportes ciudadanos YopVial: reporta huecos, semáforos dañados, señalización, accidentes y más." />
+  <title>Reportes Ciudadanos — YopVial</title>
+  <link rel="stylesheet" href="pqr.css?v=1" />
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo.png" alt="YopVial" />
+      <span class="nav-brand">Yop<b>Vial</b></span>
+    </a>
+    <div class="nav-actions">
+      <a href="../index.html" class="nav-back">← Volver al inicio</a>
+    </div>
+  </nav>
+
+  <!-- ══ ENCABEZADO ══ -->
+  <header class="pqr-head">
+    <div class="pqr-head-inner">
+      <span class="pqr-tag">PQR · Participación ciudadana</span>
+      <h1>Reportes ciudadanos</h1>
+      <p>Ayúdanos a mejorar la seguridad vial. Reporta huecos, semáforos dañados, señalización deteriorada o incidentes en las vías. Tu reporte cuenta.</p>
+      <div class="view-switch">
+        <button class="switch-btn active" data-view="form" id="btnViewForm">＋ Nuevo reporte</button>
+        <button class="switch-btn" data-view="list" id="btnViewList">📋 Ver reportes <span class="switch-count" id="switchCount">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pqr-main">
+
+    <!-- ══ VISTA: FORMULARIO ══ -->
+    <section class="view active" id="view-form">
+      <form class="pqr-form" id="pqrForm" novalidate>
+        <div class="form-grid">
+
+          <!-- Tipo -->
+          <div class="field field-full">
+            <label class="field-label">Tipo de reporte <span class="req">*</span></label>
+            <div class="type-grid" id="typeGrid"><!-- pqr.js --></div>
+            <p class="field-error" id="err-tipo">Selecciona un tipo de reporte.</p>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="field field-full">
+            <label class="field-label" for="ubicacion">Ubicación <span class="req">*</span></label>
+            <input type="text" id="ubicacion" class="input" placeholder="Ej: Calle 10 con Carrera 20, barrio El Centro" maxlength="120" />
+            <p class="field-error" id="err-ubicacion">Indica dónde ocurre.</p>
+          </div>
+
+          <!-- Gravedad -->
+          <div class="field">
+            <label class="field-label">Gravedad <span class="req">*</span></label>
+            <div class="chips" id="gravedadChips">
+              <button type="button" class="chip" data-grav="baja" style="--c:#1D9E75">Baja</button>
+              <button type="button" class="chip" data-grav="media" style="--c:#EF9F27">Media</button>
+              <button type="button" class="chip" data-grav="alta" style="--c:#E24B4A">Alta</button>
+            </div>
+            <p class="field-error" id="err-gravedad">Selecciona la gravedad.</p>
+          </div>
+
+          <!-- Foto -->
+          <div class="field">
+            <label class="field-label" for="foto">Foto (opcional)</label>
+            <label class="file-drop" id="fileDrop" for="foto">
+              <span id="fileText">📷 Toca para adjuntar una foto</span>
+              <input type="file" id="foto" accept="image/*" hidden />
+            </label>
+            <div class="file-preview" id="filePreview" hidden>
+              <img id="previewImg" alt="Vista previa" />
+              <button type="button" class="file-remove" id="fileRemove" aria-label="Quitar foto">✕</button>
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <div class="field field-full">
+            <label class="field-label" for="descripcion">Descripción <span class="req">*</span></label>
+            <textarea id="descripcion" class="input textarea" rows="4" maxlength="500" placeholder="Describe el problema con el mayor detalle posible..."></textarea>
+            <div class="char-row"><span class="field-error" id="err-descripcion">Describe el problema (mín. 10 caracteres).</span><span class="char-count" id="charCount">0 / 500</span></div>
+          </div>
+
+          <!-- Contacto (opcional) -->
+          <div class="field">
+            <label class="field-label" for="nombre">Tu nombre (opcional)</label>
+            <input type="text" id="nombre" class="input" placeholder="Anónimo" maxlength="60" />
+          </div>
+          <div class="field">
+            <label class="field-label" for="contacto">Correo o teléfono (opcional)</label>
+            <input type="text" id="contacto" class="input" placeholder="Para recibir novedades" maxlength="60" />
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" id="btnReset">Limpiar</button>
+          <button type="submit" class="btn btn-primary">Enviar reporte</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ══ VISTA: LISTA ══ -->
+    <section class="view" id="view-list">
+      <div class="stats-row" id="statsRow"><!-- pqr.js --></div>
+
+      <div class="list-toolbar">
+        <input type="search" id="search" class="input search" placeholder="🔍 Buscar por ubicación o descripción..." />
+        <div class="filters">
+          <select id="filterTipo" class="input select"><option value="">Todos los tipos</option></select>
+          <select id="filterEstado" class="input select">
+            <option value="">Todos los estados</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="en_proceso">En proceso</option>
+            <option value="resuelto">Resuelto</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="report-list" id="reportList"><!-- pqr.js --></div>
+      <div class="empty" id="emptyState" hidden>
+        <div class="empty-icon">📭</div>
+        <h3>Aún no hay reportes</h3>
+        <p>Sé el primero en reportar un problema en las vías.</p>
+        <button class="btn btn-primary" id="btnEmptyNew">Crear un reporte</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ MODAL DETALLE ══ -->
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" id="modal"><!-- pqr.js --></div>
+  </div>
+
+  <!-- ══ TOAST ══ -->
+  <div class="toast" id="toast" hidden></div>
+
+  <footer class="pqr-footer">
+    <p>YopVial · Reportes ciudadanos · Los datos se guardan localmente en tu navegador.</p>
+  </footer>
+
+  <script src="pqr.js?v=1"></script>
+</body>
+</html>
