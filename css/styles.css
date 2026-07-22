@@ -130,7 +130,13 @@ img { max-width: 100%; display: block; }
 .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
 
 .hero-art { display: flex; justify-content: center; }
-.hero-art img { width: min(360px, 80%); filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.45)); animation: floaty 5s ease-in-out infinite; }
+/* contenedor animado (flotación) que aloja las dos mascotas apiladas */
+.hero-art { --thumb: 0; }
+.mascot-holder { position: relative; width: min(360px, 80%); animation: floaty 5s ease-in-out infinite; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.45)); }
+.mascot { width: 100%; }
+.mascot-up { position: relative; z-index: 1; }
+/* la versión "pulgar abajo" va encima y aparece según el scroll (--thumb: 0→1) */
+.mascot-down { position: absolute; inset: 0; z-index: 2; opacity: var(--thumb); transition: opacity 0.12s linear; }
 @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
 
 .hero-stats {
