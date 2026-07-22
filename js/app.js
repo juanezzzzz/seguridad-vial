@@ -297,6 +297,16 @@ function observeReveals() {
   document.querySelectorAll(".reveal:not(.active)").forEach(el => revealObserver.observe(el));
 }
 
+function setupCardGlow() {
+  document.addEventListener("pointermove", (e) => {
+    const card = e.target.closest(".card");
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    card.style.setProperty("--my", `${e.clientY - r.top}px`);
+  }, { passive: true });
+}
+
 function setupTheme() {
   const btn = $("#themeToggle");
   if (!btn) return;
@@ -377,6 +387,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (year) year.textContent = new Date().getFullYear();
 
   setupTheme();
+  setupCardGlow();
   setupMenu();
   setupScrollUI();
   observeReveals();
