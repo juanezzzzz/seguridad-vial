@@ -1,0 +1,15 @@
+# Dependencias
+node_modules/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# Logs y temporales
+*.log
+*.tmp
