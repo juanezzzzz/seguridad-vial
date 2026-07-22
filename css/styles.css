@@ -14,9 +14,9 @@
   --muted-inv: rgba(244, 245, 247, 0.66);
   --linea: rgba(20, 22, 28, 0.09);
   --linea-inv: rgba(255, 255, 255, 0.10);
-  --bg: #DFE5EE;
+  --bg: #FBF1D4;          /* banda crema cálida (identidad amarilla) */
   --surface: #FFFFFF;
-  --card: #EDF1F7;
+  --card: #FCF6E6;        /* tarjeta crema sobre banda blanca */
   --radio: 18px;
   --radio-lg: 30px;
   --radio-sm: 12px;
@@ -216,11 +216,11 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans), background var(--trans);
 }
-/* barra de acento superior que crece en hover */
+/* barra de acento superior: visible en reposo, se intensifica en hover */
 .card::before {
   content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: var(--accent, var(--amarillo));
-  transform: scaleX(0); transform-origin: left; transition: transform var(--trans);
+  transform: scaleX(1); transform-origin: left; transition: transform var(--trans), height var(--trans);
 }
 /* resplandor sutil */
 .card::after {
@@ -234,7 +234,7 @@ img { max-width: 100%; display: block; }
   border-color: color-mix(in srgb, var(--accent, var(--amarillo)) 45%, var(--linea));
   box-shadow: 0 22px 44px color-mix(in srgb, var(--accent, var(--carbon)) 18%, transparent);
 }
-.card:hover::before { transform: scaleX(1); }
+.card:hover::before { height: 6px; }
 .card:hover::after { opacity: 1; }
 
 .card-icon {
