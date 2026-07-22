@@ -318,7 +318,7 @@ function setupMenu() {
 function setupScrollUI() {
   const nav = $("#nav");
   const toTop = $("#toTop");
-  const links = document.querySelectorAll(".nav-links a");
+  const links = document.querySelectorAll('.nav-links a[href^="#"]');
   const sections = [...links].map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
 
   const onScroll = () => {
