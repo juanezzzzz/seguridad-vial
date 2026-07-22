@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seguridad Vial</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav">
+    <a href="#inicio" class="nav-logo">Seguridad<span>Vial</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#inicio">Inicio</a>
+      <a href="#normas">Normas</a>
+      <a href="#consejos">Consejos</a>
+      <a href="#emergencias">Emergencias</a>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <header class="hero" id="inicio">
+    <div class="hero-content reveal">
+      <span class="hero-tag">Movilidad segura</span>
+      <h1>Muévete con <em>seguridad</em></h1>
+      <p>Conoce las normas de tránsito, aplica buenos hábitos y protege tu vida y la de los demás en las vías.</p>
+      <div class="hero-btns">
+        <a href="#normas" class="btn btn-primary">Ver normas</a>
+        <a href="#emergencias" class="btn btn-secondary">Emergencias →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ NORMAS ══ -->
+  <section class="section" id="normas">
+    <span class="section-tag">Reglamento</span>
+    <h2 class="section-title">Normas clave de tránsito</h2>
+    <div class="cards" id="normasGrid"><!-- se rellena desde app.js --></div>
+  </section>
+
+  <!-- ══ CONSEJOS ══ -->
+  <section class="section section-alt" id="consejos">
+    <span class="section-tag">Consejos prácticos</span>
+    <h2 class="section-title">Cómo proteger tu vida</h2>
+    <ul class="tips" id="tipsList"><!-- se rellena desde app.js --></ul>
+  </section>
+
+  <!-- ══ EMERGENCIAS ══ -->
+  <section class="section" id="emergencias">
+    <span class="section-tag">Líneas de ayuda</span>
+    <h2 class="section-title">Números de emergencia</h2>
+    <div class="cards" id="emergGrid"><!-- se rellena desde app.js --></div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer">
+    <p>Proyecto de Seguridad Vial · Información basada en el Código Nacional de Tránsito</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
