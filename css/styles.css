@@ -441,12 +441,12 @@ body { background: #0F1116; color: var(--texto-inv); }
 }
 .section:first-of-type { border-top: none; }
 
-/* Fondo A: reflejo tipo banner (arriba derecha) */
-.section.bg-a { background: radial-gradient(circle at 82% -20%, #2b3040 0%, #14161C 58%); }
-/* Fondo B: degradado vertical más plano y frío */
-.section.bg-b { background: linear-gradient(180deg, #191C24 0%, #101218 100%); }
-/* Fondo C: brillo amarillo sutil (identidad) abajo derecha */
-.section.bg-c { background: radial-gradient(circle at 88% 115%, rgba(255,201,30,0.09) 0%, #12141A 55%); }
+/* Fondo A: resplandor AZUL arriba a la derecha (tipo banner) */
+.section.bg-a { background: radial-gradient(circle at 85% -10%, #1f3350 0%, #0E1117 55%); }
+/* Fondo B: resplandor VIOLETA arriba a la izquierda */
+.section.bg-b { background: radial-gradient(circle at 12% -5%, #2c2447 0%, #0F1016 55%); }
+/* Fondo C: resplandor ÁMBAR (identidad) abajo a la derecha */
+.section.bg-c { background: radial-gradient(circle at 88% 112%, rgba(255,201,30,0.14) 0%, #15130D 52%); }
 
 .section-tag { color: var(--amarillo); }
 .section-title { color: #fff; }
