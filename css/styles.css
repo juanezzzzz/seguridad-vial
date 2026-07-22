@@ -14,9 +14,9 @@
   --muted-inv: rgba(244, 245, 247, 0.66);
   --linea: rgba(20, 22, 28, 0.09);
   --linea-inv: rgba(255, 255, 255, 0.10);
-  --bg: #E9EDF2;
+  --bg: #DFE5EE;
   --surface: #FFFFFF;
-  --card: #F5F7FA;
+  --card: #EDF1F7;
   --radio: 18px;
   --radio-lg: 30px;
   --radio-sm: 12px;
@@ -178,6 +178,21 @@ img { max-width: 100%; display: block; }
   border-block: 1px solid var(--linea);
   --tarjeta: var(--card);            /* tarjetas grises sobre banda blanca */
 }
+/* banda oscura (rompe la monotonía a mitad de página) */
+.section-dark {
+  background: radial-gradient(circle at 85% 0%, #24283400, var(--carbon) 70%), var(--carbon);
+  color: var(--texto-inv);
+  border-block: 1px solid rgba(255, 255, 255, 0.06);
+  --tarjeta: var(--carbon-2);
+  --linea: rgba(255, 255, 255, 0.10);
+}
+.section-dark .section-tag { color: var(--amarillo); }
+.section-dark .section-title { color: #fff; }
+.section-dark .section-lead { color: var(--muted-inv); }
+.section-dark .step h3 { color: #fff; }
+.section-dark .step p { color: var(--muted-inv); }
+.section-dark .step:hover { background: #232733; box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+.section-dark .step-num { background: var(--amarillo); color: var(--carbon); }
 
 /* Encabezado de sección con acento */
 .section-tag {
