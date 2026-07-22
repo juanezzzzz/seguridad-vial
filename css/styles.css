@@ -234,10 +234,11 @@ img { max-width: 100%; display: block; }
   background: var(--accent, var(--amarillo));
   transform: scaleX(1); transform-origin: left; transition: transform var(--trans), height var(--trans);
 }
-/* resplandor sutil */
+/* reflector que sigue el cursor (posición vía --mx / --my desde JS) */
 .card::after {
-  content: ""; position: absolute; top: -40%; right: -30%; width: 220px; height: 220px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent, var(--amarillo)) 22%, transparent), transparent 70%);
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle 200px at var(--mx, 50%) var(--my, 50%),
+              color-mix(in srgb, var(--accent, var(--amarillo)) 32%, transparent), transparent 65%);
   opacity: 0; transition: opacity var(--trans); pointer-events: none;
 }
 .card:hover {
