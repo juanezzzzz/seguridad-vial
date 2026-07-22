@@ -75,16 +75,16 @@ const DOCUMENTOS = [
 // ── Infracciones ───────────────────────────────────────
 const INFRACCIONES = [
   {
-    nivel: "Gravísimas", multa: "45 SMDLV", color: "#E24B4A",
-    items: ["Conducir en estado de embriaguez", "Exceso de velocidad de más de 30 km/h", "No detenerse en semáforo en rojo", "Adelantar en curva o doble línea"],
+    nivel: "Gravísimas", color: "#E24B4A",
+    items: ["Conducir en estado de embriaguez", "Conducir sin licencia o con documentos vencidos", "Exceso de velocidad de más de 30 km/h", "No detenerse en semáforo en rojo", "Adelantar en curva o doble línea"],
   },
   {
-    nivel: "Graves", multa: "15 SMDLV", color: "#EF9F27",
+    nivel: "Graves", color: "#EF9F27",
     items: ["No usar el cinturón de seguridad", "Conducir motos sin casco", "Usar el celular al conducir", "Estacionar en zona prohibida"],
   },
   {
-    nivel: "Leves", multa: "4 SMDLV", color: "#1D9E75",
-    items: ["Circular sin los documentos al día", "Luces fundidas", "No usar las direccionales", "Placa en mal estado"],
+    nivel: "Leves", color: "#1D9E75",
+    items: ["Luces o direccionales sin funcionar", "Placa en mal estado o mal ubicada", "Uso indebido del pito o exceso de ruido", "Estacionar sin señalizar el vehículo"],
   },
 ];
 
@@ -226,7 +226,6 @@ function renderInfracciones() {
     <article class="card infraction reveal" style="--accent:${i.color}">
       <div class="infraction-head">
         <h3>${i.nivel}</h3>
-        <span class="badge" style="--accent:${i.color}">Multa: ${i.multa}</span>
       </div>
       <ul>${i.items.map(it => `<li>${it}</li>`).join("")}</ul>
     </article>`).join(""));
