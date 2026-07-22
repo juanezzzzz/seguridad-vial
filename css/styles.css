@@ -427,6 +427,69 @@ img { max-width: 100%; display: block; }
   .footer-inner { flex-direction: column; }
 }
 
+/* ═══════════════════════════════════════════════════════
+   TEMA OSCURO — toda la página con el estilo del banner
+   3 fondos oscuros (bg-a / bg-b / bg-c) alternados
+   ═══════════════════════════════════════════════════════ */
+body { background: #0F1116; color: var(--texto-inv); }
+
+.section {
+  color: var(--texto-inv);
+  --tarjeta: #1E212B;                 /* tarjetas oscuras */
+  --linea: rgba(255, 255, 255, 0.09);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.section:first-of-type { border-top: none; }
+
+/* Fondo A: reflejo tipo banner (arriba derecha) */
+.section.bg-a { background: radial-gradient(circle at 82% -20%, #2b3040 0%, #14161C 58%); }
+/* Fondo B: degradado vertical más plano y frío */
+.section.bg-b { background: linear-gradient(180deg, #191C24 0%, #101218 100%); }
+/* Fondo C: brillo amarillo sutil (identidad) abajo derecha */
+.section.bg-c { background: radial-gradient(circle at 88% 115%, rgba(255,201,30,0.09) 0%, #12141A 55%); }
+
+.section-tag { color: var(--amarillo); }
+.section-title { color: #fff; }
+.section-lead { color: var(--muted-inv); }
+.note { color: var(--muted-inv); }
+
+/* Tarjetas y variantes en oscuro */
+.card, .speed, .doc, .tip, .step {
+  background: var(--tarjeta);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.card h3, .doc h3, .tip h3, .step h3 { color: #fff; }
+.card p, .doc p, .tip p, .step p, .card.infraction li { color: var(--muted-inv); }
+.speed-zone { color: #fff; }
+.speed-desc { color: var(--muted-inv); }
+.emerg-name { color: #fff; }
+.emerg-sub { color: var(--muted-inv); }
+
+/* Hover: sube a un slate más claro (no a blanco) */
+.card:hover, .speed:hover, .doc:hover, .tip:hover, .step:hover {
+  background: #262A35;
+}
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent, var(--amarillo)) 55%, transparent);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+.speed:hover, .doc:hover, .tip:hover, .step:hover { box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45); }
+
+/* Íconos con más presencia en oscuro */
+.card-icon, .doc-icon, .emerg-icon {
+  background: color-mix(in srgb, var(--accent, var(--amarillo)) 24%, transparent);
+}
+
+/* Tabs */
+.tab { background: var(--tarjeta); color: var(--muted-inv); border-color: rgba(255,255,255,0.10); }
+.tab:hover { color: #fff; border-color: var(--amarillo); }
+.tab.active { background: var(--amarillo); color: var(--carbon); border-color: var(--amarillo); }
+.tab-desc { color: var(--muted-inv); }
+
+/* Pasos: número amarillo (el círculo carbón se perdería) */
+.step-num { background: var(--amarillo); color: var(--carbon); }
+.tip-num { color: var(--carbon); }
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .hero-art img { animation: none; }
