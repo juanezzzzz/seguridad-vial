@@ -318,6 +318,7 @@ function setupMenu() {
 function setupScrollUI() {
   const nav = $("#nav");
   const toTop = $("#toTop");
+  const heroArt = $("#heroArt");
   const links = document.querySelectorAll('.nav-links a[href^="#"]');
   const sections = [...links].map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
 
@@ -325,6 +326,13 @@ function setupScrollUI() {
     const y = window.scrollY;
     nav.classList.toggle("scrolled", y > 20);
     toTop.classList.toggle("show", y > 500);
+
+    // Pulgar de la mascota: 0 (arriba) al inicio → 1 (abajo) al bajar el hero
+    if (heroArt) {
+      const span = window.innerHeight * 0.6;         // recorrido del efecto
+      const thumb = Math.min(Math.max(y / span, 0), 1);
+      heroArt.style.setProperty("--thumb", thumb.toFixed(3));
+    }
 
     let current = "";
     sections.forEach(sec => { if (y >= sec.offsetTop - 120) current = sec.id; });
