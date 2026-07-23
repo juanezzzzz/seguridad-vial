@@ -173,12 +173,12 @@ const EMERGENCIAS = [
 // ── Reportes ciudadanos (PQR) — qué puedes reportar ────
 // Contenido estático (mismas categorías que PQR/pqr.js), sin leer datos reales.
 const PQR_TIPOS = [
-  { icon: "🕳️", titulo: "Hueco / bache", desc: "Baches, grietas o hundimientos peligrosos en la calzada.", color: "#E24B4A" },
-  { icon: "🚦", titulo: "Semáforo dañado", desc: "Semáforos apagados, intermitentes o que no cambian correctamente.", color: "#EF9F27" },
-  { icon: "🚧", titulo: "Señalización", desc: "Señales caídas, tapadas, borradas o mal ubicadas.", color: "#185FA5" },
-  { icon: "💥", titulo: "Accidente", desc: "Choques o siniestros que debas reportar a la autoridad.", color: "#3C3489" },
-  { icon: "💡", titulo: "Alumbrado público", desc: "Postes o luminarias apagadas que reducen la visibilidad nocturna.", color: "#1D9E75" },
-  { icon: "📌", titulo: "Otro", desc: "Cualquier otra situación que ponga en riesgo a los actores viales.", color: "#E8530A" },
+  { icon: "🕳️", img: "assets/peligros/bache.png", titulo: "Hueco / bache", desc: "Baches, grietas o hundimientos peligrosos en la calzada.", color: "#E24B4A" },
+  { icon: "🚦", img: "assets/peligros/semaforo.png", titulo: "Semáforo dañado", desc: "Semáforos apagados, intermitentes o que no cambian correctamente.", color: "#EF9F27" },
+  { icon: "🚧", img: "assets/peligros/senalizacion.png", titulo: "Señalización", desc: "Señales caídas, tapadas, borradas o mal ubicadas.", color: "#185FA5" },
+  { icon: "💥", img: "assets/peligros/accidente.png", titulo: "Accidente", desc: "Choques o siniestros que debas reportar a la autoridad.", color: "#3C3489" },
+  { icon: "💡", img: "assets/peligros/alumbrado.png", titulo: "Alumbrado público", desc: "Postes o luminarias apagadas que reducen la visibilidad nocturna.", color: "#1D9E75" },
+  { icon: "📌", img: "assets/peligros/otro.png", titulo: "Otro", desc: "Cualquier otra situación que ponga en riesgo a los actores viales.", color: "#E8530A" },
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -341,7 +341,7 @@ function renderEmergencias() {
 function renderPqrTipos() {
   html($("#pqrTiposGrid"), PQR_TIPOS.map(t => `
     <article class="card reveal" style="--accent:${t.color}">
-      <div class="card-icon">${t.icon}</div>
+      <div class="card-icon">${t.img ? `<img src="${t.img}" alt="${t.titulo}" loading="lazy" />` : t.icon}</div>
       <h3>${t.titulo}</h3>
       <p>${t.desc}</p>
     </article>`).join(""));
