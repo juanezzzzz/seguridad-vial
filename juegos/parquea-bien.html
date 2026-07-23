@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Parquea bien: maniobra el carro de Yop y estacionalo dentro del cupo antes de que se acabe el tiempo. Juego de seguridad vial de YopVial." />
+  <title>Parquea bien — Juegos YopVial</title>
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
+  <link rel="stylesheet" href="juegos.css?v=8" />
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo.png" alt="YopVial" />
+      <span class="nav-brand">Yop<b>Vial</b></span>
+    </a>
+    <div class="nav-actions">
+      <a href="juegos.html" class="nav-back">← Juegos</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ══ ENCABEZADO ══ -->
+  <header class="games-head">
+    <div class="games-head-inner">
+      <span class="games-tag">🅿️ Juego</span>
+      <h1>Parquea bien</h1>
+      <p>Maniobra el carro de Yop, esquiva los obstáculos y estaciona dentro del cupo, bien orientado y antes de que se acabe el tiempo.</p>
+    </div>
+  </header>
+
+  <main class="games-main">
+
+    <section class="game" id="parquear">
+      <div class="game-head">
+        <h2 class="game-title">🅿️ Parquea bien</h2>
+        <div class="game-head-right">
+          <div class="scoreboard">
+            <div class="score-box"><span class="score-n" id="scorePuntos">0</span><span class="score-l">Puntos</span></div>
+            <div class="score-box"><span class="score-n" id="scoreNivel">1</span><span class="score-l">Nivel</span></div>
+            <div class="score-box"><span class="score-n" id="scoreMejor">0</span><span class="score-l">Mejor</span></div>
+          </div>
+          <button class="theme-toggle sound-toggle" id="soundToggle" aria-label="Sonido" title="Silenciar">🔊</button>
+        </div>
+      </div>
+
+      <!-- Pantalla de inicio -->
+      <div class="quiz-start" id="parquearStart">
+        <div class="quiz-start-ico" id="startIco">🅿️</div>
+        <h3 id="startTitle">¿List@ para estacionar?</h3>
+        <p id="startText">Maneja el carro de Yop con las <b>flechas</b> o los <b>botones</b> en pantalla. Entra al cupo marcado (línea amarilla), quedando <b>quieto</b> y con la orientación de la flecha, antes de que se acabe el tiempo. No choques con los otros carros. Tienes <b>3 vidas</b>. ¡Buena maniobra!</p>
+        <button class="btn btn-primary" id="startBtn">▶ Comenzar</button>
+      </div>
+
+      <!-- Juego (oculto hasta comenzar) -->
+      <div class="cruza-stage" id="parquearStage" hidden>
+        <div class="cruza-canvas-wrap">
+          <canvas id="parquearCanvas" class="cruza-canvas" width="420" height="560" aria-label="Tablero del juego Parquea bien"></canvas>
+        </div>
+
+        <!-- Controles táctiles -->
+        <div class="pad" role="group" aria-label="Controles">
+          <button class="pad-btn pad-up"    data-accion="acelerar" aria-label="Acelerar">▲</button>
+          <button class="pad-btn pad-left"  data-accion="izq"      aria-label="Girar izquierda">◀</button>
+          <button class="pad-btn pad-down"  data-accion="reversa"  aria-label="Reversa">▼</button>
+          <button class="pad-btn pad-right" data-accion="der"      aria-label="Girar derecha">▶</button>
+        </div>
+        <p class="pad-hint">Teclado: flechas o WASD (mantén presionado) · Móvil: mantén presionados los botones</p>
+      </div>
+    </section>
+
+    <p class="games-note"><a href="juegos.html">← Volver a todos los juegos</a></p>
+
+  </main>
+
+  <footer class="games-footer">
+    <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
+  </footer>
+
+  <script src="parquea-bien.js?v=1"></script>
+</body>
+</html>

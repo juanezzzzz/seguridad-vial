@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Ruta segura: guia la moto de Yop esquivando huecos y autos, recoge casco y SOAT. Juego de seguridad vial de YopVial." />
+  <title>Ruta segura — Juegos YopVial</title>
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
+  <link rel="stylesheet" href="juegos.css?v=6" />
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo.png" alt="YopVial" />
+      <span class="nav-brand">Yop<b>Vial</b></span>
+    </a>
+    <div class="nav-actions">
+      <a href="juegos.html" class="nav-back">← Juegos</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ══ ENCABEZADO ══ -->
+  <header class="games-head">
+    <div class="games-head-inner">
+      <span class="games-tag">🏍️ Juego</span>
+      <h1>Ruta segura</h1>
+      <p>Guía a Yop en moto por la vía: esquiva huecos y autos, recoge el casco y el SOAT, y no te distraigas con el celular.</p>
+    </div>
+  </header>
+
+  <main class="games-main">
+
+    <section class="game" id="ruta">
+      <div class="game-head">
+        <h2 class="game-title">🏍️ Ruta segura</h2>
+        <div class="game-head-right">
+          <div class="scoreboard">
+            <div class="score-box"><span class="score-n" id="scorePuntos">0</span><span class="score-l">Puntos</span></div>
+            <div class="score-box"><span class="score-n" id="scoreNivel">1</span><span class="score-l">Nivel</span></div>
+            <div class="score-box"><span class="score-n" id="scoreMejor">0</span><span class="score-l">Mejor</span></div>
+          </div>
+          <button class="theme-toggle sound-toggle" id="soundToggle" aria-label="Sonido" title="Silenciar">🔊</button>
+        </div>
+      </div>
+
+      <!-- Pantalla de inicio -->
+      <div class="quiz-start" id="rutaStart">
+        <div class="quiz-start-ico" id="startIco">🏍️</div>
+        <h3 id="startTitle">¿List@ para rodar?</h3>
+        <p id="startText">Yop va en moto por la vía. Cambia de carril para esquivar autos, <b>salta</b> los huecos, recoge <b>casco 🪖</b> y <b>SOAT 📄</b>, y evita el <b>celular 📱</b>: te distrae y te hace chocar. Tienes <b>3 vidas</b>. ¡Buena ruta!</p>
+        <button class="btn btn-primary" id="startBtn">▶ Comenzar</button>
+      </div>
+
+      <!-- Juego (oculto hasta comenzar) -->
+      <div class="ruta-stage" id="rutaStage" hidden>
+        <div class="ruta-canvas-wrap">
+          <canvas id="rutaCanvas" class="ruta-canvas" width="420" height="560" aria-label="Tablero del juego Ruta segura"></canvas>
+        </div>
+
+        <!-- Controles táctiles -->
+        <div class="ruta-pad" role="group" aria-label="Controles">
+          <button class="pad-btn" data-accion="left" aria-label="Carril izquierdo">◀</button>
+          <button class="pad-btn pad-jump" data-accion="jump" aria-label="Saltar">⤒</button>
+          <button class="pad-btn" data-accion="right" aria-label="Carril derecho">▶</button>
+        </div>
+        <p class="pad-hint">Teclado: ← → para cambiar de carril, ↑ para saltar · Móvil: desliza a los lados o toca para saltar</p>
+      </div>
+    </section>
+
+    <p class="games-note"><a href="juegos.html">← Volver a todos los juegos</a></p>
+
+  </main>
+
+  <footer class="games-footer">
+    <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
+  </footer>
+
+  <script src="ruta-segura.js?v=1"></script>
+</body>
+</html>
