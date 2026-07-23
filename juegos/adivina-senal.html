@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Adivina la señal de YopVial: identifica la señal de tránsito correcta en 10 segundos." />
+  <title>Adivina la señal — Juegos YopVial</title>
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
+  <link rel="stylesheet" href="juegos.css?v=3" />
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo.png" alt="YopVial" />
+      <span class="nav-brand">Yop<b>Vial</b></span>
+    </a>
+    <div class="nav-actions">
+      <a href="juegos.html" class="nav-back">← Juegos</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ══ ENCABEZADO ══ -->
+  <header class="games-head">
+    <div class="games-head-inner">
+      <span class="games-tag">🚦 Juego</span>
+      <h1>Adivina la señal</h1>
+      <p>Observa la señal de tránsito y elige su nombre correcto. ¡Tienes 10 segundos por señal!</p>
+    </div>
+  </header>
+
+  <main class="games-main">
+
+    <section class="game" id="adivina">
+      <div class="game-head">
+        <h2 class="game-title">🚦 Adivina la señal</h2>
+        <div class="scoreboard">
+          <div class="score-box"><span class="score-n" id="scoreAciertos">0</span><span class="score-l">Aciertos</span></div>
+          <div class="score-box"><span class="score-n" id="scoreRacha">0</span><span class="score-l">Racha</span></div>
+          <div class="score-box"><span class="score-n" id="scoreMejor">0</span><span class="score-l">Mejor racha</span></div>
+        </div>
+      </div>
+
+      <div class="game-body-quiz">
+        <!-- Cronómetro -->
+        <div class="quiz-timer"><div class="quiz-timer-bar" id="timerBar"></div></div>
+        <div class="quiz-timer-num">⏱ <span id="timeLeft">10</span> s</div>
+
+        <!-- Señal -->
+        <div class="senal-img" id="senalImg"><!-- js --></div>
+        <p class="quiz-q">¿Qué señal es esta?</p>
+
+        <!-- Opciones -->
+        <div class="options" id="options"><!-- js --></div>
+        <div class="result" id="result" hidden></div>
+        <div class="game-actions">
+          <button class="btn btn-primary" id="nextBtn" hidden>Siguiente →</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="games-note"><a href="juegos.html">← Volver a todos los juegos</a></p>
+
+  </main>
+
+  <footer class="games-footer">
+    <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
+  </footer>
+
+  <script src="adivina-senal.js?v=1"></script>
+</body>
+</html>
