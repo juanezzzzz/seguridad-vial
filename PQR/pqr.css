@@ -17,6 +17,7 @@
   --surface: #1E212B;
   --card: #171A22;
   --verde: #1D9E75;
+  --verde-osc: #17845F;
   --azul: #185FA5;
   --rojo: #E24B4A;
   --amber: #EF9F27;
@@ -237,7 +238,11 @@ img { max-width: 100%; display: block; }
   .rc-fecha { margin-left: 0; width: 100%; }
 }
 
-/* ═══ MODO CLARO (toggle) — nav y encabezado siguen oscuros ═══ */
+/* ═══════════════════════════════════════════════════════
+   MODO CLARO (toggle) — paleta VERDE + AZUL.
+   Nav, encabezado y footer también pasan a claro.
+   --amarillo se redefine como AZUL (acento principal).
+   ═══════════════════════════════════════════════════════ */
 [data-theme="light"] {
   --texto: #12141A;
   --muted: #5B6470;
@@ -245,7 +250,35 @@ img { max-width: 100%; display: block; }
   --bg: #EEF1F6;
   --surface: #FFFFFF;
   --card: #F5F7FA;
+  --amarillo: #185FA5;        /* azul = acento principal */
+  --amarillo-osc: #124A80;
 }
-[data-theme="light"] .input:focus { background: #fff; }
-[data-theme="light"] .type-btn.selected { border-color: var(--carbon); background: var(--carbon); color: #fff; }
-[data-theme="light"] .estado-btn.on { background: var(--carbon); color: var(--amarillo); border-color: var(--carbon); }
+
+/* NAV claro */
+[data-theme="light"] .nav { background: rgba(255, 255, 255, 0.92); border-bottom-color: rgba(20, 22, 28, 0.08); }
+[data-theme="light"] .nav-brand { color: var(--texto); }
+[data-theme="light"] .nav-back { color: var(--muted); border-color: rgba(20, 22, 28, 0.12); }
+[data-theme="light"] .nav-back:hover { color: var(--texto); background: rgba(20, 22, 28, 0.05); }
+[data-theme="light"] .theme-toggle { background: rgba(20, 22, 28, 0.05); border-color: rgba(20, 22, 28, 0.14); color: var(--texto); }
+[data-theme="light"] .theme-toggle:hover { background: rgba(20, 22, 28, 0.10); }
+
+/* ENCABEZADO (banner) claro */
+[data-theme="light"] .pqr-head { background: radial-gradient(circle at 85% -20%, #CFE3F8, #EAF1FA 60%); color: var(--texto); }
+[data-theme="light"] .pqr-head p { color: var(--muted); }
+[data-theme="light"] .pqr-tag { background: rgba(29, 158, 117, 0.14); border-color: rgba(29, 158, 117, 0.38); color: var(--verde-osc); }
+[data-theme="light"] .view-switch { background: rgba(20, 22, 28, 0.04); border-color: rgba(20, 22, 28, 0.10); }
+[data-theme="light"] .switch-btn { color: var(--muted); }
+[data-theme="light"] .switch-btn:hover { color: var(--texto); }
+[data-theme="light"] .switch-btn.active { background: var(--verde); color: #fff; }
+[data-theme="light"] .switch-count { background: rgba(20, 22, 28, 0.10); }
+[data-theme="light"] .switch-btn.active .switch-count { background: rgba(255, 255, 255, 0.28); }
+
+/* CTAs en VERDE, foco azul, selección de tipo en verde */
+[data-theme="light"] .btn-primary { background: var(--verde); color: #fff; box-shadow: 0 8px 22px rgba(29, 158, 117, 0.35); }
+[data-theme="light"] .btn-primary:hover { background: var(--verde-osc); }
+[data-theme="light"] .input:focus { background: #fff; border-color: var(--amarillo); box-shadow: 0 0 0 4px rgba(24, 95, 165, 0.15); }
+[data-theme="light"] .type-btn.selected { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 16%, transparent); color: var(--texto); }
+[data-theme="light"] .estado-btn.on { background: var(--verde); color: #fff; border-color: var(--verde); }
+
+/* FOOTER claro */
+[data-theme="light"] .pqr-footer { background: #E7EEF5; color: var(--muted); }

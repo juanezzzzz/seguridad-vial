@@ -24,6 +24,10 @@
   --sombra-md: 0 10px 28px rgba(20, 22, 28, 0.10);
   --sombra-lg: 0 26px 60px rgba(20, 22, 28, 0.16);
   --sombra-amarillo: 0 10px 28px rgba(255, 201, 30, 0.4);
+  --verde: #1D9E75;                 /* acento CTA en modo claro */
+  --verde-osc: #17845F;
+  --azul: #185FA5;                  /* acento principal en modo claro */
+  --azul-osc: #124A80;
   --trans: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   --ancho: 1160px;
   --font: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
@@ -547,9 +551,9 @@ body { background: #0F1116; color: var(--texto-inv); }
   --linea: rgba(20, 22, 28, 0.09);
   border-top: 1px solid rgba(20, 22, 28, 0.05);
 }
-[data-theme="light"] .section.bg-a { background: radial-gradient(circle at 85% -10%, #AFD1F7 0%, #EFF4FB 58%); }
-[data-theme="light"] .section.bg-b { background: radial-gradient(circle at 12% -5%, #D3BFF2 0%, #F1EDFA 58%); }
-[data-theme="light"] .section.bg-c { background: radial-gradient(circle at 88% 112%, rgba(255,201,30,0.45) 0%, #FBF3DC 58%); }
+[data-theme="light"] .section.bg-a { background: radial-gradient(circle at 85% -10%, #C6DEF7 0%, #EEF4FB 58%); }
+[data-theme="light"] .section.bg-b { background: radial-gradient(circle at 12% -5%, #C4EAD9 0%, #EDF7F1 58%); }
+[data-theme="light"] .section.bg-c { background: radial-gradient(circle at 88% 112%, rgba(24,95,165,0.16) 0%, #EAF1FA 58%); }
 
 [data-theme="light"] .section-tag { color: var(--amarillo-osc); }
 [data-theme="light"] .section-title { color: var(--texto); }
@@ -601,7 +605,58 @@ body { background: #0F1116; color: var(--texto-inv); }
 [data-theme="light"] .tab.active { background: var(--carbon); color: var(--amarillo); border-color: var(--carbon); }
 [data-theme="light"] .tab-desc { color: var(--muted); }
 
-[data-theme="light"] .step-num { background: var(--carbon); color: var(--amarillo); }
+/* ═══════════════════════════════════════════════════════
+   MODO CLARO — paleta VERDE + AZUL (reemplaza amarillo/negro)
+   y nav, banner (hero) y footer también pasan a claro.
+   Se redefine --amarillo como AZUL para que el acento
+   principal cambie en todo el sitio de una sola vez.
+   ═══════════════════════════════════════════════════════ */
+[data-theme="light"] {
+  --amarillo: #185FA5;        /* azul = acento principal (antes amarillo) */
+  --amarillo-osc: #124A80;    /* azul oscuro para hovers */
+}
+
+/* NAV claro */
+[data-theme="light"] .nav { background: rgba(255, 255, 255, 0.82); border-bottom-color: rgba(20, 22, 28, 0.08); }
+[data-theme="light"] .nav.scrolled { background: rgba(255, 255, 255, 0.96); box-shadow: 0 8px 30px rgba(20, 22, 28, 0.10); }
+[data-theme="light"] .nav-brand { color: var(--texto); }
+[data-theme="light"] .nav-links a { color: var(--muted); }
+[data-theme="light"] .nav-links a:hover { color: var(--texto); background: rgba(20, 22, 28, 0.05); }
+[data-theme="light"] .nav-links a.nav-report { background: var(--verde); color: #fff; box-shadow: 0 4px 14px rgba(29, 158, 117, 0.30); }
+[data-theme="light"] .nav-links a.nav-report:hover { background: var(--verde-osc); color: #fff; }
+[data-theme="light"] .nav-toggle span { background: var(--texto); }
+[data-theme="light"] .theme-toggle { background: rgba(20, 22, 28, 0.05); border-color: rgba(20, 22, 28, 0.14); color: var(--texto); }
+[data-theme="light"] .theme-toggle:hover { background: rgba(20, 22, 28, 0.10); }
+
+/* HERO (banner) claro */
+[data-theme="light"] .hero { background: radial-gradient(circle at 82% -10%, #CFE3F8 0%, #EAF1FA 55%); color: var(--texto); }
+[data-theme="light"] .hero p { color: var(--muted); }
+[data-theme="light"] .hero-tag { background: rgba(29, 158, 117, 0.14); border-color: rgba(29, 158, 117, 0.38); color: var(--verde-osc); }
+[data-theme="light"] .hero-bg { background-image: repeating-linear-gradient(90deg, transparent 0 60px, rgba(24, 95, 165, 0.05) 60px 62px); }
+[data-theme="light"] .hero-bg::before { background: repeating-linear-gradient(90deg, var(--verde) 0 40px, transparent 40px 80px); opacity: 0.18; }
+[data-theme="light"] .hero .btn-secondary { background: rgba(20, 22, 28, 0.05); color: var(--texto); border-color: rgba(20, 22, 28, 0.15); }
+[data-theme="light"] .hero .btn-secondary:hover { background: rgba(20, 22, 28, 0.10); }
+
+/* Botón primario y llamados a la acción en VERDE */
+[data-theme="light"] .btn-primary { background: var(--verde); color: #fff; box-shadow: 0 10px 28px rgba(29, 158, 117, 0.35); }
+[data-theme="light"] .btn-primary:hover { background: var(--verde-osc); }
+[data-theme="light"] .to-top { background: var(--verde); color: #fff; box-shadow: 0 10px 28px rgba(29, 158, 117, 0.40); }
+[data-theme="light"] .to-top:hover { background: var(--verde-osc); }
+[data-theme="light"] .tab.active { background: var(--verde); color: #fff; border-color: var(--verde); }
+[data-theme="light"] .step-num { background: var(--verde); color: #fff; }
+[data-theme="light"] .tip-num { background: linear-gradient(135deg, var(--verde), var(--verde-osc)); color: #fff; box-shadow: 0 6px 16px rgba(29, 158, 117, 0.35); }
+
+/* FOOTER claro */
+[data-theme="light"] .footer { background: #E7EEF5; color: var(--texto); }
+[data-theme="light"] .footer-inner p { color: var(--muted); }
+[data-theme="light"] .footer-links a { color: var(--muted); }
+[data-theme="light"] .footer-links a:hover { color: var(--amarillo); }
+[data-theme="light"] .footer-bottom { border-top-color: rgba(20, 22, 28, 0.12); color: var(--muted); }
+
+/* Menú móvil desplegable en claro */
+@media (max-width: 780px) {
+  [data-theme="light"] .nav-links { background: #fff; border-bottom-color: rgba(20, 22, 28, 0.08); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
