@@ -189,6 +189,22 @@ a.game-card:hover .game-card-cta { color: var(--verde-osc); }
 .pad-btn:active { transform: scale(0.94); }
 .pad-hint { text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 6px; }
 
+/* ══ RUTA SEGURA (canvas) ══ */
+.ruta-stage { max-width: 460px; margin: 0 auto; }
+.ruta-canvas-wrap { position: relative; border-radius: var(--radio); overflow: hidden; border: 1px solid var(--linea); box-shadow: var(--sombra-md); background: #2b2f38; }
+.ruta-canvas { display: block; width: 100%; height: auto; aspect-ratio: 420 / 560; touch-action: none; }
+.ruta-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 18px auto 6px; width: 260px; }
+.ruta-pad .pad-jump { background: var(--amarillo); color: var(--carbon); border-color: var(--amarillo); }
+
+/* ══ REFLEJOS DEL SEMÁFORO (canvas) ══ */
+.reflejos-stage { max-width: 460px; margin: 0 auto; text-align: center; }
+.reflejos-canvas-wrap { position: relative; border-radius: var(--radio); overflow: hidden; border: 1px solid var(--linea); box-shadow: var(--sombra-md); background: #2b2f38; }
+.reflejos-canvas { display: block; width: 100%; height: auto; aspect-ratio: 420 / 480; touch-action: none; cursor: pointer; }
+.reflejos-btn { width: 100%; margin-top: 16px; padding: 16px 24px; font-size: 1.05rem; transition: background 0.12s, transform 0.12s; }
+.reflejos-btn.en-verde { background: var(--verde); color: #fff; box-shadow: 0 8px 22px rgba(29,158,117,0.35); }
+.reflejos-btn.en-amarillo { background: var(--amarillo); color: var(--carbon); box-shadow: 0 8px 22px rgba(255,201,30,0.35); }
+.reflejos-btn.en-rojo { background: var(--rojo); color: #fff; box-shadow: 0 8px 22px rgba(226,75,74,0.30); opacity: 0.9; }
+
 @media (max-width: 520px) {
   .game-head-right { width: 100%; justify-content: space-between; }
 }
