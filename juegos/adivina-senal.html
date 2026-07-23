@@ -6,7 +6,7 @@
   <meta name="description" content="Adivina la señal de YopVial: identifica la señal de tránsito correcta en 10 segundos." />
   <title>Adivina la señal — Juegos YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
-  <link rel="stylesheet" href="juegos.css?v=3" />
+  <link rel="stylesheet" href="juegos.css?v=4" />
 </head>
 <body>
 
@@ -43,7 +43,16 @@
         </div>
       </div>
 
-      <div class="game-body-quiz">
+      <!-- Pantalla de inicio -->
+      <div class="quiz-start" id="quizStart">
+        <div class="quiz-start-ico">🚦</div>
+        <h3>¿List@ para empezar?</h3>
+        <p>Verás una señal de tránsito y 4 opciones. Tienes <b>10 segundos</b> para elegir la correcta. ¡Consigue la mayor racha posible!</p>
+        <button class="btn btn-primary" id="startBtn">▶ Comenzar</button>
+      </div>
+
+      <!-- Juego (oculto hasta comenzar) -->
+      <div class="game-body-quiz" id="quizBody" hidden>
         <!-- Cronómetro -->
         <div class="quiz-timer"><div class="quiz-timer-bar" id="timerBar"></div></div>
         <div class="quiz-timer-num">⏱ <span id="timeLeft">10</span> s</div>
@@ -69,6 +78,6 @@
     <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
   </footer>
 
-  <script src="adivina-senal.js?v=1"></script>
+  <script src="adivina-senal.js?v=2"></script>
 </body>
 </html>

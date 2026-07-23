@@ -53,7 +53,13 @@ function nuevaRonda() {
   clearInterval(estado.timerInt);
   estado.respondido = false;
 
-  if (estado.pos >= estado.orden.length) { estado.orden = barajar([...SENALES.keys()]); estado.pos = 0; }
+  if (estado.pos >= estado.orden.length) {
+    const ultimo = estado.actual;
+    // Rebaraja evitando que la primera señal repita a la última mostrada
+    do { estado.orden = barajar([...SENALES.keys()]); }
+    while (ultimo && SENALES[estado.orden[0]].nombre === ultimo.nombre);
+    estado.pos = 0;
+  }
   estado.actual = SENALES[estado.orden[estado.pos++]];
 
   // Imagen
@@ -148,13 +154,19 @@ function setupTheme() {
 }
 
 // ── Init ───────────────────────────────────────────────
+function comenzar() {
+  $("#quizStart").hidden = true;
+  $("#quizBody").hidden = false;
+  nuevaRonda();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   setupTheme();
   cargarMejor();
   estado.orden = barajar([...SENALES.keys()]);
   estado.pos = 0;
   pintarMarcador();
-  nuevaRonda();
-
+  // El juego NO arranca solo: espera al botón "Comenzar".
+  $("#startBtn").onclick = comenzar;
   $("#nextBtn").onclick = () => nuevaRonda();
 });
