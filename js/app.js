@@ -167,7 +167,7 @@ const EMERGENCIAS = [
   { icon: "🚨", img: "assets/emergencias/Emergencias.png", name: "Emergencias", num: "123", sub: "Línea única nacional", color: "#E24B4A" },
   { icon: "🚑", img: "assets/emergencias/Ambulancia.png", name: "Ambulancias", num: "125", sub: "Cruz Roja", color: "#1D9E75" },
   { icon: "🚒", img: "assets/emergencias/Bomberos.png", name: "Bomberos", num: "119", sub: "Cuerpo de bomberos", color: "#EF9F27" },
-  { icon: "🚓", img: "assets/emergencias/Policia.png", name: "Policía", num: "112", sub: "Policía Nacional", color: "#185FA5" },
+  { icon: "🚓", name: "Policía", num: "112", sub: "Policía Nacional", color: "#185FA5" },
 ];
 
 // ── Reportes ciudadanos (PQR) — qué puedes reportar ────
