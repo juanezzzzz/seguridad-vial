@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Guía completa de seguridad vial: normas, señales de tránsito, límites de velocidad, documentos, infracciones, consejos y números de emergencia." />
   <title>Seguridad Vial — Guía completa de tránsito</title>
-  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'dark');}catch(e){}</script>
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
   <link rel="stylesheet" href="css/styles.css?v=12" />
 </head>
 <body>
@@ -26,6 +26,7 @@
       <a href="#consejos">Consejos</a>
       <a href="#accidente">Accidentes</a>
       <a href="#emergencias">Emergencias</a>
+      <a href="#reportes">Reportes</a>
       <a href="PQR/reportes.html" class="nav-report">Reportar</a>
     </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
@@ -129,6 +130,38 @@
     <h2 class="section-title">Números de emergencia</h2>
     <p class="section-lead">Guarda estos números. En una emergencia, cada segundo cuenta.</p>
     <div class="cards" id="emergGrid"><!-- app.js --></div>
+  </section>
+
+  <!-- ══ REPORTES (módulo PQR) ══ -->
+  <section class="section bg-a" id="reportes">
+    <span class="section-tag">Participación ciudadana</span>
+    <h2 class="section-title">¿Ves algo peligroso en la vía?</h2>
+    <p class="section-lead">Repórtalo en menos de un minuto. Entre todos ayudamos a que las autoridades atiendan huecos, semáforos dañados y otros riesgos más rápido.</p>
+
+    <div class="cards" id="pqrTiposGrid"><!-- app.js --></div>
+
+    <div class="pqr-how">
+      <span class="pqr-how-tag">Cómo funciona</span>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div><h3>Elige el tipo y la ubicación</h3><p>Selecciona qué encontraste y dónde exactamente.</p></div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div><h3>Describe y adjunta una foto</h3><p>Cuéntanos los detalles; la foto es opcional pero ayuda mucho.</p></div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div><h3>Haz seguimiento al estado</h3><p>Consulta cuándo tu reporte pasa a "en proceso" o "resuelto".</p></div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="pqr-preview-actions">
+      <a href="PQR/reportes.html" class="btn btn-primary">＋ Hacer un reporte</a>
+      <a href="PQR/reportes.html?view=list" class="btn btn-secondary">📋 Ver reportes existentes</a>
+    </div>
   </section>
 
   <!-- ══ FOOTER ══ -->
