@@ -47,11 +47,11 @@ const SENALES = {
     label: "Informativas",
     desc: "Guían y entregan información útil sobre servicios, destinos y distancias. Fondo azul o verde.",
     items: [
-      { emoji: "🅿️", nombre: "Parqueadero", desc: "Zona autorizada para estacionar tu vehículo." },
-      { emoji: "🏥", nombre: "Hospital", desc: "Centro de atención médica cercano." },
-      { emoji: "⛽", nombre: "Estación de servicio", desc: "Punto de suministro de combustible adelante." },
-      { emoji: "🍽️", nombre: "Zona de servicios", desc: "Restaurantes, baños y descanso disponibles." },
-      { emoji: "📞", nombre: "Teléfono de emergencia", desc: "Punto de comunicación para auxilio." },
+      { img: "assets/senales/Parqueadero.png", nombre: "Parqueadero", desc: "Zona autorizada para estacionar tu vehículo." },
+      { img: "assets/senales/Hospital.png", nombre: "Hospital", desc: "Centro de atención médica cercano." },
+      { img: "assets/senales/Estacion_servicio.png", nombre: "Estación de servicio", desc: "Punto de suministro de combustible adelante." },
+      { img: "assets/senales/Zona_servicios.png", nombre: "Zona de servicios", desc: "Restaurantes, baños y descanso disponibles." },
+      { img: "assets/senales/Telefono_emergencia.png", nombre: "Teléfono de emergencia", desc: "Punto de comunicación para auxilio." },
     ],
   },
 };
