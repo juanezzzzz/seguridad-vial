@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ahorcado vial de YopVial: adivina palabras de seguridad vial letra por letra a partir de una pista." />
+  <title>Ahorcado vial — Juegos YopVial</title>
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
+  <link rel="stylesheet" href="juegos.css?v=2" />
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo.png" alt="YopVial" />
+      <span class="nav-brand">Yop<b>Vial</b></span>
+    </a>
+    <div class="nav-actions">
+      <a href="juegos.html" class="nav-back">← Juegos</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    </div>
+  </nav>
+
+  <!-- ══ ENCABEZADO ══ -->
+  <header class="games-head">
+    <div class="games-head-inner">
+      <span class="games-tag">🔤 Juego</span>
+      <h1>Ahorcado vial</h1>
+      <p>Lee la pista y adivina la palabra de seguridad vial letra por letra. ¡Cuida no fallar más de 6 veces!</p>
+    </div>
+  </header>
+
+  <main class="games-main">
+
+    <!-- ══ JUEGO: AHORCADO ══ -->
+    <section class="game" id="ahorcado">
+      <div class="game-head">
+        <h2 class="game-title">🔤 Ahorcado vial</h2>
+        <div class="scoreboard">
+          <div class="score-box"><span class="score-n" id="scoreAciertos">0</span><span class="score-l">Aciertos</span></div>
+          <div class="score-box"><span class="score-n" id="scoreRacha">0</span><span class="score-l">Racha</span></div>
+          <div class="score-box"><span class="score-n" id="scoreMejor">0</span><span class="score-l">Mejor racha</span></div>
+        </div>
+      </div>
+
+      <div class="game-body">
+        <!-- Columna del muñeco -->
+        <div class="hang-col">
+          <svg class="hangman" viewBox="0 0 200 250" aria-hidden="true">
+            <!-- Horca -->
+            <line class="gallows" x1="20" y1="240" x2="130" y2="240" />
+            <line class="gallows" x1="55" y1="240" x2="55" y2="20" />
+            <line class="gallows" x1="55" y1="20" x2="140" y2="20" />
+            <line class="gallows" x1="140" y1="20" x2="140" y2="48" />
+            <!-- Figura (se revela con cada error) -->
+            <circle class="part" id="part1" cx="140" cy="66" r="17" />
+            <line   class="part" id="part2" x1="140" y1="83" x2="140" y2="145" />
+            <line   class="part" id="part3" x1="140" y1="100" x2="113" y2="122" />
+            <line   class="part" id="part4" x1="140" y1="100" x2="167" y2="122" />
+            <line   class="part" id="part5" x1="140" y1="145" x2="118" y2="182" />
+            <line   class="part" id="part6" x1="140" y1="145" x2="162" y2="182" />
+          </svg>
+          <div class="lives">Errores: <span id="errCount">0</span> / <span id="errMax">6</span></div>
+        </div>
+
+        <!-- Columna de juego -->
+        <div class="play-col">
+          <div class="pista" id="pista"><span class="pista-label">Pista</span><p id="pistaText">…</p></div>
+          <div class="word" id="word"><!-- js --></div>
+          <div class="result" id="result" hidden></div>
+          <div class="keyboard" id="keyboard"><!-- js --></div>
+          <div class="game-actions">
+            <button class="btn btn-primary" id="nextBtn">Siguiente palabra →</button>
+            <button class="btn btn-ghost" id="restartBtn">Reiniciar marcador</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="games-note"><a href="juegos.html">← Volver a todos los juegos</a></p>
+
+  </main>
+
+  <footer class="games-footer">
+    <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
+  </footer>
+
+  <script src="ahorcado.js?v=1"></script>
+</body>
+</html>

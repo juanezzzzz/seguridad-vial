@@ -54,6 +54,35 @@ img { max-width: 100%; display: block; }
 /* ══ MAIN ══ */
 .games-main { flex: 1; max-width: 940px; width: 100%; margin: 0 auto; padding: 34px 5vw 60px; }
 
+/* ══ HUB: CARDS DE JUEGOS ══ */
+.games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.game-card {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--linea); border-radius: var(--radio);
+  padding: 26px 24px; box-shadow: var(--sombra); overflow: hidden;
+  transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+}
+.game-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--verde); }
+a.game-card:hover { transform: translateY(-6px); border-color: var(--verde); box-shadow: var(--sombra-md); }
+.game-card-ico {
+  display: grid; place-items: center; width: 60px; height: 60px; border-radius: 16px; font-size: 2rem;
+  margin-bottom: 14px; background: color-mix(in srgb, var(--verde) 16%, transparent);
+}
+.game-card h3 { font-size: 1.2rem; margin-bottom: 6px; }
+.game-card p { color: var(--muted); font-size: 0.92rem; flex: 1; margin-bottom: 16px; }
+.game-card-cta { font-weight: 800; color: var(--verde); font-size: 0.95rem; }
+a.game-card:hover .game-card-cta { color: var(--verde-osc); }
+
+.game-card.disabled { opacity: 0.62; cursor: not-allowed; }
+.game-card.disabled::before { background: var(--muted); }
+.game-card.disabled .game-card-ico { background: color-mix(in srgb, var(--muted) 20%, transparent); }
+.game-card.disabled .game-card-cta { color: var(--muted); }
+.soon-badge {
+  position: absolute; top: 14px; right: 14px; padding: 4px 10px; border-radius: 50px;
+  background: color-mix(in srgb, var(--amarillo) 20%, transparent); color: var(--amarillo);
+  font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+}
+
 /* ══ TARJETA DE JUEGO ══ */
 .game { background: var(--surface); border: 1px solid var(--linea); border-radius: var(--radio); padding: 26px; box-shadow: var(--sombra); }
 .game-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
