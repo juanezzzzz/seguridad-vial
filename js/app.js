@@ -154,6 +154,17 @@ const EMERGENCIAS = [
   { icon: "🚓", name: "Policía", num: "112", sub: "Policía Nacional", color: "#185FA5" },
 ];
 
+// ── Reportes ciudadanos (PQR) — qué puedes reportar ────
+// Contenido estático (mismas categorías que PQR/pqr.js), sin leer datos reales.
+const PQR_TIPOS = [
+  { icon: "🕳️", titulo: "Hueco / bache", desc: "Baches, grietas o hundimientos peligrosos en la calzada.", color: "#E24B4A" },
+  { icon: "🚦", titulo: "Semáforo dañado", desc: "Semáforos apagados, intermitentes o que no cambian correctamente.", color: "#EF9F27" },
+  { icon: "🚧", titulo: "Señalización", desc: "Señales caídas, tapadas, borradas o mal ubicadas.", color: "#185FA5" },
+  { icon: "💥", titulo: "Accidente", desc: "Choques o siniestros que debas reportar a la autoridad.", color: "#3C3489" },
+  { icon: "💡", titulo: "Alumbrado público", desc: "Postes o luminarias apagadas que reducen la visibilidad nocturna.", color: "#1D9E75" },
+  { icon: "📌", titulo: "Otro", desc: "Cualquier otra situación que ponga en riesgo a los actores viales.", color: "#E8530A" },
+];
+
 // ═══════════════════════════════════════════════════════
 //  RENDER
 // ═══════════════════════════════════════════════════════
@@ -279,6 +290,15 @@ function renderEmergencias() {
     </article>`).join(""));
 }
 
+function renderPqrTipos() {
+  html($("#pqrTiposGrid"), PQR_TIPOS.map(t => `
+    <article class="card reveal" style="--accent:${t.color}">
+      <div class="card-icon">${t.icon}</div>
+      <h3>${t.titulo}</h3>
+      <p>${t.desc}</p>
+    </article>`).join(""));
+}
+
 // ═══════════════════════════════════════════════════════
 //  INTERACCIÓN
 // ═══════════════════════════════════════════════════════
@@ -315,7 +335,7 @@ function setupTheme() {
     btn.textContent = t === "light" ? "☀️" : "🌙";
     btn.title = t === "light" ? "Cambiar a modo oscuro" : "Cambiar a modo claro";
   };
-  let theme = document.documentElement.getAttribute("data-theme") || "dark";
+  let theme = document.documentElement.getAttribute("data-theme") || "light";
   apply(theme);
   btn.addEventListener("click", () => {
     theme = theme === "light" ? "dark" : "light";
@@ -382,6 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderAccidente();
   renderZonas();
   renderEmergencias();
+  renderPqrTipos();
 
   const year = $("#year");
   if (year) year.textContent = new Date().getFullYear();

@@ -175,6 +175,14 @@ img { max-width: 100%; display: block; }
 .btn-primary:hover { transform: translateY(-2px); background: var(--amarillo-osc); }
 .btn-secondary { background: rgba(255, 255, 255, 0.08); color: var(--texto-inv); border: 1px solid var(--linea-inv); }
 .btn-secondary:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.14); }
+/* Dentro de una sección (que cambia de oscura a clara con el tema), el bg/texto fijos de arriba
+   se vuelven ilegibles; se adapta con currentColor al color de texto ya themeado de la sección. */
+.section .btn-secondary {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  color: currentColor;
+  border-color: color-mix(in srgb, currentColor 20%, transparent);
+}
+.section .btn-secondary:hover { background: color-mix(in srgb, currentColor 14%, transparent); }
 
 /* ══════════ SECCIONES = BANDAS ALTERNAS A TODO EL ANCHO ══════════ */
 .section {
@@ -385,6 +393,11 @@ img { max-width: 100%; display: block; }
 .emerg-name { font-weight: 700; margin-top: 4px; }
 .emerg-sub { color: var(--muted); font-size: 0.85rem; }
 
+/* ══════════ REPORTES (módulo PQR) ══════════ */
+.pqr-how { margin-top: 46px; }
+.pqr-how-tag { display: block; font-weight: 700; font-size: 0.95rem; color: var(--muted-inv); margin-bottom: 18px; }
+.pqr-preview-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+
 /* ══════════ FOOTER ══════════ */
 .footer { background: var(--carbon); color: var(--texto-inv); padding: 56px 5vw 28px; margin-top: 40px; }
 .footer-inner { max-width: var(--ancho); margin: 0 auto; display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
@@ -516,9 +529,9 @@ body { background: #0F1116; color: var(--texto-inv); }
   --linea: rgba(20, 22, 28, 0.09);
   border-top: 1px solid rgba(20, 22, 28, 0.05);
 }
-[data-theme="light"] .section.bg-a { background: radial-gradient(circle at 85% -10%, #E4EEFB 0%, #F2F5FB 55%); }
-[data-theme="light"] .section.bg-b { background: radial-gradient(circle at 12% -5%, #EEE9FB 0%, #F4F3FA 55%); }
-[data-theme="light"] .section.bg-c { background: radial-gradient(circle at 88% 112%, rgba(255,201,30,0.20) 0%, #FBF7EC 55%); }
+[data-theme="light"] .section.bg-a { background: radial-gradient(circle at 85% -10%, #AFD1F7 0%, #EFF4FB 58%); }
+[data-theme="light"] .section.bg-b { background: radial-gradient(circle at 12% -5%, #D3BFF2 0%, #F1EDFA 58%); }
+[data-theme="light"] .section.bg-c { background: radial-gradient(circle at 88% 112%, rgba(255,201,30,0.45) 0%, #FBF3DC 58%); }
 
 [data-theme="light"] .section-tag { color: var(--amarillo-osc); }
 [data-theme="light"] .section-title { color: var(--texto); }

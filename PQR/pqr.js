@@ -373,7 +373,7 @@ function setupTheme() {
     btn.textContent = t === "light" ? "☀️" : "🌙";
     btn.title = t === "light" ? "Cambiar a modo oscuro" : "Cambiar a modo claro";
   };
-  let theme = document.documentElement.getAttribute("data-theme") || "dark";
+  let theme = document.documentElement.getAttribute("data-theme") || "light";
   apply(theme);
   btn.addEventListener("click", () => {
     theme = theme === "light" ? "dark" : "light";
@@ -389,6 +389,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupPhoto();
   setupCharCount();
   updateCount();
+
+  if (new URLSearchParams(location.search).get("view") === "list") switchView("list");
 
   $("#pqrForm").addEventListener("submit", submitForm);
   $("#btnReset").onclick = resetForm;
