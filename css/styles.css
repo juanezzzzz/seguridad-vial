@@ -95,6 +95,10 @@ img { max-width: 100%; display: block; }
 .nav-links a.nav-report:hover { background: var(--amarillo-osc); color: var(--carbon); }
 .nav-links a.nav-report.active::after { display: none; }
 
+.nav-links a.nav-games { border: 1px solid var(--linea-inv); border-radius: 8px; padding: 8px 14px; }
+.nav-links a.nav-games:hover { border-color: var(--amarillo); color: var(--amarillo); background: transparent; }
+.nav-links a.nav-games.active::after { display: none; }
+
 .nav-toggle {
   display: none; margin-left: auto; flex-direction: column; gap: 5px;
   background: none; border: none; cursor: pointer; padding: 6px;
@@ -634,6 +638,7 @@ body { background: #0F1116; color: var(--texto-inv); }
 [data-theme="light"] .nav-links a { color: var(--muted); }
 [data-theme="light"] .nav-links a:hover { color: var(--texto); background: rgba(20, 22, 28, 0.05); }
 [data-theme="light"] .nav-links a.nav-report { background: var(--verde); color: #fff; box-shadow: 0 4px 14px rgba(29, 158, 117, 0.30); }
+[data-theme="light"] .nav-links a.nav-games { border-color: rgba(20, 22, 28, 0.15); }
 [data-theme="light"] .nav-links a.nav-report:hover { background: var(--verde-osc); color: #fff; }
 [data-theme="light"] .nav-toggle span { background: var(--texto); }
 [data-theme="light"] .theme-toggle { background: rgba(20, 22, 28, 0.05); border-color: rgba(20, 22, 28, 0.14); color: var(--texto); }
