@@ -66,10 +66,10 @@ const VELOCIDAD = [
 
 // ── Documentos obligatorios ────────────────────────────
 const DOCUMENTOS = [
-  { icon: "🪪", titulo: "Licencia de conducción", desc: "Vigente, de la categoría adecuada al vehículo y sin suspensiones activas.", color: "#3C3489" },
+  { icon: "🪪", img: "assets/documentos/Licencia_conduccion.png", titulo: "Licencia de conducción", desc: "Vigente, de la categoría adecuada al vehículo y sin suspensiones activas.", color: "#3C3489" },
   { icon: "🛡️", titulo: "SOAT vigente", desc: "Seguro Obligatorio de Accidentes de Tránsito. Válido en formato físico o digital.", color: "#1D9E75" },
-  { icon: "🔧", titulo: "Revisión técnico-mecánica", desc: "Obligatoria para vehículos con más de 2 años (autos) o según normativa.", color: "#E8530A" },
-  { icon: "📄", titulo: "Tarjeta de propiedad", desc: "Licencia de tránsito que acredita al propietario del vehículo.", color: "#185FA5" },
+  { icon: "🔧", img: "assets/documentos/Tecnico_mecanica.png", titulo: "Revisión técnico-mecánica", desc: "Obligatoria para vehículos con más de 2 años (autos) o según normativa.", color: "#E8530A" },
+  { icon: "📄", img: "assets/documentos/Tarjeta_propiedad.png", titulo: "Tarjeta de propiedad", desc: "Licencia de tránsito que acredita al propietario del vehículo.", color: "#185FA5" },
 ];
 
 // ── Infracciones ───────────────────────────────────────
@@ -240,7 +240,7 @@ function renderVelocidad() {
 function renderDocumentos() {
   html($("#documentosGrid"), DOCUMENTOS.map(d => `
     <div class="doc reveal" style="--accent:${d.color}">
-      <div class="doc-icon">${d.icon}</div>
+      <div class="doc-icon">${d.img ? `<img src="${d.img}" alt="${d.titulo}" loading="lazy" />` : d.icon}</div>
       <div>
         <h3>${d.titulo}</h3>
         <p>${d.desc}</p>
