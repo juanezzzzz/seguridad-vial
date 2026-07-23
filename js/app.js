@@ -76,15 +76,31 @@ const DOCUMENTOS = [
 const INFRACCIONES = [
   {
     nivel: "Gravísimas", color: "#E24B4A",
-    items: ["Conducir en estado de embriaguez", "Conducir sin licencia o con documentos vencidos", "Exceso de velocidad de más de 30 km/h", "No detenerse en semáforo en rojo", "Adelantar en curva o doble línea"],
+    items: [
+      { t: "Conducir en estado de embriaguez", d: "Conducir después de consumir alcohol o sustancias psicoactivas disminuye la capacidad de reacción y pone en riesgo la vida de todos los usuarios de la vía.", ley: "Ley 769 de 2002 (Código Nacional de Tránsito), artículo 131. Modificada y reforzada por la Ley 1696 de 2013, que aumenta las sanciones por conducir en estado de embriaguez." },
+      { t: "Conducir sin licencia o con documentos vencidos", d: "Se infringe cuando el conductor no posee licencia válida, conduce con una categoría diferente o circula con documentos obligatorios vencidos.", ley: "Ley 769 de 2002, artículo 131, infracción D.1." },
+      { t: "Exceso de velocidad de más de 30 km/h", d: "Ocurre cuando se supera ampliamente el límite máximo permitido para la vía, aumentando considerablemente el riesgo de accidentes.", ley: "Ley 769 de 2002, artículos 106 y 107 (límites de velocidad) y artículo 131 (comparendos por exceder los límites establecidos)." },
+      { t: "No detenerse en semáforo en rojo", d: "Se comete al cruzar una intersección sin respetar la luz roja o la señal reglamentaria de PARE.", ley: "Ley 769 de 2002, artículo 131, infracción D.4." },
+      { t: "Adelantar en curva o doble línea", d: "Consiste en sobrepasar otro vehículo en lugares donde la visibilidad o la señalización lo prohíben, generando alto riesgo de colisión.", ley: "Ley 769 de 2002, artículo 131, infracción D.6." },
+    ],
   },
   {
     nivel: "Graves", color: "#EF9F27",
-    items: ["No usar el cinturón de seguridad", "Conducir motos sin casco", "Usar el celular al conducir", "Estacionar en zona prohibida"],
+    items: [
+      { t: "No usar el cinturón de seguridad", d: "El conductor o los pasajeros viajan sin utilizar el cinturón, reduciendo significativamente la protección en caso de accidente.", ley: "Ley 769 de 2002, artículo 82 (uso obligatorio del cinturón) y artículo 131, infracción C.6." },
+      { t: "Conducir motos sin casco", d: "El motociclista o su acompañante circulan sin casco de seguridad debidamente asegurado.", ley: "Ley 769 de 2002, artículo 96 y artículo 131." },
+      { t: "Usar el celular al conducir", d: "Manipular un teléfono móvil u otro dispositivo electrónico mientras se conduce, excepto mediante sistemas manos libres permitidos.", ley: "Ley 769 de 2002, artículo 131, infracción C.38." },
+      { t: "Estacionar en zona prohibida", d: "Dejar el vehículo en lugares donde la señalización o la norma prohíben el estacionamiento, afectando la movilidad y la seguridad vial.", ley: "Ley 769 de 2002, artículo 77 y artículo 131, infracción C.39." },
+    ],
   },
   {
     nivel: "Leves", color: "#1D9E75",
-    items: ["Luces o direccionales sin funcionar", "Placa en mal estado o mal ubicada", "Uso indebido del pito o exceso de ruido", "Estacionar sin señalizar el vehículo"],
+    items: [
+      { t: "Luces o direccionales sin funcionar", d: "Circular con luces principales, de freno o direccionales dañadas o apagadas cuando son obligatorias.", ley: "Ley 769 de 2002, artículo 131, infracción D.8." },
+      { t: "Placa en mal estado o mal ubicada", d: "La placa no es visible, está deteriorada, modificada o instalada en un lugar diferente al autorizado.", ley: "Ley 769 de 2002, artículos 43 y 44, y sanciones del artículo 131." },
+      { t: "Uso indebido del pito o exceso de ruido", d: "Utilizar la bocina sin necesidad o generar ruidos que afecten la tranquilidad y la seguridad de los demás usuarios de la vía.", ley: "Ley 769 de 2002, artículo 104 y sanciones del artículo 131." },
+      { t: "Estacionar sin señalizar el vehículo", d: "No colocar las señales preventivas cuando el vehículo queda detenido por emergencia o avería en la vía, poniendo en riesgo a otros conductores.", ley: "Ley 769 de 2002, artículos 112 y 113." },
+    ],
   },
 ];
 
@@ -238,8 +254,37 @@ function renderInfracciones() {
       <div class="infraction-head">
         <h3>${i.nivel}</h3>
       </div>
-      <ul>${i.items.map(it => `<li>${it}</li>`).join("")}</ul>
+      <ul>${i.items.map(it => `
+        <li class="infraction-item">
+          <button type="button" class="infraction-toggle" aria-expanded="false">
+            <span class="infraction-name">${it.t}</span>
+            <span class="infraction-arrow" aria-hidden="true">▾</span>
+          </button>
+          <div class="infraction-panel">
+            <div class="infraction-panel-inner">
+              <p class="infraction-desc">${it.d}</p>
+              <p class="infraction-ley"><strong>Ley:</strong> ${it.ley}</p>
+            </div>
+          </div>
+        </li>`).join("")}</ul>
     </article>`).join(""));
+
+  // Acordeón: solo una infracción abierta a la vez (en toda la sección)
+  const items = $("#infraccionesGrid").querySelectorAll(".infraction-item");
+  items.forEach(item => {
+    const btn = item.querySelector(".infraction-toggle");
+    btn.addEventListener("click", () => {
+      const wasOpen = item.classList.contains("open");
+      items.forEach(other => {
+        other.classList.remove("open");
+        other.querySelector(".infraction-toggle").setAttribute("aria-expanded", "false");
+      });
+      if (!wasOpen) {
+        item.classList.add("open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
 }
 
 function renderConsejos(activeKey = "conductores") {
