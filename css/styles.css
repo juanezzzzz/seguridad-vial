@@ -341,9 +341,27 @@ img { max-width: 100%; display: block; }
 .card.infraction::before { height: 5px; }
 .infraction-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
 .infraction-head h3 { font-size: 1.4rem; color: var(--accent); }
-.card.infraction ul { list-style: none; display: flex; flex-direction: column; gap: 10px; position: relative; }
-.card.infraction li { position: relative; padding-left: 22px; color: var(--muted); font-size: 0.95rem; }
-.card.infraction li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.card.infraction ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+/* Acordeón de infracciones */
+.infraction-item { border: 1px solid rgba(255, 255, 255, 0.10); border-radius: var(--radio-sm); overflow: hidden; }
+.infraction-toggle {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 11px 14px; background: rgba(255, 255, 255, 0.03); border: none; cursor: pointer;
+  text-align: left; font: inherit; color: #fff; font-size: 0.95rem; font-weight: 600;
+  line-height: 1.4; transition: background var(--trans);
+}
+.infraction-toggle:hover,
+.infraction-item.open .infraction-toggle { background: rgba(255, 255, 255, 0.07); }
+.infraction-name { flex: 1; }
+.infraction-arrow { color: var(--accent); font-weight: 700; font-size: 0.85rem; flex-shrink: 0; transition: transform var(--trans); }
+.infraction-item.open .infraction-arrow { transform: rotate(180deg); }
+.infraction-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--trans); }
+.infraction-item.open .infraction-panel { grid-template-rows: 1fr; }
+.infraction-panel-inner { overflow: hidden; }
+.infraction-desc { padding: 12px 14px 6px; color: var(--muted-inv); font-size: 0.9rem; }
+.infraction-ley { padding: 0 14px 13px; color: var(--muted-inv); font-size: 0.8rem; line-height: 1.5; }
+.infraction-ley strong { color: var(--accent); }
 
 /* ══════════ TIPS ══════════ */
 .tips { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
@@ -558,6 +576,14 @@ body { background: #0F1116; color: var(--texto-inv); }
 [data-theme="light"] .card.infraction li,
 [data-theme="light"] .speed-desc,
 [data-theme="light"] .emerg-sub { color: var(--muted); }
+
+/* Acordeón de infracciones — modo claro */
+[data-theme="light"] .infraction-item { border-color: rgba(20, 22, 28, 0.10); }
+[data-theme="light"] .infraction-toggle { background: rgba(20, 22, 28, 0.02); color: var(--texto); }
+[data-theme="light"] .infraction-toggle:hover,
+[data-theme="light"] .infraction-item.open .infraction-toggle { background: rgba(20, 22, 28, 0.05); }
+[data-theme="light"] .infraction-desc,
+[data-theme="light"] .infraction-ley { color: var(--muted); }
 
 [data-theme="light"] .card:hover,
 [data-theme="light"] .speed:hover,
