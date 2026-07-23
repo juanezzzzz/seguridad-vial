@@ -282,11 +282,14 @@ img { max-width: 100%; display: block; }
 /* ══════════ TABS ══════════ */
 .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
 .tab {
+  display: inline-flex; align-items: center; gap: 9px;
   padding: 10px 20px; border-radius: 50px; border: 1px solid var(--linea);
   background: var(--tarjeta); color: var(--muted);
   font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer;
   transition: var(--trans);
 }
+.tab:has(.tab-ico) { padding: 8px 20px 8px 12px; }
+.tab-ico { width: 24px; height: 19px; object-fit: contain; flex-shrink: 0; }
 .tab:hover { border-color: var(--amarillo); color: var(--texto); transform: translateY(-2px); }
 .tab.active { background: var(--carbon); color: var(--amarillo); border-color: var(--carbon); box-shadow: var(--sombra); }
 .tab-desc { color: var(--muted); margin-bottom: 24px; max-width: 700px; font-size: 0.98rem;

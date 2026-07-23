@@ -107,7 +107,7 @@ const INFRACCIONES = [
 // ── Consejos por actor vial ────────────────────────────
 const CONSEJOS = {
   conductores: {
-    label: "🚗 Conductores",
+    label: "Conductores", img: "assets/consejos/Conductores.png",
     items: [
       { t: "Mantén la distancia de seguridad", d: "Conserva al menos 3 segundos respecto al vehículo de adelante; auméntalos si llueve o hay niebla." },
       { t: "No manejes cansado", d: "La fatiga reduce tus reflejos igual que el alcohol. Descansa cada 2 horas en viajes largos." },
@@ -116,7 +116,7 @@ const CONSEJOS = {
     ],
   },
   motociclistas: {
-    label: "🏍️ Motociclistas",
+    label: "Motociclistas", img: "assets/consejos/Motociclistas.png",
     items: [
       { t: "Casco certificado y abrochado", d: "Tuyo y del parrillero. Es tu principal protección ante una caída." },
       { t: "Hazte visible", d: "Usa luces encendidas siempre y ropa reflectiva. Evita los puntos ciegos de los carros." },
@@ -125,7 +125,7 @@ const CONSEJOS = {
     ],
   },
   peatones: {
-    label: "🚶 Peatones",
+    label: "Peatones", img: "assets/consejos/Peatones.png",
     items: [
       { t: "Cruza por las cebras", d: "Usa siempre los cruces peatonales y los puentes. Nunca entre vehículos estacionados." },
       { t: "Mira antes de cruzar", d: "Izquierda, derecha y de nuevo izquierda. Haz contacto visual con los conductores." },
@@ -134,7 +134,7 @@ const CONSEJOS = {
     ],
   },
   ciclistas: {
-    label: "🚴 Ciclistas",
+    label: "Ciclistas", img: "assets/consejos/Ciclistas.png",
     items: [
       { t: "Usa casco y elementos reflectivos", d: "Casco siempre, y luz blanca adelante y roja atrás en la noche." },
       { t: "Respeta las señales", d: "Detente en los semáforos y señales igual que cualquier vehículo." },
@@ -289,8 +289,11 @@ function renderInfracciones() {
 
 function renderConsejos(activeKey = "conductores") {
   const keys = Object.keys(CONSEJOS);
-  html($("#consejosTabs"), keys.map(k => `
-    <button class="tab ${k === activeKey ? "active" : ""}" data-tab="${k}">${CONSEJOS[k].label}</button>`).join(""));
+  html($("#consejosTabs"), keys.map(k => {
+    const c = CONSEJOS[k];
+    const ico = c.img ? `<img class="tab-ico" src="${c.img}" alt="" loading="lazy" />` : "";
+    return `<button class="tab ${k === activeKey ? "active" : ""}" data-tab="${k}">${ico}${c.label}</button>`;
+  }).join(""));
 
   html($("#consejosList"), CONSEJOS[activeKey].items.map((c, i) => `
     <li class="tip reveal">
