@@ -110,23 +110,43 @@ function responder(seleccion) {   // null = se acabó el tiempo
     else if (b.dataset.nombre === seleccion) b.classList.add("no");
   });
 
+  const res = $("#result");
+  res.hidden = false;
+
   if (gano) {
     estado.aciertos++; estado.racha++;
     if (estado.racha > estado.mejor) { estado.mejor = estado.racha; guardarMejor(); }
+    pintarMarcador();
+    res.className = "result win";
+    res.textContent = "¡Correcto! 🎉";
+    $("#nextBtn").hidden = false;
+    estado.autoNext = setTimeout(nuevaRonda, 1300);
   } else {
-    estado.racha = 0;
+    // Perdiste → fin de la partida
+    res.className = "result lose";
+    res.textContent = (seleccion === null
+      ? `¡Se acabó el tiempo! Era "${correcta}".`
+      : `¡Fallaste! Era "${correcta}".`) + ` Terminaste con ${estado.aciertos} acierto${estado.aciertos === 1 ? "" : "s"}.`;
+    $("#nextBtn").hidden = true;
+    estado.autoNext = setTimeout(finDelJuego, 2400);
   }
+}
 
-  const res = $("#result");
-  res.hidden = false;
-  res.className = "result " + (gano ? "win" : "lose");
-  res.textContent = gano
-    ? "¡Correcto! 🎉"
-    : (seleccion === null ? `¡Se acabó el tiempo! Era "${correcta}".` : `¡Casi! Era "${correcta}".`);
-
+// ── Fin de la partida: reinicia stats (menos mejor racha) y vuelve al inicio ──
+function finDelJuego() {
+  clearTimeout(estado.autoNext);
+  clearInterval(estado.timerInt);
+  const aciertosPartida = estado.aciertos;
+  estado.aciertos = 0;
+  estado.racha = 0;
   pintarMarcador();
-  $("#nextBtn").hidden = false;
-  estado.autoNext = setTimeout(nuevaRonda, 2000);
+
+  $("#quizBody").hidden = true;
+  $("#startIco").textContent = "🏁";
+  $("#startTitle").textContent = "¡Fin de la partida!";
+  $("#startText").innerHTML = `Conseguiste <b>${aciertosPartida}</b> acierto${aciertosPartida === 1 ? "" : "s"}. Tu mejor racha es <b>${estado.mejor}</b>. ¿Lo intentas de nuevo?`;
+  $("#startBtn").textContent = "▶ Jugar de nuevo";
+  $("#quizStart").hidden = false;
 }
 
 function pintarMarcador() {
@@ -155,6 +175,10 @@ function setupTheme() {
 
 // ── Init ───────────────────────────────────────────────
 function comenzar() {
+  estado.aciertos = 0;
+  estado.racha = 0;
+  estado.actual = null;
+  pintarMarcador();
   $("#quizStart").hidden = true;
   $("#quizBody").hidden = false;
   nuevaRonda();
