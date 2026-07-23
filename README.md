@@ -52,6 +52,7 @@ Módulo de participación ciudadana para reportar huecos, semáforos dañados, s
 Un **hub** con una card por juego; cada juego vive en su propia página:
 - **🔤 Ahorcado vial** — adivina palabras de seguridad vial letra por letra a partir de una pista.
 - **🚦 Adivina la señal** — opción múltiple con **10 segundos** por señal; fallar o quedarte sin tiempo termina la partida. Guarda tu mejor racha.
+- **🚗 Cruza la calle** — juego arcade en **canvas** (estilo Frogger): Yop cruza la avenida esquivando el tráfico. Niveles progresivos, 3 vidas, sonido, controles de teclado y táctiles, y récord guardado. Cada cruce muestra un consejo de seguridad vial.
 - **❓ Quiz vial** — *(próximamente)*.
 
 ---
@@ -81,7 +82,8 @@ seguridad-vial/
 │   ├── juegos.html       # Hub (cards)
 │   ├── juegos.css
 │   ├── ahorcado.html / ahorcado.js
-│   └── adivina-senal.html / adivina-senal.js
+│   ├── adivina-senal.html / adivina-senal.js
+│   └── cruza-calle.html / cruza-calle.js   # juego arcade en canvas
 └── supabase/setup.sql    # Script de tabla, RLS, vista y Storage
 ```
 
