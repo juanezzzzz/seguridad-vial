@@ -12,12 +12,12 @@ const STATS = [
 
 // ── Normas ─────────────────────────────────────────────
 const NORMAS = [
-  { icon: "🪖", titulo: "Casco obligatorio", desc: "Conductor y parrillero deben usar casco certificado y bien abrochado, sin excepción.", badge: "Falta grave", color: "#E24B4A" },
-  { icon: "🍺", titulo: "Alcohol cero al conducir", desc: "Conducir con cualquier grado de alcohol en la sangre está prohibido. Multa y retención del vehículo.", badge: "Multa alta", color: "#E8530A" },
-  { icon: "📵", titulo: "Sin celular al volante", desc: "Usar el teléfono sin manos libres genera comparendo y pone en riesgo tu vida y la de otros.", badge: "Comparendo", color: "#BA7517" },
-  { icon: "🔒", titulo: "Cinturón siempre", desc: "Conductor y todos los pasajeros deben llevar el cinturón abrochado, incluso en trayectos cortos.", badge: "Obligatorio", color: "#1D9E75" },
-  { icon: "🚦", titulo: "Respeta las señales", desc: "Semáforos, cebras peatonales y señales verticales son de cumplimiento obligatorio.", badge: "Obligatorio", color: "#3C3489" },
-  { icon: "🏫", titulo: "Zonas escolares", desc: "Velocidad máxima de 30 km/h frente a colegios e instituciones en horario escolar.", badge: "30 km/h máx.", color: "#185FA5" },
+  { icon: "🪖", img: "assets/normas/casco.png", titulo: "Casco obligatorio", desc: "Conductor y parrillero deben usar casco certificado y bien abrochado, sin excepción.", badge: "Falta grave", color: "#E24B4A" },
+  { icon: "🍺", img: "assets/normas/alcohol.png", titulo: "Alcohol cero al conducir", desc: "Conducir con cualquier grado de alcohol en la sangre está prohibido. Multa y retención del vehículo.", badge: "Multa alta", color: "#E8530A" },
+  { icon: "📵", img: "assets/normas/celular.png", titulo: "Sin celular al volante", desc: "Usar el teléfono sin manos libres genera comparendo y pone en riesgo tu vida y la de otros.", badge: "Comparendo", color: "#BA7517" },
+  { icon: "🔒", img: "assets/normas/cinturon.png", titulo: "Cinturón siempre", desc: "Conductor y todos los pasajeros deben llevar el cinturón abrochado, incluso en trayectos cortos.", badge: "Obligatorio", color: "#1D9E75" },
+  { icon: "🚦", img: "assets/normas/senales.png", titulo: "Respeta las señales", desc: "Semáforos, cebras peatonales y señales verticales son de cumplimiento obligatorio.", badge: "Obligatorio", color: "#3C3489" },
+  { icon: "🏫", img: "assets/normas/zonas-escolares.png", titulo: "Zonas escolares", desc: "Velocidad máxima de 30 km/h frente a colegios e instituciones en horario escolar.", badge: "30 km/h máx.", color: "#185FA5" },
 ];
 
 // ── Señales de tránsito (con imágenes reales) ──────────
@@ -198,7 +198,7 @@ function renderStats() {
 function renderNormas() {
   html($("#normasGrid"), NORMAS.map(n => `
     <article class="card reveal" style="--accent:${n.color}">
-      <div class="card-icon">${n.icon}</div>
+      <div class="card-icon">${n.img ? `<img src="${n.img}" alt="${n.titulo}" loading="lazy" />` : n.icon}</div>
       <h3>${n.titulo}</h3>
       <p>${n.desc}</p>
       <span class="badge" style="--accent:${n.color}">${n.badge}</span>
