@@ -22,7 +22,7 @@ const GUIA = [
   { shape: "octagon", icon: "⚖️", href: "guia/infracciones.html", titulo: "Infracciones", desc: "Clasificación por gravedad, con la ley que aplica a cada una.", color: "#E24B4A" },
   { shape: "square", icon: "🧭", href: "guia/consejos.html", titulo: "Consejos por rol", desc: "Conductores, motociclistas, peatones y ciclistas.", color: "#0EA5A5" },
   { shape: "triangle", icon: "🚑", href: "guia/accidentes.html", titulo: "En caso de accidente", desc: "Los pasos a seguir, en orden, si ocurre un siniestro.", color: "#E8530A" },
-  { shape: "diamond", icon: "⚠️", href: "guia/zonas.html", titulo: "Puntos de mayor riesgo", desc: "Lugares donde debes extremar la precaución.", color: "#E24B4A" },
+  { shape: "diamond", icon: "⚠️", href: "guia/zonas.html", titulo: "Puntos de mayor riesgo", desc: "Los corredores de Yopal con más congestión y accidentalidad.", color: "#E24B4A" },
 ];
 
 // ── Normas ─────────────────────────────────────────────
@@ -167,14 +167,28 @@ const ACCIDENTE = [
   { t: "Reporta a la autoridad y a tu aseguradora", d: "Espera a la autoridad de tránsito si hay heridos y avisa a tu aseguradora dentro de las 24 horas." },
 ];
 
-// ── Zonas / puntos de riesgo ───────────────────────────
+// ── Zonas / puntos de riesgo (Yopal, Casanare) ─────────
+// Corredores identificados por la Secretaría de Movilidad de Yopal y
+// reportes de prensa local como puntos de mayor congestión/accidentalidad.
 const ZONAS = [
-  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Intersecciones sin semáforo", desc: "Cruces de alto flujo donde chocan vehículos que no ceden el paso." },
-  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Curvas y pendientes", desc: "Puntos ciegos y pérdida de control por exceso de velocidad." },
-  { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Zonas escolares", desc: "Alta presencia de niños y peatones en horas de entrada y salida." },
-  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Vías interurbanas", desc: "Adelantamientos imprudentes y baja visibilidad nocturna." },
-  { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Glorietas", desc: "Confusión por señalización insuficiente y choques laterales." },
-  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Zonas de rumba", desc: "Conducción bajo efectos del alcohol en horario nocturno." },
+  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Calle 40",
+    resumen: "El corredor con mayor flujo vehicular de la ciudad.",
+    detalle: "Concentra el mayor tráfico de Yopal, con cruces de alto riesgo en las carreras 11, 19 y 20. La Alcaldía ha intervenido varios tramos con bacheo y cierres temporales para mitigar accidentes, sobre todo en época de lluvias." },
+  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Carrera 10, sector del puente",
+    resumen: "Accidentes recurrentes cerca del puente.",
+    detalle: "La curva cercana al puente, cerca de la calle 30, es uno de los tramos con más reportes de accidentes de este corredor." },
+  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Calle 10 con Carrera 23",
+    resumen: "Conflictos entre vehículos y peatones.",
+    detalle: "La cercanía a zonas comerciales genera choques frecuentes entre vehículos y peatones, sobre todo en las horas de mayor movimiento comercial." },
+  { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Carrera 20",
+    resumen: "Eje comercial con tráfico mixto.",
+    detalle: "Buses, motos y peatones comparten la vía; el parqueo indebido sobre la calzada reduce la capacidad y complica la circulación frente a los locales comerciales." },
+  { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Centro de Yopal",
+    resumen: "Alta concentración de bancos y comercio.",
+    detalle: "La actividad bancaria y comercial genera doble fila, motos parqueadas sobre andenes e invasión del espacio público, lo que empuja a los peatones a caminar por la calzada." },
+  { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Zonas escolares en horas pico",
+    resumen: "Alto flujo peatonal cerca de colegios.",
+    detalle: "Entre las 6:30–8:30 a.m. y las 5:00–7:00 p.m., el ingreso y salida de instituciones educativas aumenta el riesgo por la alta presencia de niños y peatones cerca de la vía." },
 ];
 
 // ── Números de emergencia ──────────────────────────────
@@ -348,11 +362,32 @@ function renderAccidente() {
 
 function renderZonas() {
   html($("#zonasGrid"), ZONAS.map(z => `
-    <article class="card zona reveal">
-      <div class="zona-tag" style="--accent:${z.color}"><span class="dot"></span>${z.nivel}</div>
+    <article class="card zona reveal" style="--accent:${z.color}">
+      <div class="zona-tag"><span class="dot"></span>${z.nivel}</div>
       <h3>${z.nombre}</h3>
-      <p>${z.desc}</p>
+      <p class="zona-resumen">${z.resumen}</p>
+      <button type="button" class="zona-toggle" aria-expanded="false">
+        <span class="zona-toggle-label">Ver más</span><span class="zona-arrow" aria-hidden="true">▾</span>
+      </button>
+      <div class="zona-panel">
+        <div class="zona-panel-inner">
+          <p class="zona-detalle">${z.detalle}</p>
+        </div>
+      </div>
     </article>`).join(""));
+
+  // Cada tarjeta se expande de forma independiente (no es un acordeón exclusivo)
+  const grid = $("#zonasGrid");
+  if (!grid) return;
+  grid.querySelectorAll(".card.zona").forEach(card => {
+    const btn = card.querySelector(".zona-toggle");
+    const label = btn.querySelector(".zona-toggle-label");
+    btn.addEventListener("click", () => {
+      const abierta = card.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(abierta));
+      label.textContent = abierta ? "Ver menos" : "Ver más";
+    });
+  });
 }
 
 function renderEmergencias() {
