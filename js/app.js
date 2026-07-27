@@ -10,14 +10,29 @@ const STATS = [
   { num: "#1", label: "el exceso de velocidad es la principal causa de muertes viales" },
 ];
 
+// ── Guía completa: hub de temas (cada uno vive en su propia página) ──
+// La forma de cada insignia corresponde a una categoría real de señalización
+// vial (rombo = preventiva, círculo = reglamentaria, triángulo = advertencia,
+// octágono = pare/sanción, rectángulo redondeado = informativa).
+const GUIA = [
+  { shape: "circle", icon: "📜", href: "guia/normas.html", titulo: "Normas clave", desc: "Las reglas básicas que todo actor vial debe cumplir para circular seguro.", color: "#3C3489" },
+  { shape: "diamond", icon: "🚦", href: "guia/senales.html", titulo: "Señales de tránsito", desc: "Reglamentarias, preventivas e informativas, con imágenes reales.", color: "#185FA5" },
+  { shape: "circle", icon: "⏱️", href: "guia/velocidad.html", titulo: "Límites de velocidad", desc: "Cuánto puedes ir según el tipo de zona por la que circulas.", color: "#EAB308" },
+  { shape: "square", icon: "🪪", href: "guia/documentos.html", titulo: "Documentos obligatorios", desc: "Licencia, SOAT, técnico-mecánica y tarjeta de propiedad.", color: "#1D9E75" },
+  { shape: "octagon", icon: "⚖️", href: "guia/infracciones.html", titulo: "Infracciones", desc: "Clasificación por gravedad, con la ley que aplica a cada una.", color: "#E24B4A" },
+  { shape: "square", icon: "🧭", href: "guia/consejos.html", titulo: "Consejos por rol", desc: "Conductores, motociclistas, peatones y ciclistas.", color: "#0EA5A5" },
+  { shape: "triangle", icon: "🚑", href: "guia/accidentes.html", titulo: "En caso de accidente", desc: "Los pasos a seguir, en orden, si ocurre un siniestro.", color: "#E8530A" },
+  { shape: "diamond", icon: "⚠️", href: "guia/zonas.html", titulo: "Puntos de mayor riesgo", desc: "Lugares donde debes extremar la precaución.", color: "#E24B4A" },
+];
+
 // ── Normas ─────────────────────────────────────────────
 const NORMAS = [
-  { icon: "🪖", img: "assets/normas/casco.png", titulo: "Casco obligatorio", desc: "Conductor y parrillero deben usar casco certificado y bien abrochado, sin excepción.", badge: "Falta grave", color: "#E24B4A" },
-  { icon: "🍺", img: "assets/normas/alcohol.png", titulo: "Alcohol cero al conducir", desc: "Conducir con cualquier grado de alcohol en la sangre está prohibido. Multa y retención del vehículo.", badge: "Multa alta", color: "#E8530A" },
-  { icon: "📵", img: "assets/normas/celular.png", titulo: "Sin celular al volante", desc: "Usar el teléfono sin manos libres genera comparendo y pone en riesgo tu vida y la de otros.", badge: "Comparendo", color: "#BA7517" },
-  { icon: "🔒", img: "assets/normas/cinturon.png", titulo: "Cinturón siempre", desc: "Conductor y todos los pasajeros deben llevar el cinturón abrochado, incluso en trayectos cortos.", badge: "Obligatorio", color: "#1D9E75" },
-  { icon: "🚦", img: "assets/normas/senales.png", titulo: "Respeta las señales", desc: "Semáforos, cebras peatonales y señales verticales son de cumplimiento obligatorio.", badge: "Obligatorio", color: "#3C3489" },
-  { icon: "🏫", img: "assets/normas/zonas-escolares.png", titulo: "Zonas escolares", desc: "Velocidad máxima de 30 km/h frente a colegios e instituciones en horario escolar.", badge: "30 km/h máx.", color: "#185FA5" },
+  { icon: "🪖", img: "../assets/normas/casco.png", titulo: "Casco obligatorio", desc: "Conductor y parrillero deben usar casco certificado y bien abrochado, sin excepción.", badge: "Falta grave", color: "#E24B4A" },
+  { icon: "🍺", img: "../assets/normas/alcohol.png", titulo: "Alcohol cero al conducir", desc: "Conducir con cualquier grado de alcohol en la sangre está prohibido. Multa y retención del vehículo.", badge: "Multa alta", color: "#E8530A" },
+  { icon: "📵", img: "../assets/normas/celular.png", titulo: "Sin celular al volante", desc: "Usar el teléfono sin manos libres genera comparendo y pone en riesgo tu vida y la de otros.", badge: "Comparendo", color: "#BA7517" },
+  { icon: "🔒", img: "../assets/normas/cinturon.png", titulo: "Cinturón siempre", desc: "Conductor y todos los pasajeros deben llevar el cinturón abrochado, incluso en trayectos cortos.", badge: "Obligatorio", color: "#1D9E75" },
+  { icon: "🚦", img: "../assets/normas/senales.png", titulo: "Respeta las señales", desc: "Semáforos, cebras peatonales y señales verticales son de cumplimiento obligatorio.", badge: "Obligatorio", color: "#3C3489" },
+  { icon: "🏫", img: "../assets/normas/zonas-escolares.png", titulo: "Zonas escolares", desc: "Velocidad máxima de 30 km/h frente a colegios e instituciones en horario escolar.", badge: "30 km/h máx.", color: "#185FA5" },
 ];
 
 // ── Señales de tránsito (con imágenes reales) ──────────
@@ -26,32 +41,32 @@ const SENALES = {
     label: "Reglamentarias",
     desc: "Indican prohibiciones, restricciones y obligaciones. Su incumplimiento es una infracción. Fondo blanco con borde rojo.",
     items: [
-      { img: "assets/senales/Pare.png", nombre: "Pare", desc: "Detente por completo antes de la línea. Reanuda solo cuando sea seguro." },
-      { img: "assets/senales/prohibido_adelantar.png", nombre: "Prohibido adelantar", desc: "No puedes rebasar otros vehículos en este tramo." },
-      { img: "assets/senales/Prohibido_girar_U.png", nombre: "Prohibido giro en U", desc: "No está permitido devolverse cambiando de sentido." },
-      { img: "assets/senales/velocidad_maxima.png", nombre: "Velocidad máxima", desc: "No superes la velocidad indicada en la señal." },
+      { img: "../assets/senales/Pare.png", nombre: "Pare", desc: "Detente por completo antes de la línea. Reanuda solo cuando sea seguro." },
+      { img: "../assets/senales/prohibido_adelantar.png", nombre: "Prohibido adelantar", desc: "No puedes rebasar otros vehículos en este tramo." },
+      { img: "../assets/senales/Prohibido_girar_U.png", nombre: "Prohibido giro en U", desc: "No está permitido devolverse cambiando de sentido." },
+      { img: "../assets/senales/velocidad_maxima.png", nombre: "Velocidad máxima", desc: "No superes la velocidad indicada en la señal." },
     ],
   },
   preventivas: {
     label: "Preventivas",
     desc: "Advierten sobre un peligro cercano en la vía para que reduzcas la velocidad y actúes con precaución. Fondo amarillo.",
     items: [
-      { img: "assets/senales/Curva_contracurva_cerrada.png", nombre: "Curva y contracurva", desc: "Curvas cerradas seguidas. Reduce la velocidad antes de entrar." },
-      { img: "assets/senales/Peatones.png", nombre: "Zona de peatones", desc: "Cruce de personas cercano. Prepárate para detenerte." },
-      { img: "assets/senales/Pendiente_Desendente.png", nombre: "Pendiente descendente", desc: "Bajada pronunciada. Usa freno motor y controla la velocidad." },
-      { img: "assets/senales/Conservar_Espacio.png", nombre: "Conservar la derecha", desc: "Mantente en tu carril y conserva la distancia adecuada." },
-      { img: "assets/senales/Separador_transito.png", nombre: "Separador de tránsito", desc: "Divisor de calzada adelante. Circula por el lado correcto." },
+      { img: "../assets/senales/Curva_contracurva_cerrada.png", nombre: "Curva y contracurva", desc: "Curvas cerradas seguidas. Reduce la velocidad antes de entrar." },
+      { img: "../assets/senales/Peatones.png", nombre: "Zona de peatones", desc: "Cruce de personas cercano. Prepárate para detenerte." },
+      { img: "../assets/senales/Pendiente_Desendente.png", nombre: "Pendiente descendente", desc: "Bajada pronunciada. Usa freno motor y controla la velocidad." },
+      { img: "../assets/senales/Conservar_Espacio.png", nombre: "Conservar la derecha", desc: "Mantente en tu carril y conserva la distancia adecuada." },
+      { img: "../assets/senales/Separador_transito.png", nombre: "Separador de tránsito", desc: "Divisor de calzada adelante. Circula por el lado correcto." },
     ],
   },
   informativas: {
     label: "Informativas",
     desc: "Guían y entregan información útil sobre servicios, destinos y distancias. Fondo azul o verde.",
     items: [
-      { img: "assets/senales/Parqueadero.png", nombre: "Parqueadero", desc: "Zona autorizada para estacionar tu vehículo." },
-      { img: "assets/senales/Hospital.png", nombre: "Hospital", desc: "Centro de atención médica cercano." },
-      { img: "assets/senales/Estacion_servicio.png", nombre: "Estación de servicio", desc: "Punto de suministro de combustible adelante." },
-      { img: "assets/senales/Zona_servicios.png", nombre: "Zona de servicios", desc: "Restaurantes, baños y descanso disponibles." },
-      { img: "assets/senales/Telefono_emergencia.png", nombre: "Teléfono de emergencia", desc: "Punto de comunicación para auxilio." },
+      { img: "../assets/senales/Parqueadero.png", nombre: "Parqueadero", desc: "Zona autorizada para estacionar tu vehículo." },
+      { img: "../assets/senales/Hospital.png", nombre: "Hospital", desc: "Centro de atención médica cercano." },
+      { img: "../assets/senales/Estacion_servicio.png", nombre: "Estación de servicio", desc: "Punto de suministro de combustible adelante." },
+      { img: "../assets/senales/Zona_servicios.png", nombre: "Zona de servicios", desc: "Restaurantes, baños y descanso disponibles." },
+      { img: "../assets/senales/Telefono_emergencia.png", nombre: "Teléfono de emergencia", desc: "Punto de comunicación para auxilio." },
     ],
   },
 };
@@ -66,10 +81,10 @@ const VELOCIDAD = [
 
 // ── Documentos obligatorios ────────────────────────────
 const DOCUMENTOS = [
-  { icon: "🪪", img: "assets/documentos/Licencia_conduccion.png", titulo: "Licencia de conducción", desc: "Vigente, de la categoría adecuada al vehículo y sin suspensiones activas.", color: "#3C3489" },
-  { icon: "🛡️", img: "assets/documentos/Soat.png", titulo: "SOAT vigente", desc: "Seguro Obligatorio de Accidentes de Tránsito. Válido en formato físico o digital.", color: "#1D9E75" },
-  { icon: "🔧", img: "assets/documentos/Tecnico_mecanica.png", titulo: "Revisión técnico-mecánica", desc: "Obligatoria para vehículos con más de 2 años (autos) o según normativa.", color: "#E8530A" },
-  { icon: "📄", img: "assets/documentos/Tarjeta_propiedad.png", titulo: "Tarjeta de propiedad", desc: "Licencia de tránsito que acredita al propietario del vehículo.", color: "#185FA5" },
+  { icon: "🪪", img: "../assets/documentos/Licencia_conduccion.png", titulo: "Licencia de conducción", desc: "Vigente, de la categoría adecuada al vehículo y sin suspensiones activas.", color: "#3C3489" },
+  { icon: "🛡️", img: "../assets/documentos/Soat.png", titulo: "SOAT vigente", desc: "Seguro Obligatorio de Accidentes de Tránsito. Válido en formato físico o digital.", color: "#1D9E75" },
+  { icon: "🔧", img: "../assets/documentos/Tecnico_mecanica.png", titulo: "Revisión técnico-mecánica", desc: "Obligatoria para vehículos con más de 2 años (autos) o según normativa.", color: "#E8530A" },
+  { icon: "📄", img: "../assets/documentos/Tarjeta_propiedad.png", titulo: "Tarjeta de propiedad", desc: "Licencia de tránsito que acredita al propietario del vehículo.", color: "#185FA5" },
 ];
 
 // ── Infracciones ───────────────────────────────────────
@@ -107,7 +122,7 @@ const INFRACCIONES = [
 // ── Consejos por actor vial ────────────────────────────
 const CONSEJOS = {
   conductores: {
-    label: "Conductores", img: "assets/consejos/Conductores.png",
+    label: "Conductores", img: "../assets/consejos/Conductores.png",
     items: [
       { t: "Mantén la distancia de seguridad", d: "Conserva al menos 3 segundos respecto al vehículo de adelante; auméntalos si llueve o hay niebla." },
       { t: "No manejes cansado", d: "La fatiga reduce tus reflejos igual que el alcohol. Descansa cada 2 horas en viajes largos." },
@@ -116,7 +131,7 @@ const CONSEJOS = {
     ],
   },
   motociclistas: {
-    label: "Motociclistas", img: "assets/consejos/Motociclistas.png",
+    label: "Motociclistas", img: "../assets/consejos/Motociclistas.png",
     items: [
       { t: "Casco certificado y abrochado", d: "Tuyo y del parrillero. Es tu principal protección ante una caída." },
       { t: "Hazte visible", d: "Usa luces encendidas siempre y ropa reflectiva. Evita los puntos ciegos de los carros." },
@@ -125,7 +140,7 @@ const CONSEJOS = {
     ],
   },
   peatones: {
-    label: "Peatones", img: "assets/consejos/Peatones.png",
+    label: "Peatones", img: "../assets/consejos/Peatones.png",
     items: [
       { t: "Cruza por las cebras", d: "Usa siempre los cruces peatonales y los puentes. Nunca entre vehículos estacionados." },
       { t: "Mira antes de cruzar", d: "Izquierda, derecha y de nuevo izquierda. Haz contacto visual con los conductores." },
@@ -134,7 +149,7 @@ const CONSEJOS = {
     ],
   },
   ciclistas: {
-    label: "Ciclistas", img: "assets/consejos/Ciclistas.png",
+    label: "Ciclistas", img: "../assets/consejos/Ciclistas.png",
     items: [
       { t: "Usa casco y elementos reflectivos", d: "Casco siempre, y luz blanca adelante y roja atrás en la noche." },
       { t: "Respeta las señales", d: "Detente en los semáforos y señales igual que cualquier vehículo." },
@@ -195,6 +210,16 @@ function renderStats() {
     </div>`).join(""));
 }
 
+function renderGuia() {
+  html($("#guiaGrid"), GUIA.map(g => `
+    <a class="card reveal" href="${g.href}" style="--accent:${g.color}">
+      <div class="sign sign-${g.shape}"><span class="sign-shape"></span><span class="sign-ico">${g.icon}</span></div>
+      <h3>${g.titulo}</h3>
+      <p>${g.desc}</p>
+      <span class="badge" style="--accent:${g.color}">Ver guía →</span>
+    </a>`).join(""));
+}
+
 function renderNormas() {
   html($("#normasGrid"), NORMAS.map(n => `
     <article class="card reveal" style="--accent:${n.color}">
@@ -224,7 +249,7 @@ function renderSenales(activeKey = "reglamentarias") {
 
   html($("#senalesGrid"), `<p class="tab-desc">${grupo.desc}</p><div class="cards signals-inner">${cards}</div>`);
 
-  $("#senalesTabs").querySelectorAll(".tab").forEach(btn =>
+  $("#senalesTabs")?.querySelectorAll(".tab").forEach(btn =>
     btn.addEventListener("click", () => { renderSenales(btn.dataset.tab); observeReveals(); }));
 }
 
@@ -270,7 +295,9 @@ function renderInfracciones() {
     </article>`).join(""));
 
   // Acordeón: solo una infracción abierta a la vez (en toda la sección)
-  const items = $("#infraccionesGrid").querySelectorAll(".infraction-item");
+  const grid = $("#infraccionesGrid");
+  if (!grid) return;
+  const items = grid.querySelectorAll(".infraction-item");
   items.forEach(item => {
     const btn = item.querySelector(".infraction-toggle");
     btn.addEventListener("click", () => {
@@ -304,7 +331,7 @@ function renderConsejos(activeKey = "conductores") {
       </div>
     </li>`).join(""));
 
-  $("#consejosTabs").querySelectorAll(".tab").forEach(btn =>
+  $("#consejosTabs")?.querySelectorAll(".tab").forEach(btn =>
     btn.addEventListener("click", () => { renderConsejos(btn.dataset.tab); observeReveals(); }));
 }
 
@@ -441,6 +468,7 @@ function setupScrollUI() {
 // ── Init ───────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   renderStats();
+  renderGuia();
   renderNormas();
   renderSenales();
   renderVelocidad();
