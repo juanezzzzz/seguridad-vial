@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="description" content="Parquea bien: maniobra el carro de Yop y estacionalo dentro del cupo antes de que se acabe el tiempo. Juego de seguridad vial de YopVial." />
-  <title>Parquea bien — Juegos YopVial</title>
+  <meta name="description" content="Ruta nocturna: maneja de noche con el cono de luz de las farolas, esquiva peatones, animales y huecos, y cuidado con el deslumbramiento. Juego de seguridad vial de YopVial hecho con Phaser." />
+  <title>Ruta nocturna — Juegos YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
   <link rel="stylesheet" href="juegos.css?v=10" />
 </head>
-<body data-game="parquea-bien">
+<body data-game="ruta-nocturna">
 
   <!-- ══ NAV ══ -->
   <nav class="nav">
@@ -25,19 +25,19 @@
   <!-- ══ ENCABEZADO ══ -->
   <header class="games-head">
     <div class="games-head-inner">
-      <div class="sign sign-square game-hero-sign" aria-hidden="true"><span class="sign-shape"></span><span class="sign-ico">🅿️</span></div>
-      <span class="games-tag">Señal informativa · Precisión</span>
-      <h1>Parquea bien</h1>
-      <p>Maniobra el carro de Yop, esquiva los obstáculos y estaciona dentro del cupo, bien orientado y antes de que se acabe el tiempo.</p>
+      <div class="sign sign-circle game-hero-sign" aria-hidden="true"><span class="sign-shape"></span><span class="sign-ico">🌙</span></div>
+      <span class="games-tag">Señal reglamentaria · Iluminación real (Phaser)</span>
+      <h1>Ruta nocturna</h1>
+      <p>Maneja de noche con el cono de luz de tus farolas: esquiva peatones, animales y huecos antes de que se vuelvan visibles, y cuidado con el deslumbramiento.</p>
     </div>
   </header>
   <div class="lane-divider" aria-hidden="true"></div>
 
   <main class="games-main">
 
-    <section class="game" id="parquear">
+    <section class="game" id="nocturna">
       <div class="game-head">
-        <h2 class="game-title">🅿️ Parquea bien</h2>
+        <h2 class="game-title">🌙 Ruta nocturna</h2>
         <div class="game-head-right">
           <div class="scoreboard">
             <div class="score-box"><span class="score-n" id="scorePuntos">0</span><span class="score-l">Puntos</span></div>
@@ -49,27 +49,25 @@
       </div>
 
       <!-- Pantalla de inicio -->
-      <div class="quiz-start" id="parquearStart">
-        <div class="quiz-start-ico" id="startIco">🅿️</div>
-        <h3 id="startTitle">¿List@ para estacionar?</h3>
-        <p id="startText">Maneja el carro de Yop con las <b>flechas</b> o los <b>botones</b> en pantalla. Entra al cupo marcado (línea amarilla), quedando <b>quieto</b> y con la orientación de la flecha, antes de que se acabe el tiempo. No choques con los otros carros. Tienes <b>3 vidas</b>. ¡Buena maniobra!</p>
+      <div class="quiz-start" id="nocturnaStart">
+        <div class="quiz-start-ico" id="startIco">🌙</div>
+        <h3 id="startTitle">¿List@ para manejar de noche?</h3>
+        <p id="startText">Solo ves bien dentro del cono de luz de tus farolas. Cambia de carril con las <b>flechas</b> o los <b>botones</b> para esquivar peatones, animales y huecos que aparecen en la oscuridad. De vez en cuando un carro de frente te deslumbra: mantén la calma. Tienes <b>3 vidas</b>. ¡Buen viaje!</p>
         <button class="btn btn-primary" id="startBtn">▶ Comenzar</button>
       </div>
 
       <!-- Juego (oculto hasta comenzar) -->
-      <div class="cruza-stage" id="parquearStage" hidden>
-        <div class="cruza-canvas-wrap">
-          <canvas id="parquearCanvas" class="cruza-canvas" width="420" height="560" aria-label="Tablero del juego Parquea bien"></canvas>
+      <div class="ruta-stage" id="nocturnaStage" hidden>
+        <div class="ruta-canvas-wrap">
+          <div id="nocturnaMount" class="ruta-canvas" role="img" aria-label="Tablero del juego Ruta nocturna"></div>
         </div>
 
         <!-- Controles táctiles -->
-        <div class="pad" role="group" aria-label="Controles">
-          <button class="pad-btn pad-up"    data-accion="acelerar" aria-label="Acelerar">▲</button>
-          <button class="pad-btn pad-left"  data-accion="izq"      aria-label="Girar izquierda">◀</button>
-          <button class="pad-btn pad-down"  data-accion="reversa"  aria-label="Reversa">▼</button>
-          <button class="pad-btn pad-right" data-accion="der"      aria-label="Girar derecha">▶</button>
+        <div class="nocturna-pad" role="group" aria-label="Controles">
+          <button class="pad-btn" data-accion="left" aria-label="Carril izquierdo">◀</button>
+          <button class="pad-btn" data-accion="right" aria-label="Carril derecho">▶</button>
         </div>
-        <p class="pad-hint">Teclado: flechas o WASD (mantén presionado) · Móvil: mantén presionados los botones</p>
+        <p class="pad-hint">Teclado: ← → para cambiar de carril · Móvil: desliza a los lados o toca los botones</p>
       </div>
     </section>
 
@@ -81,6 +79,7 @@
     <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
   </footer>
 
-  <script src="parquea-bien.js?v=2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+  <script src="ruta-nocturna.js?v=1"></script>
 </body>
 </html>

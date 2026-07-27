@@ -6,9 +6,9 @@
   <meta name="description" content="Ruta segura: guia la moto de Yop esquivando huecos y autos, recoge casco y SOAT. Juego de seguridad vial de YopVial." />
   <title>Ruta segura — Juegos YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
-  <link rel="stylesheet" href="juegos.css?v=6" />
+  <link rel="stylesheet" href="juegos.css?v=10" />
 </head>
-<body>
+<body data-game="ruta-segura">
 
   <!-- ══ NAV ══ -->
   <nav class="nav">
@@ -25,11 +25,13 @@
   <!-- ══ ENCABEZADO ══ -->
   <header class="games-head">
     <div class="games-head-inner">
-      <span class="games-tag">🏍️ Juego</span>
+      <div class="sign sign-square game-hero-sign" aria-hidden="true"><span class="sign-shape"></span><span class="sign-ico">🏍️</span></div>
+      <span class="games-tag">Señal informativa · Sin fin</span>
       <h1>Ruta segura</h1>
       <p>Guía a Yop en moto por la vía: esquiva huecos y autos, recoge el casco y el SOAT, y no te distraigas con el celular.</p>
     </div>
   </header>
+  <div class="lane-divider" aria-hidden="true"></div>
 
   <main class="games-main">
 
@@ -78,6 +80,6 @@
     <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
   </footer>
 
-  <script src="ruta-segura.js?v=1"></script>
+  <script src="ruta-segura.js?v=2"></script>
 </body>
 </html>

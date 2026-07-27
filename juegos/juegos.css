@@ -17,13 +17,38 @@
   --verde-osc: #17845F;
   --azul: #185FA5;
   --rojo: #E24B4A;
+  --naranja: #E8530A;
+  --morado: #6C4FD6;
+  --noche: #3A5AE8;
   --radio: 18px;
   --radio-sm: 12px;
   --sombra: 0 4px 14px rgba(0, 0, 0, 0.25);
   --sombra-md: 0 12px 30px rgba(0, 0, 0, 0.35);
   --trans: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   --font: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --linea-fuerte: rgba(255, 255, 255, 0.28);
+
+  /* Identidad de cada juego, tomada de las categorías reales de señalización vial */
+  --sign-ahorcado: var(--amarillo);   /* preventiva (rombo) */
+  --sign-adivina: var(--azul);        /* reglamentaria (círculo) */
+  --sign-cruza: var(--naranja);       /* ceda el paso (triángulo) */
+  --sign-ruta: var(--verde);          /* informativa (rectángulo redondeado) */
+  --sign-reflejos: var(--rojo);       /* pare (octágono) */
+  --sign-parquear: var(--morado);     /* informativa (rectángulo redondeado) */
+  --sign-nocturna: var(--noche);      /* reglamentaria (círculo, uso obligatorio de luces) */
+  --sign-soon: var(--muted);
 }
+
+/* Identidad de color por juego: se aplica a .game-card[data-game] en el hub
+   y a <body data-game="..."> en la página de cada juego. */
+[data-game="ahorcado"]         { --tema: var(--sign-ahorcado); }
+[data-game="adivina-senal"]    { --tema: var(--sign-adivina); }
+[data-game="cruza-calle"]      { --tema: var(--sign-cruza); }
+[data-game="ruta-segura"]      { --tema: var(--sign-ruta); }
+[data-game="reflejos-semaforo"]{ --tema: var(--sign-reflejos); }
+[data-game="parquea-bien"]     { --tema: var(--sign-parquear); }
+[data-game="ruta-nocturna"]    { --tema: var(--sign-nocturna); }
+[data-game="quiz-vial"]        { --tema: var(--sign-soon); }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 [hidden] { display: none !important; }
@@ -45,11 +70,25 @@ img { max-width: 100%; display: block; }
 .theme-toggle:hover { background: rgba(255,255,255,0.18); transform: rotate(-18deg); }
 
 /* ══ ENCABEZADO ══ */
-.games-head { background: radial-gradient(circle at 85% -20%, #2b2f3d, var(--carbon) 60%); color: var(--texto); padding: 46px 5vw 40px; text-align: center; }
-.games-head-inner { max-width: 760px; margin: 0 auto; }
+.games-head { background: radial-gradient(circle at 85% -20%, #2b2f3d, var(--carbon) 60%); color: var(--texto); padding: 46px 5vw 0; text-align: center; }
+.games-head-inner { max-width: 760px; margin: 0 auto; padding-bottom: 40px; }
 .games-tag { display: inline-block; padding: 6px 15px; border-radius: 50px; background: rgba(255,201,30,0.12); border: 1px solid rgba(255,201,30,0.35); color: var(--amarillo); font-size: 0.8rem; font-weight: 600; }
+[data-game] .games-tag { color: var(--tema); background: color-mix(in srgb, var(--tema) 14%, transparent); border-color: color-mix(in srgb, var(--tema) 40%, transparent); }
 .games-head h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.8px; margin: 16px 0 10px; }
 .games-head p { color: var(--muted-inv); font-size: 1.02rem; }
+
+/* Franja de carril: la misma línea punteada de los tableros de juego,
+   usada como transición entre el encabezado y el contenido. */
+.lane-divider { height: 4px; background-image: repeating-linear-gradient(90deg, var(--linea-fuerte) 0 26px, transparent 26px 48px); }
+@media (prefers-reduced-motion: no-preference) {
+  .lane-divider { animation: laneScroll 1s linear infinite; }
+}
+@keyframes laneScroll { to { background-position: 48px center; } }
+
+/* Señal grande del encabezado de cada juego (misma pieza que en el hub, a mayor escala) */
+.game-hero-sign { margin: 0 auto 14px; }
+.game-hero-sign.sign { width: 76px; height: 76px; }
+.game-hero-sign .sign-ico { font-size: 2.15rem; }
 
 /* ══ MAIN ══ */
 .games-main { flex: 1; max-width: 940px; width: 100%; margin: 0 auto; padding: 34px 5vw 60px; }
@@ -62,20 +101,35 @@ img { max-width: 100%; display: block; }
   padding: 26px 24px; box-shadow: var(--sombra); overflow: hidden;
   transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
 }
-.game-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--verde); }
-a.game-card:hover { transform: translateY(-6px); border-color: var(--verde); box-shadow: var(--sombra-md); }
-.game-card-ico {
-  display: grid; place-items: center; width: 60px; height: 60px; border-radius: 16px; font-size: 2rem;
-  margin-bottom: 14px; background: color-mix(in srgb, var(--verde) 16%, transparent);
-}
+a.game-card:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--tema, var(--verde)) 55%, var(--linea)); box-shadow: var(--sombra-md); }
+
+/* ══ SEÑAL: insignia con la silueta real de una señal vial ══
+   El color y la forma identifican cada juego (rombo = preventiva,
+   círculo = reglamentaria, triángulo = ceda el paso, octágono = pare,
+   rectángulo redondeado = informativa). */
+.sign { position: relative; width: 58px; height: 58px; flex-shrink: 0; margin-bottom: 14px; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+a.game-card:hover .sign { transform: rotate(-8deg) scale(1.08); }
+.sign-shape { position: absolute; inset: 0; background: var(--tema, var(--muted)); box-shadow: 0 8px 18px color-mix(in srgb, var(--tema, transparent) 45%, transparent); }
+.sign-ico { position: relative; z-index: 1; width: 100%; height: 100%; display: grid; place-items: center; font-size: 1.6rem; }
+.sign-diamond .sign-shape { inset: 7px; border-radius: 8px; transform: rotate(45deg); }
+.sign-circle .sign-shape { border-radius: 50%; }
+.sign-square .sign-shape { border-radius: 16px; }
+.sign-triangle .sign-shape { clip-path: polygon(50% 100%, 3% 8%, 97% 8%); border-radius: 7px; }
+.sign-octagon .sign-shape { clip-path: polygon(30% 3%, 70% 3%, 97% 30%, 97% 70%, 70% 97%, 30% 97%, 3% 70%, 3% 30%); }
+
 .game-card h3 { font-size: 1.2rem; margin-bottom: 6px; }
 .game-card p { color: var(--muted); font-size: 0.92rem; flex: 1; margin-bottom: 16px; }
-.game-card-cta { font-weight: 800; color: var(--verde); font-size: 0.95rem; }
-a.game-card:hover .game-card-cta { color: var(--verde-osc); }
+
+.card-best { display: inline-flex; align-items: center; gap: 6px; font-size: 0.76rem; font-weight: 800; color: var(--tema, var(--muted)); background: color-mix(in srgb, var(--tema, var(--muted)) 14%, transparent); padding: 4px 10px; border-radius: 50px; margin-bottom: 14px; }
+
+.game-card-cta { display: inline-flex; align-items: center; gap: 4px; font-weight: 800; color: var(--tema, var(--verde)); font-size: 0.95rem; }
+.game-card-cta .arrow { transition: transform var(--trans); }
+a.game-card:hover .game-card-cta { color: color-mix(in srgb, var(--tema, var(--verde)) 80%, black); }
+a.game-card:hover .game-card-cta .arrow { transform: translateX(4px); }
 
 .game-card.disabled { opacity: 0.62; cursor: not-allowed; }
-.game-card.disabled::before { background: var(--muted); }
-.game-card.disabled .game-card-ico { background: color-mix(in srgb, var(--muted) 20%, transparent); }
+.game-card.disabled .sign-shape { background: transparent; border: 3px dashed var(--muted); box-shadow: none; }
+.game-card.disabled .card-best { display: none; }
 .game-card.disabled .game-card-cta { color: var(--muted); }
 .soon-badge {
   position: absolute; top: 14px; right: 14px; padding: 4px 10px; border-radius: 50px;
@@ -90,6 +144,7 @@ a.game-card:hover .game-card-cta { color: var(--verde-osc); }
 .scoreboard { display: flex; gap: 10px; }
 .score-box { display: flex; flex-direction: column; align-items: center; min-width: 66px; padding: 8px 12px; border-radius: var(--radio-sm); background: var(--card); border: 1px solid var(--linea); }
 .score-n { font-size: 1.4rem; font-weight: 800; color: var(--amarillo); line-height: 1.1; }
+[data-game] .score-box:last-child .score-n { color: var(--tema); }
 .score-l { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
 .game-body { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
@@ -105,7 +160,7 @@ a.game-card:hover .game-card-cta { color: var(--verde-osc); }
 
 /* ══ PISTA + PALABRA ══ */
 .play-col { display: flex; flex-direction: column; gap: 20px; }
-.pista { background: var(--card); border: 1px solid var(--linea); border-left: 4px solid var(--azul); border-radius: var(--radio-sm); padding: 14px 16px; }
+.pista { background: color-mix(in srgb, var(--azul) 8%, var(--card)); border: 1px solid color-mix(in srgb, var(--azul) 22%, var(--linea)); border-radius: var(--radio-sm); padding: 14px 16px; }
 .pista-label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--azul); font-weight: 800; margin-bottom: 4px; }
 .pista p { color: var(--texto); font-size: 0.98rem; }
 
@@ -144,7 +199,7 @@ a.game-card:hover .game-card-cta { color: var(--verde-osc); }
 .quiz-start p b { color: var(--texto); }
 .game-body-quiz { max-width: 520px; margin: 0 auto; }
 .quiz-timer { height: 9px; border-radius: 50px; background: var(--card); overflow: hidden; }
-.quiz-timer-bar { height: 100%; width: 100%; background: var(--verde); border-radius: 50px; transition: width 0.1s linear; }
+.quiz-timer-bar { height: 100%; width: 100%; background: var(--verde); border-radius: 50px; transform: scaleX(1); transform-origin: left; transition: transform 0.1s linear, background var(--trans); }
 .quiz-timer-bar.low { background: var(--rojo); }
 .quiz-timer-num { text-align: center; font-weight: 700; color: var(--muted); font-size: 0.9rem; margin: 8px 0 18px; }
 .quiz-timer-num #timeLeft { color: var(--texto); }
@@ -196,6 +251,10 @@ a.game-card:hover .game-card-cta { color: var(--verde-osc); }
 .ruta-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 18px auto 6px; width: 260px; }
 .ruta-pad .pad-jump { background: var(--amarillo); color: var(--carbon); border-color: var(--amarillo); }
 
+/* ══ RUTA NOCTURNA (Phaser) ══ */
+.nocturna-pad { display: flex; gap: 10px; margin: 18px auto 6px; max-width: 260px; }
+.nocturna-pad .pad-btn { flex: 1; }
+
 /* ══ REFLEJOS DEL SEMÁFORO (canvas) ══ */
 .reflejos-stage { max-width: 460px; margin: 0 auto; text-align: center; }
 .reflejos-canvas-wrap { position: relative; border-radius: var(--radio); overflow: hidden; border: 1px solid var(--linea); box-shadow: var(--sombra-md); background: #2b2f38; }
@@ -235,6 +294,7 @@ a.game-card:hover .game-card-cta { color: var(--verde-osc); }
   --card: #F5F7FA;
   --amarillo: #185FA5;        /* azul = acento principal */
   --amarillo-osc: #124A80;
+  --linea-fuerte: rgba(20, 22, 28, 0.16);
 }
 [data-theme="light"] .nav { background: rgba(255,255,255,0.92); }
 [data-theme="light"] .nav-back { color: var(--muted); }
@@ -244,6 +304,7 @@ a.game-card:hover .game-card-cta { color: var(--verde-osc); }
 [data-theme="light"] .games-head { background: radial-gradient(circle at 85% -20%, #CFE3F8, #EAF1FA 60%); color: var(--texto); }
 [data-theme="light"] .games-head p { color: var(--muted); }
 [data-theme="light"] .games-tag { background: rgba(29,158,117,0.14); border-color: rgba(29,158,117,0.38); color: var(--verde-osc); }
+[data-theme="light"] [data-game] .games-tag { color: var(--tema); background: color-mix(in srgb, var(--tema) 14%, transparent); border-color: color-mix(in srgb, var(--tema) 40%, transparent); }
 [data-theme="light"] .score-n { color: var(--amarillo); }
 [data-theme="light"] .btn-primary { background: var(--verde); color: #fff; box-shadow: 0 8px 22px rgba(29,158,117,0.30); }
 [data-theme="light"] .btn-primary:hover { background: var(--verde-osc); }

@@ -6,7 +6,7 @@
   <meta name="description" content="Juegos interactivos de YopVial para aprender seguridad vial jugando: ahorcado vial y más." />
   <title>Juegos interactivos — YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
-  <link rel="stylesheet" href="juegos.css?v=5" />
+  <link rel="stylesheet" href="juegos.css?v=10" />
 </head>
 <body>
 
@@ -30,63 +30,81 @@
       <p>Elige un juego y refuerza lo que sabes de seguridad vial de una forma divertida.</p>
     </div>
   </header>
+  <div class="lane-divider" aria-hidden="true"></div>
 
   <main class="games-main">
 
-    <!-- ══ HUB DE JUEGOS ══ -->
+    <!-- ══ HUB DE JUEGOS ══
+         Cada juego tiene su propia "señal": la forma y el color
+         corresponden a una categoría real de señalización vial. -->
     <div class="games-grid">
 
-      <!-- Ahorcado (activo) -->
-      <a class="game-card" href="ahorcado.html">
-        <div class="game-card-ico">🔤</div>
+      <!-- Ahorcado: preventiva (rombo ámbar) -->
+      <a class="game-card" href="ahorcado.html" data-game="ahorcado">
+        <div class="sign sign-diamond"><span class="sign-shape"></span><span class="sign-ico">🔤</span></div>
         <h3>Ahorcado vial</h3>
         <p>Adivina palabras de seguridad vial letra por letra a partir de una pista.</p>
-        <span class="game-card-cta">Jugar →</span>
+        <span class="card-best"><span class="ico">🏆</span> Mejor racha: <span class="card-best-n">—</span></span>
+        <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
       </a>
 
-      <!-- Adivina la señal (activo) -->
-      <a class="game-card" href="adivina-senal.html">
-        <div class="game-card-ico">🚦</div>
+      <!-- Adivina la señal: reglamentaria (círculo azul) -->
+      <a class="game-card" href="adivina-senal.html" data-game="adivina-senal">
+        <div class="sign sign-circle"><span class="sign-shape"></span><span class="sign-ico">🪧</span></div>
         <h3>Adivina la señal</h3>
         <p>Observa la señal de tránsito y elige su nombre correcto en 10 segundos.</p>
-        <span class="game-card-cta">Jugar →</span>
+        <span class="card-best"><span class="ico">🏆</span> Mejor racha: <span class="card-best-n">—</span></span>
+        <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
       </a>
 
-      <!-- Cruza la calle (activo) -->
-      <a class="game-card" href="cruza-calle.html">
-        <div class="game-card-ico">🚗</div>
+      <!-- Cruza la calle: ceda el paso (triángulo naranja) -->
+      <a class="game-card" href="cruza-calle.html" data-game="cruza-calle">
+        <div class="sign sign-triangle"><span class="sign-shape"></span><span class="sign-ico">🦫</span></div>
         <h3>Cruza la calle</h3>
         <p>Ayuda a Yop a cruzar la avenida esquivando el tráfico. Sube de nivel sin perder tus vidas.</p>
-        <span class="game-card-cta">Jugar →</span>
+        <span class="card-best"><span class="ico">🏆</span> Mejor puntaje: <span class="card-best-n">—</span></span>
+        <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
       </a>
 
-      <!-- Ruta segura (activo) -->
-      <a class="game-card" href="ruta-segura.html">
-        <div class="game-card-ico">🏍️</div>
+      <!-- Ruta segura: informativa (rectángulo verde) -->
+      <a class="game-card" href="ruta-segura.html" data-game="ruta-segura">
+        <div class="sign sign-square"><span class="sign-shape"></span><span class="sign-ico">🏍️</span></div>
         <h3>Ruta segura</h3>
         <p>Esquiva huecos y autos en moto, recoge casco y SOAT, y evita el celular. Sin fin, sube de nivel.</p>
-        <span class="game-card-cta">Jugar →</span>
+        <span class="card-best"><span class="ico">🏆</span> Mejor puntaje: <span class="card-best-n">—</span></span>
+        <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
       </a>
 
-      <!-- Reflejos del semáforo (activo) -->
-      <a class="game-card" href="reflejos-semaforo.html">
-        <div class="game-card-ico">🚦</div>
+      <!-- Reflejos del semáforo: pare (octágono rojo) -->
+      <a class="game-card" href="reflejos-semaforo.html" data-game="reflejos-semaforo">
+        <div class="sign sign-octagon"><span class="sign-shape"></span><span class="sign-ico">🚦</span></div>
         <h3>Reflejos del semáforo</h3>
         <p>Avanza apenas veas el verde y frena antes del rojo. Mide tu tiempo de reacción y sube de nivel.</p>
-        <span class="game-card-cta">Jugar →</span>
+        <span class="card-best"><span class="ico">🏆</span> Mejor puntaje: <span class="card-best-n">—</span></span>
+        <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
       </a>
 
-      <!-- Parquea bien (activo) -->
-      <a class="game-card" href="parquea-bien.html">
-        <div class="game-card-ico">🅿️</div>
+      <!-- Parquea bien: informativa (rectángulo morado) -->
+      <a class="game-card" href="parquea-bien.html" data-game="parquea-bien">
+        <div class="sign sign-square"><span class="sign-shape"></span><span class="sign-ico">🅿️</span></div>
         <h3>Parquea bien</h3>
         <p>Maniobra el carro y estaciónalo bien orientado dentro del cupo antes de que se acabe el tiempo.</p>
-        <span class="game-card-cta">Jugar →</span>
+        <span class="card-best"><span class="ico">🏆</span> Mejor puntaje: <span class="card-best-n">—</span></span>
+        <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
       </a>
 
-      <div class="game-card disabled" aria-disabled="true">
+      <!-- Ruta nocturna: reglamentaria (círculo azul noche), hecho con Phaser -->
+      <a class="game-card" href="ruta-nocturna.html" data-game="ruta-nocturna">
+        <div class="sign sign-circle"><span class="sign-shape"></span><span class="sign-ico">🌙</span></div>
+        <h3>Ruta nocturna</h3>
+        <p>Maneja de noche con el cono de luz de tus farolas: esquiva peatones, animales y huecos, y cuidado con el deslumbramiento.</p>
+        <span class="card-best"><span class="ico">🏆</span> Mejor puntaje: <span class="card-best-n">—</span></span>
+        <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
+      </a>
+
+      <div class="game-card disabled" aria-disabled="true" data-game="quiz-vial">
         <span class="soon-badge">Próximamente</span>
-        <div class="game-card-ico">❓</div>
+        <div class="sign sign-circle"><span class="sign-shape"></span><span class="sign-ico">❓</span></div>
         <h3>Quiz vial</h3>
         <p>Responde preguntas de opción múltiple sobre normas, señales y buenas prácticas.</p>
         <span class="game-card-cta">Muy pronto</span>
@@ -102,6 +120,6 @@
     <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
   </footer>
 
-  <script src="juegos.js?v=2"></script>
+  <script src="juegos.js?v=4"></script>
 </body>
 </html>

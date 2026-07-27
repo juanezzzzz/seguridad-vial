@@ -91,7 +91,7 @@ function iniciarTimer() {
 function pintarTimer() {
   $("#timeLeft").textContent = Math.ceil(estado.timeLeft);
   const bar = $("#timerBar");
-  bar.style.width = (estado.timeLeft / TIEMPO * 100) + "%";
+  bar.style.transform = `scaleX(${estado.timeLeft / TIEMPO})`;
   bar.classList.toggle("low", estado.timeLeft <= 3);
 }
 

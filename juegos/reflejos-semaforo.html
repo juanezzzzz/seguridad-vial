@@ -6,9 +6,9 @@
   <meta name="description" content="Reflejos del semaforo: mide tu tiempo de reaccion en verde y no te pases el rojo. Juego de seguridad vial de YopVial." />
   <title>Reflejos del semáforo — Juegos YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
-  <link rel="stylesheet" href="juegos.css?v=7" />
+  <link rel="stylesheet" href="juegos.css?v=10" />
 </head>
-<body>
+<body data-game="reflejos-semaforo">
 
   <!-- ══ NAV ══ -->
   <nav class="nav">
@@ -25,11 +25,13 @@
   <!-- ══ ENCABEZADO ══ -->
   <header class="games-head">
     <div class="games-head-inner">
-      <span class="games-tag">🚦 Juego</span>
+      <div class="sign sign-octagon game-hero-sign" aria-hidden="true"><span class="sign-shape"></span><span class="sign-ico">🚦</span></div>
+      <span class="games-tag">Señal de pare · Reflejos</span>
       <h1>Reflejos del semáforo</h1>
       <p>Reacciona a tiempo: avanza apenas veas el verde y frena antes de que el amarillo se convierta en rojo.</p>
     </div>
   </header>
+  <div class="lane-divider" aria-hidden="true"></div>
 
   <main class="games-main">
 
@@ -73,6 +75,6 @@
     <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
   </footer>
 
-  <script src="reflejos-semaforo.js?v=1"></script>
+  <script src="reflejos-semaforo.js?v=2"></script>
 </body>
 </html>

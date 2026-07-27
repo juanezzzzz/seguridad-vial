@@ -61,6 +61,33 @@ function ajustarCanvas() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+// ── Textura de asfalto (patrón tejado una sola vez, no por frame) ──
+function crearTextura(base, motas) {
+  const t = document.createElement("canvas");
+  t.width = t.height = 48;
+  const tc = t.getContext("2d");
+  tc.fillStyle = base;
+  tc.fillRect(0, 0, 48, 48);
+  for (let i = 0; i < 46; i++) {
+    tc.fillStyle = motas[(Math.random() * motas.length) | 0];
+    const x = Math.random() * 48, y = Math.random() * 48, r = Math.random() * 1.1 + 0.3;
+    tc.beginPath(); tc.arc(x, y, r, 0, Math.PI * 2); tc.fill();
+  }
+  return ctx.createPattern(t, "repeat");
+}
+const TEXTURA_ASFALTO = crearTextura("#3a3e47", ["rgba(255,255,255,0.05)", "rgba(0,0,0,0.14)"]);
+function sombraSuave(x, y, w, h, alpha = 0.28) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, w);
+  g.addColorStop(0, `rgba(0,0,0,${alpha})`);
+  g.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(1, h / w);
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(0, 0, w, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+
 // ── Sonido (WebAudio, sin archivos) ────────────────────
 let actx = null;
 function beep(freq, dur, type = "square", vol = 0.14) {
@@ -233,8 +260,13 @@ function render() {
     ctx.translate((Math.random() - 0.5) * s, (Math.random() - 0.5) * s);
   }
 
-  // Pista (parqueadero)
-  ctx.fillStyle = "#3a3e47";
+  // Pista (parqueadero): degradado radial suave + textura de asfalto
+  const pisoG = ctx.createRadialGradient(VW / 2, VH / 2, 40, VW / 2, VH / 2, VH * 0.75);
+  pisoG.addColorStop(0, "#42464f");
+  pisoG.addColorStop(1, "#2e323a");
+  ctx.fillStyle = pisoG;
+  ctx.fillRect(0, 0, VW, VH);
+  ctx.fillStyle = TEXTURA_ASFALTO;
   ctx.fillRect(0, 0, VW, VH);
   ctx.strokeStyle = "rgba(255,255,255,0.10)";
   ctx.lineWidth = 1;
@@ -255,7 +287,9 @@ function render() {
     ctx.strokeStyle = dentro && anguloOk ? "#1D9E75" : "#FFC91E";
     ctx.lineWidth = 3;
     ctx.setLineDash([10, 8]);
+    if (dentro && anguloOk) { ctx.shadowColor = "#1D9E75"; ctx.shadowBlur = 14; }
     ctx.strokeRect(s.x - s.w / 2, s.y - s.h / 2, s.w, s.h);
+    ctx.shadowBlur = 0;
     ctx.setLineDash([]);
     ctx.fillStyle = dentro && anguloOk ? "rgba(29,158,117,0.16)" : "rgba(255,201,30,0.10)";
     ctx.fillRect(s.x - s.w / 2, s.y - s.h / 2, s.w, s.h);
@@ -270,6 +304,7 @@ function render() {
   }
 
   // Obstáculos (carros parqueados)
+  for (const o of G.obst) sombraSuave(o.x, o.y + 8, 17, 6, 0.28);
   ctx.textAlign = "center"; ctx.textBaseline = "middle";
   for (const o of G.obst) {
     ctx.save();
@@ -283,6 +318,7 @@ function render() {
   const p = G.player;
   const parpadea = p.invuln > 0 && Math.floor(p.invuln * 10) % 2 === 0;
   if (!parpadea) {
+    sombraSuave(p.x, p.y + 8, 17, 6, 0.3);
     ctx.save();
     ctx.translate(p.x, p.y);
     ctx.rotate(p.angle - Math.PI / 2);
