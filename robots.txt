@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://juanezzzzz.github.io/seguridad-vial/sitemap.xml
