@@ -20,6 +20,7 @@
   --naranja: #E8530A;
   --morado: #6C4FD6;
   --noche: #3A5AE8;
+  --turquesa: #0EA5A5;
   --radio: 18px;
   --radio-sm: 12px;
   --sombra: 0 4px 14px rgba(0, 0, 0, 0.25);
@@ -36,6 +37,7 @@
   --sign-reflejos: var(--rojo);       /* pare (octágono) */
   --sign-parquear: var(--morado);     /* informativa (rectángulo redondeado) */
   --sign-nocturna: var(--noche);      /* reglamentaria (círculo, uso obligatorio de luces) */
+  --sign-quiz: var(--turquesa);       /* informativa (rectángulo redondeado) */
   --sign-soon: var(--muted);
 }
 
@@ -48,7 +50,7 @@
 [data-game="reflejos-semaforo"]{ --tema: var(--sign-reflejos); }
 [data-game="parquea-bien"]     { --tema: var(--sign-parquear); }
 [data-game="ruta-nocturna"]    { --tema: var(--sign-nocturna); }
-[data-game="quiz-vial"]        { --tema: var(--sign-soon); }
+[data-game="quiz-vial"]        { --tema: var(--sign-quiz); }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 [hidden] { display: none !important; }
@@ -207,6 +209,10 @@ a.game-card:hover .game-card-cta .arrow { transform: translateX(4px); }
 .senal-img { width: 180px; height: 180px; margin: 0 auto 16px; padding: 14px; background: #fff; border-radius: var(--radio); border: 1px solid var(--linea); overflow: hidden; display: grid; place-items: center; }
 .senal-img img { width: 100%; height: 100%; object-fit: contain; }
 .quiz-q { text-align: center; font-weight: 700; font-size: 1.05rem; margin-bottom: 16px; }
+
+/* Quiz vial: categoría de la pregunta + explicación tras responder */
+.quiz-cat { display: block; text-align: center; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--tema, var(--amarillo)); margin-bottom: 8px; }
+.quiz-explain { margin-top: 14px; padding: 12px 16px; border-radius: var(--radio-sm); background: color-mix(in srgb, var(--tema, var(--amarillo)) 10%, var(--card)); border: 1px solid color-mix(in srgb, var(--tema, var(--amarillo)) 22%, var(--linea)); font-size: 0.9rem; color: var(--texto); }
 
 .options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .option { padding: 14px 16px; border-radius: var(--radio-sm); border: 1.5px solid var(--linea); background: var(--card); color: var(--texto); font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: var(--trans); }

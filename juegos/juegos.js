@@ -9,6 +9,7 @@ const MEJOR_KEYS = {
   "reflejos-semaforo": "yopvial_reflejos_mejor",
   "parquea-bien": "yopvial_parquear_mejor",
   "ruta-nocturna": "yopvial_nocturna_mejor",
+  "quiz-vial": "yopvial_quiz_mejor",
 };
 
 function pintarMejores() {
