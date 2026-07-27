@@ -457,6 +457,21 @@ img { max-width: 100%; display: block; }
 .card.zona::before { background: var(--accent, var(--amarillo)); }
 .zona-tag { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.85rem; color: var(--accent); margin-bottom: 10px; }
 .zona-tag .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent); }
+.zona-resumen { margin-bottom: 4px; }
+
+/* Acordeón: resumen corto siempre visible, detalle completo al hacer clic */
+.zona-toggle {
+  display: flex; align-items: center; gap: 8px; margin-top: 10px;
+  padding: 0; background: none; border: none; cursor: pointer;
+  font: inherit; font-weight: 700; font-size: 0.85rem; color: var(--accent);
+}
+.zona-toggle:hover { text-decoration: underline; }
+.zona-arrow { transition: transform var(--trans); }
+.card.zona.open .zona-arrow { transform: rotate(180deg); }
+.zona-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--trans); }
+.card.zona.open .zona-panel { grid-template-rows: 1fr; }
+.zona-panel-inner { overflow: hidden; }
+.zona-detalle { padding-top: 10px; font-size: 0.9rem; }
 
 /* ══════════ EMERGENCIAS ══════════ */
 .card.emerg { text-align: center; }
