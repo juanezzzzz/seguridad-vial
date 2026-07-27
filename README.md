@@ -1,6 +1,6 @@
 # 🦫 YopVial — Seguridad Vial
 
-Guía educativa e interactiva de **seguridad y movilidad vial**, basada en el Código Nacional de Tránsito de Colombia (Ley 769 de 2002). Incluye contenido didáctico, un módulo de **reportes ciudadanos (PQR)** con base de datos real y una sección de **juegos interactivos** para aprender jugando.
+Guía educativa e interactiva de **seguridad y movilidad vial**, basada en el Código Nacional de Tránsito de Colombia (Ley 769 de 2002). Incluye contenido didáctico organizado por temas, un módulo de **reportes ciudadanos (PQR)** con base de datos real y una sección de **8 juegos interactivos** para aprender jugando.
 
 > Mascota: **Yop**, una capibara con casco y chaleco de seguridad. Por un camino seguro. 🚦
 
@@ -27,20 +27,27 @@ Desplegado en GitHub Pages: **https://juanezzzzz.github.io/seguridad-vial/**
 |---|---|
 | ![Adivina la señal](assets/screenshots/adivina.png) | ![Ahorcado vial](assets/screenshots/ahorcado.png) |
 
+> Estas capturas son de una versión anterior del sitio; el diseño actual del hub de juegos y del home cambió (ver "Qué incluye" abajo).
+
 ---
 
 ## ✨ Qué incluye
 
-### Landing educativo (`index.html`)
+### Landing (`index.html`)
+Página corta y directa: hero, un **hub "Guía completa"** con una tarjeta por tema (cada una con la insignia de una señal vial real: forma + color según la categoría), números de emergencia siempre visibles, y acceso rápido a Reportes y Juegos.
+
+### Guía por temas (`guia/`)
+Cada tema vive en su propia página (para no hacer del home un scroll interminable), reutilizando el mismo contenido y estilos del landing:
 - **Normas** clave de tránsito.
-- **Señales** (reglamentarias, preventivas e informativas) con imágenes reales.
+- **Señales** (reglamentarias, preventivas e informativas) con imágenes reales, por pestañas.
 - **Límites de velocidad** por tipo de zona.
 - **Documentos obligatorios** para circular (con imágenes).
-- **Clasificación de infracciones** con menú desplegable (acordeón): descripción y ley de cada una.
+- **Clasificación de infracciones** con acordeón: descripción y ley de cada una.
 - **Consejos** por tipo de actor vial (conductores, motociclistas, peatones, ciclistas).
-- **Qué hacer en caso de accidente** y **puntos de mayor riesgo**.
-- **Números de emergencia** (con imágenes).
-- **Modo claro / oscuro** con paleta verde + azul (claro) y amarillo + carbón (oscuro).
+- **Qué hacer en caso de accidente**, paso a paso.
+- **Puntos de mayor riesgo**.
+
+Todas comparten `js/app.js` (contenido y renderizado) y `css/styles.css` (modo claro/oscuro, paleta verde + azul / amarillo + carbón).
 
 ### Reportes ciudadanos — PQR (`PQR/`)
 Módulo de participación ciudadana para reportar huecos, semáforos dañados, señalización, accidentes, etc.
@@ -49,17 +56,24 @@ Módulo de participación ciudadana para reportar huecos, semáforos dañados, s
 - Vista de lista con filtros, buscador y detalle.
 
 ### Juegos interactivos (`juegos/`)
-Un **hub** con una card por juego; cada juego vive en su propia página:
+Un **hub** con una tarjeta por juego (misma insignia de señal vial que en la guía); cada juego vive en su propia página:
 - **🔤 Ahorcado vial** — adivina palabras de seguridad vial letra por letra a partir de una pista.
-- **🚦 Adivina la señal** — opción múltiple con **10 segundos** por señal; fallar o quedarte sin tiempo termina la partida. Guarda tu mejor racha.
-- **🚗 Cruza la calle** — juego arcade en **canvas** (estilo Frogger): Yop cruza la avenida esquivando el tráfico. Niveles progresivos, 3 vidas, sonido, controles de teclado y táctiles, y récord guardado. Cada cruce muestra un consejo de seguridad vial.
-- **❓ Quiz vial** — *(próximamente)*.
+- **🪧 Adivina la señal** — opción múltiple con **10 segundos** por señal; fallar o quedarte sin tiempo termina la partida. Guarda tu mejor racha.
+- **🦫 Cruza la calle** — arcade en **canvas** (estilo Frogger): Yop cruza la avenida esquivando el tráfico. Niveles progresivos, 3 vidas, sonido, controles de teclado y táctiles, récord guardado.
+- **🏍️ Ruta segura** — endless runner en moto: esquiva huecos y autos, recoge casco y SOAT, evita el celular.
+- **🚦 Reflejos del semáforo** — mide tu tiempo de reacción: avanza en verde, frena antes del rojo.
+- **🅿️ Parquea bien** — física de manejo simple: maniobra el carro y estaciónalo bien orientado antes de que se acabe el tiempo.
+- **🌙 Ruta nocturna** — conducción nocturna con **iluminación real** (Phaser 3 + su sistema de luces): solo ves lo que entra en el cono de tus farolas, con lluvia animada y eventos de deslumbramiento.
+- **❓ Quiz vial** — 24 preguntas de opción múltiple sobre normas, señales, infracciones, documentos, consejos y emergencias, contrarreloj, con explicación tras cada respuesta.
+
+Todos los juegos guardan su mejor marca en `localStorage` y comparten tema/silencio con el resto del sitio.
 
 ---
 
 ## 🛠️ Tecnologías
 
-- **HTML + CSS + JavaScript puro** (sin frameworks ni build).
+- **HTML + CSS + JavaScript puro** (sin frameworks ni build) para el landing, la guía, el PQR y 7 de los 8 juegos.
+- **[Phaser 3](https://phaser.io)** (vía CDN) para "Ruta nocturna", que usa su sistema de iluminación 2D y partículas.
 - **[Supabase](https://supabase.com)** (PostgreSQL + Storage) para los reportes ciudadanos, vía el cliente ESM desde CDN.
 - **GitHub Pages** para el despliegue.
 
@@ -69,22 +83,40 @@ Un **hub** con una card por juego; cada juego vive en su propia página:
 
 ```
 seguridad-vial/
-├── index.html            # Landing principal
-├── css/styles.css        # Estilos del landing (temas claro/oscuro)
-├── js/app.js             # Contenido y lógica del landing
+├── index.html            # Landing (hero + hub de la guía + emergencias + reportes)
+├── css/styles.css        # Estilos compartidos por landing y guia/ (temas claro/oscuro)
+├── js/app.js             # Contenido y renderizado, compartido por landing y guia/
+├── guia/                 # Un tema por página
+│   ├── normas.html
+│   ├── senales.html
+│   ├── velocidad.html
+│   ├── documentos.html
+│   ├── infracciones.html
+│   ├── consejos.html
+│   ├── accidentes.html
+│   └── zonas.html
 ├── assets/               # Imágenes: logo, señales, documentos, emergencias, consejos, capturas
+│   └── ruta-nocturna/    # Arte SVG propio del juego "Ruta nocturna"
 ├── PQR/                  # Módulo de reportes ciudadanos
 │   ├── reportes.html
 │   ├── pqr.css
 │   ├── pqr.js            # Lógica con Supabase
 │   └── config.js         # URL y clave pública de Supabase
-├── juegos/               # Sección de juegos
-│   ├── juegos.html       # Hub (cards)
-│   ├── juegos.css
+├── juegos/                       # Hub + 8 juegos
+│   ├── juegos.html / juegos.css / juegos.js
 │   ├── ahorcado.html / ahorcado.js
 │   ├── adivina-senal.html / adivina-senal.js
-│   └── cruza-calle.html / cruza-calle.js   # juego arcade en canvas
-└── supabase/setup.sql    # Script de tabla, RLS, vista y Storage
+│   ├── cruza-calle.html / cruza-calle.js       # canvas
+│   ├── ruta-segura.html / ruta-segura.js       # canvas
+│   ├── reflejos-semaforo.html / reflejos-semaforo.js  # canvas
+│   ├── parquea-bien.html / parquea-bien.js     # canvas
+│   ├── ruta-nocturna.html / ruta-nocturna.js   # Phaser 3
+│   └── quiz-vial.html / quiz-vial.js
+├── scripts/
+│   └── smoke-test.js     # Chequeo sin dependencias: sintaxis JS + accesos DOM sin proteger
+├── supabase/setup.sql    # Script de tabla, RLS, vista y Storage
+├── sitemap.xml
+└── robots.txt
 ```
 
 ---
@@ -99,6 +131,14 @@ Con la extensión **Live Server** de VS Code (clic derecho en `index.html` → *
 # Python
 python -m http.server 5500
 # luego abre http://127.0.0.1:5500/
+```
+
+### Antes de hacer commit
+
+Corre el chequeo rápido (sin dependencias) que valida sintaxis de todos los scripts y detecta accesos al DOM sin proteger entre páginas:
+
+```bash
+node scripts/smoke-test.js
 ```
 
 ---
