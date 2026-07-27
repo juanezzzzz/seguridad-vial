@@ -61,6 +61,36 @@ function ajustarCanvas() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+// ── Textura de asfalto (patrón tejado una sola vez, no por frame) ──
+function crearTextura(base, motas) {
+  const t = document.createElement("canvas");
+  t.width = t.height = 48;
+  const tc = t.getContext("2d");
+  tc.fillStyle = base;
+  tc.fillRect(0, 0, 48, 48);
+  for (let i = 0; i < 46; i++) {
+    tc.fillStyle = motas[(Math.random() * motas.length) | 0];
+    const x = Math.random() * 48, y = Math.random() * 48, r = Math.random() * 1.1 + 0.3;
+    tc.beginPath(); tc.arc(x, y, r, 0, Math.PI * 2); tc.fill();
+  }
+  return ctx.createPattern(t, "repeat");
+}
+const TEXTURAS = {
+  asfaltoClaro: crearTextura("#4a4f57", ["rgba(255,255,255,0.07)", "rgba(0,0,0,0.10)"]),
+  asfaltoOscuro: crearTextura("#2b2f38", ["rgba(255,255,255,0.05)", "rgba(0,0,0,0.16)"]),
+};
+function sombraSuave(x, y, w, h, alpha = 0.28) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, w);
+  g.addColorStop(0, `rgba(0,0,0,${alpha})`);
+  g.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(1, h / w);
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(0, 0, w, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+
 // ── Sonido (WebAudio, sin archivos) ────────────────────
 let actx = null;
 function beep(freq, dur, type = "square", vol = 0.14) {
@@ -219,13 +249,25 @@ function render() {
     ctx.translate((Math.random() - 0.5) * s, (Math.random() - 0.5) * s);
   }
 
-  // Vía
-  ctx.fillStyle = light ? "#4a4f57" : "#2b2f38";
+  // Vía (gradiente de luz + textura de asfalto)
+  const viaG = ctx.createLinearGradient(0, 0, VW, 0);
+  if (light) { viaG.addColorStop(0, "#4a4f57"); viaG.addColorStop(0.5, "#565c66"); viaG.addColorStop(1, "#4a4f57"); }
+  else { viaG.addColorStop(0, "#262a33"); viaG.addColorStop(0.5, "#31353f"); viaG.addColorStop(1, "#262a33"); }
+  ctx.fillStyle = viaG;
+  ctx.fillRect(0, 0, VW, VH);
+  ctx.fillStyle = light ? TEXTURAS.asfaltoClaro : TEXTURAS.asfaltoOscuro;
   ctx.fillRect(0, 0, VW, VH);
 
-  // Bordes de la vía (andén/césped)
-  ctx.fillStyle = light ? "#bfe0cb" : "#24442f";
+  // Bordes de la vía (andén/césped), con degradado para dar volumen
+  const bordeG = ctx.createLinearGradient(0, 0, 12, 0);
+  if (light) { bordeG.addColorStop(0, "#a9dcbc"); bordeG.addColorStop(1, "#bfe0cb"); }
+  else { bordeG.addColorStop(0, "#1a3524"); bordeG.addColorStop(1, "#24442f"); }
+  ctx.fillStyle = bordeG;
   ctx.fillRect(0, 0, 8, VH);
+  const bordeG2 = ctx.createLinearGradient(VW - 12, 0, VW, 0);
+  if (light) { bordeG2.addColorStop(0, "#bfe0cb"); bordeG2.addColorStop(1, "#a9dcbc"); }
+  else { bordeG2.addColorStop(0, "#24442f"); bordeG2.addColorStop(1, "#1a3524"); }
+  ctx.fillStyle = bordeG2;
   ctx.fillRect(VW - 8, 0, 8, VH);
 
   // Líneas divisoras entre carriles, animadas
@@ -247,13 +289,21 @@ function render() {
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   for (const it of G.items) {
+    if (it.type !== "hueco") sombraSuave(LANE_X[it.lane], it.y + 12, 20, 7, 0.24);
+  }
+  for (const it of G.items) {
     const x = LANE_X[it.lane];
     ctx.save();
     ctx.translate(x, it.y);
     if (it.type === "hueco") {
-      ctx.fillStyle = "rgba(0,0,0,0.55)";
+      const hg = ctx.createRadialGradient(-4, -3, 2, 0, 0, 25);
+      hg.addColorStop(0, "rgba(40,40,40,0.55)");
+      hg.addColorStop(1, "rgba(0,0,0,0.62)");
+      ctx.fillStyle = hg;
       ctx.beginPath(); ctx.ellipse(0, 0, 24, 13, 0, 0, Math.PI * 2); ctx.fill();
       ctx.strokeStyle = "rgba(0,0,0,0.7)"; ctx.lineWidth = 2; ctx.stroke();
+      ctx.strokeStyle = "rgba(255,255,255,0.10)"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.ellipse(-3, -4, 16, 7, 0, Math.PI, Math.PI * 1.8); ctx.stroke();
     } else if (it.type === "auto") {
       ctx.font = "42px serif";
       ctx.fillText(Math.random() < 0.001 ? "🚌" : "🚗", 0, 2);
@@ -276,8 +326,12 @@ function render() {
     ctx.translate(p.x, PLAYER_Y - arc * 34);
     const escala = 1 + arc * 0.12;
     ctx.scale(escala, escala);
-    ctx.fillStyle = "rgba(0,0,0,0.25)";
-    ctx.beginPath(); ctx.ellipse(0, 26 + arc * 4, 18 - arc * 6, 6 - arc * 2, 0, 0, Math.PI * 2); ctx.fill();
+    const sombraR = 18 - arc * 6;
+    const sg = ctx.createRadialGradient(0, 26 + arc * 4, 0, 0, 26 + arc * 4, sombraR);
+    sg.addColorStop(0, "rgba(0,0,0,0.34)");
+    sg.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = sg;
+    ctx.beginPath(); ctx.ellipse(0, 26 + arc * 4, sombraR, 6 - arc * 2, 0, 0, Math.PI * 2); ctx.fill();
     ctx.save();
     ctx.rotate(-Math.PI / 2);
     ctx.font = "40px serif";

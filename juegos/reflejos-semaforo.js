@@ -62,6 +62,33 @@ function ajustarCanvas() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+// ── Textura de asfalto (patrón tejado una sola vez, no por frame) ──
+function crearTextura(base, motas) {
+  const t = document.createElement("canvas");
+  t.width = t.height = 48;
+  const tc = t.getContext("2d");
+  tc.fillStyle = base;
+  tc.fillRect(0, 0, 48, 48);
+  for (let i = 0; i < 46; i++) {
+    tc.fillStyle = motas[(Math.random() * motas.length) | 0];
+    const x = Math.random() * 48, y = Math.random() * 48, r = Math.random() * 1.1 + 0.3;
+    tc.beginPath(); tc.arc(x, y, r, 0, Math.PI * 2); tc.fill();
+  }
+  return ctx.createPattern(t, "repeat");
+}
+const TEXTURA_ASFALTO = crearTextura("#33373f", ["rgba(255,255,255,0.05)", "rgba(0,0,0,0.16)"]);
+function sombraSuave(x, y, w, h, alpha = 0.28) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, w);
+  g.addColorStop(0, `rgba(0,0,0,${alpha})`);
+  g.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(1, h / w);
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(0, 0, w, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+
 // ── Sonido (WebAudio, sin archivos) ────────────────────
 let actx = null;
 function beep(freq, dur, type = "square", vol = 0.14) {
@@ -213,8 +240,22 @@ function render() {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, VW, VH);
 
-  // Asfalto inferior
-  ctx.fillStyle = "#33373f";
+  // Perfil de edificios al fondo (atmósfera, no interactivo)
+  ctx.fillStyle = "rgba(10,12,18,0.55)";
+  const skylineSeed = [30, 55, 22, 70, 40, 60, 26];
+  let sx = 0;
+  for (let i = 0; i < skylineSeed.length; i++) {
+    const w = VW / skylineSeed.length + 2;
+    ctx.fillRect(sx, VH - 130 - skylineSeed[i], w, skylineSeed[i]);
+    sx += w;
+  }
+
+  // Asfalto inferior (gradiente + textura)
+  const asfG = ctx.createLinearGradient(0, VH - 130, 0, VH);
+  asfG.addColorStop(0, "#3a3e47"); asfG.addColorStop(1, "#2c3038");
+  ctx.fillStyle = asfG;
+  ctx.fillRect(0, VH - 130, VW, 130);
+  ctx.fillStyle = TEXTURA_ASFALTO;
   ctx.fillRect(0, VH - 130, VW, 130);
   ctx.strokeStyle = "rgba(255,255,255,0.5)";
   ctx.lineWidth = 3;
@@ -227,11 +268,18 @@ function render() {
 
   // Poste y semáforo
   const px = VW / 2;
-  ctx.fillStyle = "#4a4f57";
+  const posteG = ctx.createLinearGradient(px - 5, 0, px + 5, 0);
+  posteG.addColorStop(0, "#565c66"); posteG.addColorStop(0.5, "#6b7178"); posteG.addColorStop(1, "#3f434c");
+  ctx.fillStyle = posteG;
   ctx.fillRect(px - 5, 70, 10, 130);
   const boxX = px - 34, boxY = 40, boxW = 68, boxH = 150;
-  ctx.fillStyle = "#1a1c22";
+  ctx.save();
+  ctx.shadowColor = "rgba(0,0,0,0.5)"; ctx.shadowBlur = 16; ctx.shadowOffsetY = 6;
+  const cajaG = ctx.createLinearGradient(boxX, boxY, boxX + boxW, boxY);
+  cajaG.addColorStop(0, "#262932"); cajaG.addColorStop(0.5, "#1e2129"); cajaG.addColorStop(1, "#15171d");
+  ctx.fillStyle = cajaG;
   roundRect(ctx, boxX, boxY, boxW, boxH, 14); ctx.fill();
+  ctx.restore();
   ctx.strokeStyle = "#000"; ctx.lineWidth = 2; ctx.stroke();
 
   const litRojo = G.fase === "rojo";
@@ -244,6 +292,7 @@ function render() {
   // Vehículo de Yop
   const carY = VH - 60;
   const bx = G.bounce > 0 ? Math.sin(G.bounce * Math.PI) * -10 : 0;
+  sombraSuave(px, carY + 20, 20, 6, 0.3);
   ctx.save();
   ctx.translate(px, carY + bx);
   ctx.font = "44px serif";
@@ -318,6 +367,12 @@ function dibujarLuz(cx, cy, color, encendida) {
     ctx.fill();
     ctx.restore();
   }
+  // Brillo de lente (da un acabado de vidrio a la luz)
+  const brillo = ctx.createRadialGradient(cx - 5, cy - 6, 0, cx - 5, cy - 6, 10);
+  brillo.addColorStop(0, encendida ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.12)");
+  brillo.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = brillo;
+  ctx.beginPath(); ctx.arc(cx, cy, 17, 0, Math.PI * 2); ctx.fill();
 }
 
 function roundRect(c, x, y, w, h, r) {

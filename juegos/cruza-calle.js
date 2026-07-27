@@ -61,6 +61,38 @@ function ajustarCanvas() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
+// ── Texturas de escenografía (patrón tejado una sola vez, no por frame) ──
+function crearTextura(base, motas) {
+  const t = document.createElement("canvas");
+  t.width = t.height = 48;
+  const tc = t.getContext("2d");
+  tc.fillStyle = base;
+  tc.fillRect(0, 0, 48, 48);
+  for (let i = 0; i < 46; i++) {
+    tc.fillStyle = motas[(Math.random() * motas.length) | 0];
+    const x = Math.random() * 48, y = Math.random() * 48, r = Math.random() * 1.1 + 0.3;
+    tc.beginPath(); tc.arc(x, y, r, 0, Math.PI * 2); tc.fill();
+  }
+  return ctx.createPattern(t, "repeat");
+}
+const TEXTURAS = {
+  asfaltoClaro: crearTextura("#4a4f57", ["rgba(255,255,255,0.07)", "rgba(0,0,0,0.10)"]),
+  asfaltoOscuro: crearTextura("#2b2f38", ["rgba(255,255,255,0.05)", "rgba(0,0,0,0.16)"]),
+  cespedClaro: crearTextura("#cfe9d8", ["rgba(255,255,255,0.18)", "rgba(20,60,35,0.10)"]),
+  cespedOscuro: crearTextura("#1f3a2c", ["rgba(255,255,255,0.05)", "rgba(0,0,0,0.20)"]),
+};
+function sombraSuave(x, y, w, h, alpha = 0.28) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, w);
+  g.addColorStop(0, `rgba(0,0,0,${alpha})`);
+  g.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(1, h / w);
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(0, 0, w, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+
 // ── Sonido (WebAudio, sin archivos) ────────────────────
 let actx = null;
 function beep(freq, dur, type = "square", vol = 0.14) {
@@ -189,13 +221,23 @@ function render() {
   for (let r = 0; r < ROWS; r++) {
     const y = r * ROW_H;
     if (filaSegura(r)) {
-      ctx.fillStyle = light ? "#cfe9d8" : "#1f3a2c";
+      const g = ctx.createLinearGradient(0, y, 0, y + ROW_H);
+      if (light) { g.addColorStop(0, "#d8f0e0"); g.addColorStop(1, "#c3e6d0"); }
+      else { g.addColorStop(0, "#234a34"); g.addColorStop(1, "#192f22"); }
+      ctx.fillStyle = g;
       ctx.fillRect(0, y, VW, ROW_H);
-      // textura de césped
+      ctx.fillStyle = light ? TEXTURAS.cespedClaro : TEXTURAS.cespedOscuro;
+      ctx.fillRect(0, y, VW, ROW_H);
+      // textura de césped (motas definidas encima del ruido)
       ctx.fillStyle = light ? "#bfe0cb" : "#24442f";
       for (let x = 0; x < VW; x += 16) ctx.fillRect(x + (r % 2 ? 8 : 0), y + 10, 6, 4);
     } else {
-      ctx.fillStyle = light ? "#4a4f57" : "#2b2f38";
+      const g = ctx.createLinearGradient(0, y, 0, y + ROW_H);
+      if (light) { g.addColorStop(0, "#565c66"); g.addColorStop(1, "#454a52"); }
+      else { g.addColorStop(0, "#31353f"); g.addColorStop(1, "#262a33"); }
+      ctx.fillStyle = g;
+      ctx.fillRect(0, y, VW, ROW_H);
+      ctx.fillStyle = light ? TEXTURAS.asfaltoClaro : TEXTURAS.asfaltoOscuro;
       ctx.fillRect(0, y, VW, ROW_H);
       // línea discontinua central del carril
       ctx.strokeStyle = "rgba(255,255,255,0.5)";
@@ -210,7 +252,10 @@ function render() {
   }
 
   // Cebra en la meta (fila 0)
-  ctx.fillStyle = "rgba(255,255,255,0.85)";
+  const cebraG = ctx.createLinearGradient(0, 4, 0, ROW_H - 4);
+  cebraG.addColorStop(0, "rgba(255,255,255,0.92)");
+  cebraG.addColorStop(1, "rgba(220,222,226,0.72)");
+  ctx.fillStyle = cebraG;
   for (let x = 6; x < VW; x += 26) ctx.fillRect(x, 4, 14, ROW_H - 8);
 
   // Bordillo de la fila de inicio
@@ -220,6 +265,12 @@ function render() {
   // Vehículos
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
+  for (const lane of G.lanes) {
+    const y = lane.row * ROW_H + ROW_H / 2;
+    for (const car of lane.cars) {
+      sombraSuave(car.x, y + ROW_H * 0.24, car.w * 0.42, car.w * 0.15, 0.26);
+    }
+  }
   for (const lane of G.lanes) {
     const y = lane.row * ROW_H + ROW_H / 2;
     for (const car of lane.cars) {
@@ -243,9 +294,12 @@ function render() {
     ctx.save();
     ctx.translate(px, py - p.hop * 6);
     ctx.scale(escala, escala);
-    // sombra
-    ctx.fillStyle = "rgba(0,0,0,0.22)";
-    ctx.beginPath(); ctx.ellipse(0, 20, 15, 5, 0, 0, Math.PI * 2); ctx.fill();
+    // sombra (gradiente radial, se desvanece en el borde)
+    const sg = ctx.createRadialGradient(0, 20, 0, 0, 20, 16);
+    sg.addColorStop(0, "rgba(0,0,0,0.32)");
+    sg.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = sg;
+    ctx.beginPath(); ctx.ellipse(0, 20, 16, 5.5, 0, 0, Math.PI * 2); ctx.fill();
     ctx.font = "38px serif";
     ctx.fillText("🦫", 0, 0);
     ctx.restore();

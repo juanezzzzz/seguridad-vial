@@ -6,9 +6,9 @@
   <meta name="description" content="Cruza la calle con Yop: esquiva el tráfico y llega a salvo al otro lado. Juego de seguridad vial de YopVial." />
   <title>Cruza la calle — Juegos YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
-  <link rel="stylesheet" href="juegos.css?v=5" />
+  <link rel="stylesheet" href="juegos.css?v=10" />
 </head>
-<body>
+<body data-game="cruza-calle">
 
   <!-- ══ NAV ══ -->
   <nav class="nav">
@@ -25,11 +25,13 @@
   <!-- ══ ENCABEZADO ══ -->
   <header class="games-head">
     <div class="games-head-inner">
-      <span class="games-tag">🚗 Juego</span>
+      <div class="sign sign-triangle game-hero-sign" aria-hidden="true"><span class="sign-shape"></span><span class="sign-ico">🦫</span></div>
+      <span class="games-tag">Ceda el paso · Arcade</span>
       <h1>Cruza la calle</h1>
       <p>Ayuda a Yop a cruzar la avenida esquivando el tráfico. ¡Mira a ambos lados y llega a la cebra!</p>
     </div>
   </header>
+  <div class="lane-divider" aria-hidden="true"></div>
 
   <main class="games-main">
 
@@ -79,6 +81,6 @@
     <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
   </footer>
 
-  <script src="cruza-calle.js?v=1"></script>
+  <script src="cruza-calle.js?v=2"></script>
 </body>
 </html>

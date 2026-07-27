@@ -275,10 +275,13 @@ img { max-width: 100%; display: block; }
   transition: transform var(--trans);
 }
 .card:hover .card-icon { transform: scale(1.08) rotate(-4deg); }
-/* Cuando la norma tiene imagen: thumbnail enmarcado más grande */
+/* Cuando la norma tiene imagen: thumbnail enmarcado más grande.
+   Fondo con el mismo tinte del acento (no blanco fijo) para que
+   no se vea una caja blanca alrededor del ícono en modo oscuro. */
 .card-icon:has(img) {
-  width: 84px; height: 84px; border-radius: 16px; padding: 6px;
-  background: #fff; border: 1px solid var(--linea); overflow: hidden;
+  width: 84px; height: 84px; border-radius: 16px; padding: 10px;
+  background: color-mix(in srgb, var(--accent, var(--amarillo)) 15%, transparent);
+  overflow: hidden;
 }
 .card-icon img { width: 100%; height: 100%; object-fit: contain; }
 .card:hover .card-icon:has(img) { transform: scale(1.06) rotate(0); }
@@ -312,7 +315,8 @@ img { max-width: 100%; display: block; }
 .card.signal { text-align: center; }
 .signal-img {
   width: 118px; height: 118px; margin: 0 auto 16px;
-  display: grid; place-items: center; background: #fff; border-radius: 16px; padding: 12px;
+  display: grid; place-items: center; border-radius: 16px; padding: 12px;
+  background: color-mix(in srgb, var(--azul) 10%, var(--tarjeta));
   box-shadow: inset 0 0 0 1px var(--linea); transition: transform var(--trans);
 }
 .card.signal:hover .signal-img { transform: scale(1.06); }
@@ -353,10 +357,12 @@ img { max-width: 100%; display: block; }
   overflow: hidden;   /* evita que las esquinas de la imagen se asomen del marco */
   background: color-mix(in srgb, var(--accent) 15%, transparent);
 }
-/* Cuando el documento tiene imagen: mini-thumbnail enmarcado que muestra el documento completo */
+/* Cuando el documento tiene imagen: mini-thumbnail enmarcado que muestra el documento completo.
+   Mismo tinte de acento que el resto (no blanco fijo), para no verse como una
+   caja blanca alrededor del ícono en modo oscuro. */
 .doc-icon:has(img) {
-  min-width: 78px; width: 78px; height: 56px; padding: 4px; border-radius: 10px;
-  background: #fff; border: 1px solid var(--linea);
+  min-width: 78px; width: 78px; height: 56px; padding: 6px; border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
 }
 .doc-icon img { width: 100%; height: 100%; object-fit: contain; }
 .doc h3 { font-size: 1.05rem; margin-bottom: 4px; }

@@ -6,9 +6,9 @@
   <meta name="description" content="Ahorcado vial de YopVial: adivina palabras de seguridad vial letra por letra a partir de una pista." />
   <title>Ahorcado vial — Juegos YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
-  <link rel="stylesheet" href="juegos.css?v=3" />
+  <link rel="stylesheet" href="juegos.css?v=10" />
 </head>
-<body>
+<body data-game="ahorcado">
 
   <!-- ══ NAV ══ -->
   <nav class="nav">
@@ -25,11 +25,13 @@
   <!-- ══ ENCABEZADO ══ -->
   <header class="games-head">
     <div class="games-head-inner">
-      <span class="games-tag">🔤 Juego</span>
+      <div class="sign sign-diamond game-hero-sign" aria-hidden="true"><span class="sign-shape"></span><span class="sign-ico">🔤</span></div>
+      <span class="games-tag">Señal preventiva · Vocabulario vial</span>
       <h1>Ahorcado vial</h1>
       <p>Lee la pista y adivina la palabra de seguridad vial letra por letra. ¡Cuida no fallar más de 6 veces!</p>
     </div>
   </header>
+  <div class="lane-divider" aria-hidden="true"></div>
 
   <main class="games-main">
 
