@@ -6,7 +6,7 @@
   <meta name="description" content="Guía completa de seguridad vial: normas, señales de tránsito, límites de velocidad, documentos, infracciones, consejos y números de emergencia." />
   <title>Seguridad Vial — Guía completa de tránsito</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
-  <link rel="stylesheet" href="css/styles.css?v=24" />
+  <link rel="stylesheet" href="css/styles.css?v=28" />
 </head>
 <body>
 
@@ -18,13 +18,14 @@
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#inicio">Inicio</a>
-      <a href="#normas">Normas</a>
-      <a href="#senales">Señales</a>
-      <a href="#velocidad">Velocidad</a>
-      <a href="#documentos">Documentos</a>
-      <a href="#infracciones">Infracciones</a>
-      <a href="#consejos">Consejos</a>
-      <a href="#accidente">Accidentes</a>
+      <a href="guia/normas.html">Normas</a>
+      <a href="guia/senales.html">Señales</a>
+      <a href="guia/velocidad.html">Velocidad</a>
+      <a href="guia/documentos.html">Documentos</a>
+      <a href="guia/infracciones.html">Infracciones</a>
+      <a href="guia/consejos.html">Consejos</a>
+      <a href="guia/accidentes.html">Accidentes</a>
+      <a href="guia/zonas.html">Zonas de riesgo</a>
       <a href="#emergencias">Emergencias</a>
       <a href="#reportes">Reportes</a>
       <a href="juegos/juegos.html" class="nav-games">🎮 Juegos</a>
@@ -45,7 +46,8 @@
         <h1>Muévete con <em>seguridad</em> en las vías</h1>
         <p>La seguridad vial es responsabilidad de todos. Conoce las normas, aprende a leer las señales, aplica buenos hábitos y protege tu vida y la de los demás.</p>
         <div class="hero-btns">
-          <a href="#normas" class="btn btn-primary">Empezar a aprender</a>
+          <a href="guia/normas.html" class="btn btn-primary">Empezar a aprender</a>
+          <a href="juegos/juegos.html" class="btn btn-games">🎮 Jugar</a>
           <a href="PQR/reportes.html" class="btn btn-secondary">Reportar un problema →</a>
         </div>
       </div>
@@ -58,71 +60,16 @@
     </div>
     <div class="hero-stats" id="heroStats"><!-- app.js --></div>
   </header>
+  <div class="lane-divider" aria-hidden="true"></div>
 
-  <!-- ══ NORMAS ══ -->
-  <section class="section bg-a" id="normas">
-    <span class="section-tag">Reglamento</span>
-    <h2 class="section-title">Normas clave de tránsito</h2>
-    <p class="section-lead">Las reglas básicas que todo actor vial debe cumplir para circular de forma segura y evitar sanciones.</p>
-    <div class="cards" id="normasGrid"><!-- app.js --></div>
-  </section>
-
-  <!-- ══ SEÑALES ══ -->
-  <section class="section bg-b" id="senales">
-    <span class="section-tag">Lenguaje de la vía</span>
-    <h2 class="section-title">Señales de tránsito</h2>
-    <p class="section-lead">Las señales se agrupan en tres tipos. Reconocerlas a tiempo es clave para tomar decisiones seguras.</p>
-    <div class="tabs" id="senalesTabs"><!-- app.js --></div>
-    <div id="senalesGrid"><!-- app.js --></div>
-  </section>
-
-  <!-- ══ VELOCIDAD ══ -->
-  <section class="section bg-c" id="velocidad">
-    <span class="section-tag">Límites</span>
-    <h2 class="section-title">Límites de velocidad</h2>
-    <p class="section-lead">Respetar la velocidad reduce drásticamente la gravedad de los accidentes. Estos son los límites según la zona.</p>
-    <div class="speed-grid" id="velocidadGrid"><!-- app.js --></div>
-  </section>
-
-  <!-- ══ DOCUMENTOS ══ -->
-  <section class="section bg-a" id="documentos">
-    <span class="section-tag">Requisitos</span>
-    <h2 class="section-title">Documentos obligatorios para circular</h2>
-    <p class="section-lead">Siempre debes portar estos documentos vigentes. Circular sin ellos genera comparendo e inmovilización.</p>
-    <div class="docs" id="documentosGrid"><!-- app.js --></div>
-  </section>
-
-  <!-- ══ INFRACCIONES ══ -->
-  <section class="section bg-b" id="infracciones">
-    <span class="section-tag">Sanciones</span>
-    <h2 class="section-title">Clasificación de infracciones</h2>
-    <p class="section-lead">Las infracciones se clasifican según su gravedad. A mayor riesgo para la vida, mayor la sanción.</p>
-    <div class="cards" id="infraccionesGrid"><!-- app.js --></div>
-  </section>
-
-  <!-- ══ CONSEJOS ══ -->
-  <section class="section bg-c" id="consejos">
-    <span class="section-tag">Buenas prácticas</span>
-    <h2 class="section-title">Consejos según cómo te muevas</h2>
-    <p class="section-lead">Cada actor vial tiene riesgos distintos. Elige tu rol y aplica estas recomendaciones.</p>
-    <div class="tabs" id="consejosTabs"><!-- app.js --></div>
-    <ul class="tips" id="consejosList"><!-- app.js --></ul>
-  </section>
-
-  <!-- ══ ACCIDENTE ══ -->
-  <section class="section bg-a" id="accidente">
-    <span class="section-tag">Actúa bien</span>
-    <h2 class="section-title">¿Qué hacer en caso de accidente?</h2>
-    <p class="section-lead">Mantén la calma y sigue estos pasos en orden. Actuar correctamente puede salvar vidas.</p>
-    <ol class="steps" id="accidenteSteps"><!-- app.js --></ol>
-  </section>
-
-  <!-- ══ ZONAS ══ -->
-  <section class="section bg-b" id="zonas">
-    <span class="section-tag">Precaución</span>
-    <h2 class="section-title">Puntos de mayor riesgo</h2>
-    <p class="section-lead">Lugares donde ocurren más siniestros. Extrema la precaución al transitarlos.</p>
-    <div class="cards" id="zonasGrid"><!-- app.js --></div>
+  <!-- ══ GUÍA COMPLETA (hub) ══
+       Cada tema vive en su propia página bajo guia/ para no hacer
+       del home un scroll interminable. -->
+  <section class="section bg-a" id="guia">
+    <span class="section-tag">Guía completa</span>
+    <h2 class="section-title">Todo lo que debes saber</h2>
+    <p class="section-lead">Explora cada tema en detalle: normas, señales, límites de velocidad, documentos, infracciones, consejos por rol, qué hacer en caso de accidente y los puntos de mayor riesgo.</p>
+    <div class="cards" id="guiaGrid"><!-- app.js --></div>
   </section>
 
   <!-- ══ EMERGENCIAS ══ -->
@@ -137,27 +84,7 @@
   <section class="section bg-a" id="reportes">
     <span class="section-tag">Participación ciudadana</span>
     <h2 class="section-title">¿Ves algo peligroso en la vía?</h2>
-    <p class="section-lead">Repórtalo en menos de un minuto. Entre todos ayudamos a que las autoridades atiendan huecos, semáforos dañados y otros riesgos más rápido.</p>
-
-    <div class="cards" id="pqrTiposGrid"><!-- app.js --></div>
-
-    <div class="pqr-how">
-      <span class="pqr-how-tag">Cómo funciona</span>
-      <ol class="steps">
-        <li class="step">
-          <div class="step-num">1</div>
-          <div><h3>Elige el tipo y la ubicación</h3><p>Selecciona qué encontraste y dónde exactamente.</p></div>
-        </li>
-        <li class="step">
-          <div class="step-num">2</div>
-          <div><h3>Describe y adjunta una foto</h3><p>Cuéntanos los detalles; la foto es opcional pero ayuda mucho.</p></div>
-        </li>
-        <li class="step">
-          <div class="step-num">3</div>
-          <div><h3>Haz seguimiento al estado</h3><p>Consulta cuándo tu reporte pasa a "en proceso" o "resuelto".</p></div>
-        </li>
-      </ol>
-    </div>
+    <p class="section-lead">Repórtalo en menos de un minuto: huecos, semáforos dañados, señalización, accidentes y más. Entre todos ayudamos a que las autoridades atiendan estos riesgos más rápido.</p>
 
     <div class="pqr-preview-actions">
       <a href="PQR/reportes.html" class="btn btn-primary">＋ Hacer un reporte</a>
@@ -173,9 +100,9 @@
         <p>Guía educativa de seguridad y movilidad vial. Por un camino seguro. Información basada en el Código Nacional de Tránsito (Ley 769 de 2002).</p>
       </div>
       <div class="footer-links">
-        <a href="#normas">Normas</a>
-        <a href="#senales">Señales</a>
-        <a href="#infracciones">Infracciones</a>
+        <a href="guia/normas.html">Normas</a>
+        <a href="guia/senales.html">Señales</a>
+        <a href="guia/infracciones.html">Infracciones</a>
         <a href="#emergencias">Emergencias</a>
       </div>
     </div>
@@ -184,6 +111,6 @@
 
   <button class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
 
-  <script src="js/app.js?v=22"></script>
+  <script src="js/app.js?v=25"></script>
 </body>
 </html>
