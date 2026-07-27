@@ -4,9 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Juegos interactivos de YopVial para aprender seguridad vial jugando: ahorcado vial y más." />
+  <link rel="icon" type="image/png" href="../assets/logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Juegos interactivos — YopVial" />
+  <meta property="og:description" content="Juegos interactivos de YopVial para aprender seguridad vial jugando: ahorcado vial y más." />
+  <meta property="og:image" content="https://juanezzzzz.github.io/seguridad-vial/assets/screenshots/landing.png" />
+  <meta property="og:url" content="https://juanezzzzz.github.io/seguridad-vial/juegos/juegos.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Juegos interactivos — YopVial" />
+  <meta name="twitter:description" content="Juegos interactivos de YopVial para aprender seguridad vial jugando: ahorcado vial y más." />
+  <meta name="twitter:image" content="https://juanezzzzz.github.io/seguridad-vial/assets/screenshots/landing.png" />
   <title>Juegos interactivos — YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
-  <link rel="stylesheet" href="juegos.css?v=10" />
+  <link rel="stylesheet" href="juegos.css?v=11" />
 </head>
 <body>
 
@@ -102,13 +112,14 @@
         <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
       </a>
 
-      <div class="game-card disabled" aria-disabled="true" data-game="quiz-vial">
-        <span class="soon-badge">Próximamente</span>
-        <div class="sign sign-circle"><span class="sign-shape"></span><span class="sign-ico">❓</span></div>
+      <!-- Quiz vial: informativa (rectángulo turquesa) -->
+      <a class="game-card" href="quiz-vial.html" data-game="quiz-vial">
+        <div class="sign sign-square"><span class="sign-shape"></span><span class="sign-ico">❓</span></div>
         <h3>Quiz vial</h3>
-        <p>Responde preguntas de opción múltiple sobre normas, señales y buenas prácticas.</p>
-        <span class="game-card-cta">Muy pronto</span>
-      </div>
+        <p>Responde preguntas de opción múltiple sobre normas, señales, infracciones y más contra el tiempo.</p>
+        <span class="card-best"><span class="ico">🏆</span> Mejor racha: <span class="card-best-n">—</span></span>
+        <span class="game-card-cta">Jugar <span class="arrow">→</span></span>
+      </a>
 
     </div>
 
@@ -120,6 +131,6 @@
     <p>YopVial · Juegos interactivos · Aprende seguridad vial jugando.</p>
   </footer>
 
-  <script src="juegos.js?v=4"></script>
+  <script src="juegos.js?v=5"></script>
 </body>
 </html>
