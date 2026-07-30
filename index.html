@@ -17,6 +17,39 @@
   <title>Seguridad Vial — Guía completa de tránsito</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
   <link rel="stylesheet" href="css/styles.css?v=29" />
+  <!-- Mapa (Leaflet + OpenStreetMap, sin API key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    .mapa-wrap { max-width: 960px; margin: 0 auto; }
+    #mapaZonas {
+      height: 420px; width: 100%; border-radius: 18px;
+      border: 1px solid var(--border, #e3e3e3);
+      box-shadow: 0 10px 30px rgba(0,0,0,.12); z-index: 0;
+    }
+    .mapa-legend {
+      display: flex; flex-wrap: wrap; gap: 1.25rem; justify-content: center;
+      margin: .9rem 0 .3rem; font-size: .9rem;
+    }
+    .mapa-legend span { display: inline-flex; align-items: center; gap: .5rem; }
+    .mapa-legend i {
+      width: 14px; height: 14px; border-radius: 50%; display: inline-block;
+      border: 2px solid #fff; box-shadow: 0 0 6px 1px currentColor;
+    }
+    .led-dot {
+      position: relative; display: block; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--led); border: 2px solid #fff; box-shadow: 0 0 8px 2px var(--led);
+    }
+    .led-dot::before {
+      content: ""; position: absolute; inset: -5px; border-radius: 50%;
+      border: 2px solid var(--led); opacity: .75;
+      animation: ledPulse 1.6s ease-out infinite;
+    }
+    @keyframes ledPulse {
+      0%   { transform: scale(.5); opacity: .85; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .led-dot::before { animation: none; } }
+  </style>
 </head>
 <body>
 
@@ -90,6 +123,21 @@
     <div class="cards" id="emergGrid"><!-- app.js --></div>
   </section>
 
+  <!-- ══ MAPA DE ZONAS DE RIESGO ══ -->
+  <section class="section bg-b" id="mapa-riesgo">
+    <span class="section-tag">Yopal, Casanare</span>
+    <h2 class="section-title">Mapa de zonas de riesgo</h2>
+    <p class="section-lead">Ubica en el mapa los puntos con mayor accidentalidad de la ciudad. Toca cada punto para ver el detalle.</p>
+    <div class="mapa-wrap">
+      <div id="mapaZonas" role="img" aria-label="Mapa de Yopal con los puntos de mayor accidentalidad marcados"></div>
+      <div class="mapa-legend">
+        <span style="color:#E24B4A"><i></i> Riesgo alto</span>
+        <span style="color:#EF9F27"><i></i> Riesgo medio</span>
+      </div>
+    </div>
+    <a class="guia-back" href="guia/zonas.html">Ver todas las zonas de riesgo →</a>
+  </section>
+
   <!-- ══ REPORTES (módulo PQR) ══ -->
   <section class="section bg-a" id="reportes">
     <span class="section-tag">Participación ciudadana</span>
@@ -121,6 +169,7 @@
 
   <button class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
 
-  <script src="js/app.js?v=27"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/app.js?v=28"></script>
 </body>
 </html>

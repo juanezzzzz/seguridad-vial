@@ -170,6 +170,7 @@ const ACCIDENTE = [
 // ── Zonas / puntos de riesgo (Yopal, Casanare) ─────────
 // Corredores identificados por la Secretaría de Movilidad de Yopal y
 // reportes de prensa local como puntos de mayor congestión/accidentalidad.
+// Para que un punto salga en el mapa, agrégale lat/lng con el editor temporal.
 const ZONAS = [
   { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Calle 40",
     resumen: "El corredor con mayor flujo vehicular de la ciudad.",
@@ -390,6 +391,46 @@ function renderZonas() {
   });
 }
 
+// Mapa de Yopal con puntos LED en las zonas de mayor accidentalidad (Leaflet).
+// Se inicializa sólo en la página que tiene el contenedor y si Leaflet cargó.
+function renderMapaZonas() {
+  const el = $("#mapaZonas");
+  if (!el || typeof L === "undefined" || el.dataset.ready === "1") return;
+  el.dataset.ready = "1";
+
+  const map = L.map(el, { scrollWheelZoom: false, attributionControl: true })
+    .setView([5.3378, -72.3959], 14); // Yopal, Casanare
+  window.mapaZonasRef = map; // TEMP-EDITOR: quitar antes de subir al repo
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "&copy; OpenStreetMap",
+  }).addTo(map);
+
+  const puntos = ZONAS.filter((z) => typeof z.lat === "number" && typeof z.lng === "number");
+  puntos.forEach((z) => {
+    const icon = L.divIcon({
+      className: "led-icon",
+      html: `<span class="led-dot" style="--led:${z.color}"></span>`,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+      popupAnchor: [0, -8],
+    });
+    L.marker([z.lat, z.lng], { icon, title: z.nombre })
+      .addTo(map)
+      .bindPopup(
+        `<strong>${z.nombre}</strong><br><span style="color:${z.color};font-weight:600">${z.nivel}</span><br>${z.resumen}`
+      );
+  });
+
+  // Encadra el mapa a los puntos si hay al menos dos.
+  if (puntos.length > 1) {
+    map.fitBounds(puntos.map((z) => [z.lat, z.lng]), { padding: [40, 40], maxZoom: 15 });
+  }
+  // Recalcula tamaño por si el contenedor se midió antes de tiempo.
+  setTimeout(() => map.invalidateSize(), 200);
+}
+
 function renderEmergencias() {
   html($("#emergGrid"), EMERGENCIAS.map(e => `
     <article class="card emerg reveal" style="--accent:${e.color}">
@@ -512,6 +553,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderConsejos();
   renderAccidente();
   renderZonas();
+  renderMapaZonas();
   renderEmergencias();
   renderPqrTipos();
 

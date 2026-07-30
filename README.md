@@ -1,5 +1,17 @@
 # 🦫 YopVial — Seguridad Vial
 
+> # ⚠️🚨 ANTES DE DESPLEGAR — LEER 🚨⚠️
+>
+> **Este repo trae un EDITOR TEMPORAL para colocar los puntos del mapa de zonas de riesgo.
+> HAY QUE BORRARLO ANTES DE PUBLICAR EL SITIO** (si no, cualquier visitante verá el panel de edición).
+>
+> Para quitarlo, elimina TODO lo marcado con `TEMP-EDITOR` (3 lugares):
+> 1. **Borra el archivo** `js/editor-zonas.js`
+> 2. En `guia/zonas.html`, **quita** la línea `<script src="../js/editor-zonas.js"></script>`
+> 3. En `js/app.js`, **quita** la línea `window.mapaZonasRef = map;`
+>
+> Búscalo rápido con: `grep -rn "TEMP-EDITOR" .`
+
 Guía educativa e interactiva de **seguridad y movilidad vial**, basada en el Código Nacional de Tránsito de Colombia (Ley 769 de 2002). Incluye contenido didáctico organizado por temas, un módulo de **reportes ciudadanos (PQR)** con base de datos real y una sección de **8 juegos interactivos** para aprender jugando.
 
 > Mascota: **Yop**, una capibara con casco y chaleco de seguridad. Por un camino seguro. 🚦
