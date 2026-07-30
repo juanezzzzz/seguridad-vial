@@ -15,14 +15,14 @@ const STATS = [
 // vial (rombo = preventiva, círculo = reglamentaria, triángulo = advertencia,
 // octágono = pare/sanción, rectángulo redondeado = informativa).
 const GUIA = [
-  { shape: "circle", icon: "📜", href: "guia/normas.html", titulo: "Normas clave", desc: "Las reglas básicas que todo actor vial debe cumplir para circular seguro.", color: "#3C3489" },
-  { shape: "diamond", icon: "🚦", href: "guia/senales.html", titulo: "Señales de tránsito", desc: "Reglamentarias, preventivas e informativas, con imágenes reales.", color: "#185FA5" },
-  { shape: "circle", icon: "⏱️", href: "guia/velocidad.html", titulo: "Límites de velocidad", desc: "Cuánto puedes ir según el tipo de zona por la que circulas.", color: "#EAB308" },
-  { shape: "square", icon: "🪪", href: "guia/documentos.html", titulo: "Documentos obligatorios", desc: "Licencia, SOAT, técnico-mecánica y tarjeta de propiedad.", color: "#1D9E75" },
-  { shape: "octagon", icon: "⚖️", href: "guia/infracciones.html", titulo: "Infracciones", desc: "Clasificación por gravedad, con la ley que aplica a cada una.", color: "#E24B4A" },
-  { shape: "square", icon: "🧭", href: "guia/consejos.html", titulo: "Consejos por rol", desc: "Conductores, motociclistas, peatones y ciclistas.", color: "#0EA5A5" },
-  { shape: "triangle", icon: "🚑", href: "guia/accidentes.html", titulo: "En caso de accidente", desc: "Los pasos a seguir, en orden, si ocurre un siniestro.", color: "#E8530A" },
-  { shape: "diamond", icon: "⚠️", href: "guia/zonas.html", titulo: "Puntos de mayor riesgo", desc: "Los corredores de Yopal con más congestión y accidentalidad.", color: "#E24B4A" },
+  { shape: "circle", icon: "📜", img: "assets/guia/normas.png", href: "guia/normas.html", titulo: "Normas clave", desc: "Las reglas básicas que todo actor vial debe cumplir para circular seguro.", color: "#3C3489" },
+  { shape: "diamond", icon: "🚦", img: "assets/guia/senales.png", href: "guia/senales.html", titulo: "Señales de tránsito", desc: "Reglamentarias, preventivas e informativas, con imágenes reales.", color: "#185FA5" },
+  { shape: "circle", icon: "⏱️", img: "assets/guia/velocidad.png", href: "guia/velocidad.html", titulo: "Límites de velocidad", desc: "Cuánto puedes ir según el tipo de zona por la que circulas.", color: "#EAB308" },
+  { shape: "square", icon: "🪪", img: "assets/guia/documentos.png", href: "guia/documentos.html", titulo: "Documentos obligatorios", desc: "Licencia, SOAT, técnico-mecánica y tarjeta de propiedad.", color: "#1D9E75" },
+  { shape: "octagon", icon: "⚖️", img: "assets/guia/infracciones.png", href: "guia/infracciones.html", titulo: "Infracciones", desc: "Clasificación por gravedad, con la ley que aplica a cada una.", color: "#E24B4A" },
+  { shape: "square", icon: "🧭", img: "assets/guia/consejos.png", href: "guia/consejos.html", titulo: "Consejos por rol", desc: "Conductores, motociclistas, peatones y ciclistas.", color: "#0EA5A5" },
+  { shape: "triangle", icon: "🚑", img: "assets/guia/accidentes.png", href: "guia/accidentes.html", titulo: "En caso de accidente", desc: "Los pasos a seguir, en orden, si ocurre un siniestro.", color: "#E8530A" },
+  { shape: "diamond", icon: "⚠️", img: "assets/guia/puntos-riesgo.png", href: "guia/zonas.html", titulo: "Puntos de mayor riesgo", desc: "Los corredores de Yopal con más congestión y accidentalidad.", color: "#E24B4A" },
 ];
 
 // ── Normas ─────────────────────────────────────────────
@@ -228,7 +228,9 @@ function renderStats() {
 function renderGuia() {
   html($("#guiaGrid"), GUIA.map(g => `
     <a class="card reveal" href="${g.href}" style="--accent:${g.color}">
-      <div class="sign sign-${g.shape}"><span class="sign-shape"></span><span class="sign-ico">${g.icon}</span></div>
+      ${g.img
+        ? `<img class="guia-ico" src="${g.img}" alt="${g.titulo}" loading="lazy" />`
+        : `<div class="sign sign-${g.shape}"><span class="sign-shape"></span><span class="sign-ico">${g.icon}</span></div>`}
       <h3>${g.titulo}</h3>
       <p>${g.desc}</p>
       <span class="badge" style="--accent:${g.color}">Ver guía →</span>

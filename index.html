@@ -49,6 +49,11 @@
       100% { transform: scale(2.4); opacity: 0; }
     }
     @media (prefers-reduced-motion: reduce) { .led-dot::before { animation: none; } }
+    /* Íconos de la guía ("Todo lo que debes saber") */
+    .guia-ico {
+      width: 76px; height: 76px; object-fit: contain;
+      display: block; margin-bottom: 4px;
+    }
   </style>
 </head>
 <body>
@@ -170,6 +175,6 @@
   <button class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/app.js?v=28"></script>
+  <script src="js/app.js?v=29"></script>
 </body>
 </html>
