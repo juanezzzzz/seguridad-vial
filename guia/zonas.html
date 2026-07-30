@@ -17,6 +17,41 @@
   <title>Puntos de mayor riesgo en Yopal — YopVial</title>
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('yopvial_theme')||'light');}catch(e){}</script>
   <link rel="stylesheet" href="../css/styles.css?v=29" />
+  <!-- Mapa (Leaflet + OpenStreetMap, sin API key) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    .mapa-wrap { max-width: 960px; margin: 0 auto 1.5rem; }
+    #mapaZonas {
+      height: 440px; width: 100%; border-radius: 18px;
+      border: 1px solid var(--border, #e3e3e3);
+      box-shadow: 0 10px 30px rgba(0,0,0,.12); z-index: 0;
+    }
+    .mapa-legend {
+      display: flex; flex-wrap: wrap; gap: 1.25rem; justify-content: center;
+      margin: .9rem 0 .3rem; font-size: .9rem;
+    }
+    .mapa-legend span { display: inline-flex; align-items: center; gap: .5rem; }
+    .mapa-legend i {
+      width: 14px; height: 14px; border-radius: 50%; display: inline-block;
+      border: 2px solid #fff; box-shadow: 0 0 6px 1px currentColor;
+    }
+    .mapa-nota { text-align: center; font-size: .82rem; opacity: .7; margin-top: .2rem; }
+    /* Puntos LED pulsantes */
+    .led-dot {
+      position: relative; display: block; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--led); border: 2px solid #fff; box-shadow: 0 0 8px 2px var(--led);
+    }
+    .led-dot::before {
+      content: ""; position: absolute; inset: -5px; border-radius: 50%;
+      border: 2px solid var(--led); opacity: .75;
+      animation: ledPulse 1.6s ease-out infinite;
+    }
+    @keyframes ledPulse {
+      0%   { transform: scale(.5); opacity: .85; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .led-dot::before { animation: none; } }
+  </style>
 </head>
 <body>
 
@@ -52,6 +87,17 @@
     <span class="section-tag">Precaución · Yopal, Casanare</span>
     <h1 class="section-title">Puntos de mayor riesgo en Yopal</h1>
     <p class="section-lead">Los corredores con más congestión y accidentalidad de la ciudad, según reportes de la Secretaría de Movilidad y de prensa local. Extrema la precaución al transitarlos.</p>
+
+    <!-- Mapa de zonas de riesgo -->
+    <div class="mapa-wrap">
+      <div id="mapaZonas" role="img" aria-label="Mapa de Yopal con los puntos de mayor accidentalidad marcados"></div>
+      <div class="mapa-legend">
+        <span style="color:#E24B4A"><i></i> Riesgo alto</span>
+        <span style="color:#EF9F27"><i></i> Riesgo medio</span>
+      </div>
+      <p class="mapa-nota">Puntos referenciales sobre el mapa de Yopal, Casanare. Toca un punto para ver el detalle.</p>
+    </div>
+
     <div class="cards" id="zonasGrid"><!-- app.js --></div>
     <a class="guia-back" href="../index.html#guia">← Volver a la guía completa</a>
   </section>
@@ -75,6 +121,8 @@
 
   <button class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
 
-  <script src="../js/app.js?v=27"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../js/app.js?v=28"></script>
+  <script src="../js/editor-zonas.js"></script><!-- TEMP-EDITOR: quitar antes de subir al repo -->
 </body>
 </html>
