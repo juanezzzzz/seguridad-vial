@@ -200,14 +200,17 @@ img { max-width: 100%; display: block; }
 }
 .section .btn-secondary:hover { background: color-mix(in srgb, currentColor 14%, transparent); }
 
-/* Botón "Jugar": llamativo a propósito, distinto del CTA principal y del ghost,
-   pero con los propios colores de la marca (azul + verde) en vez de uno ajeno. */
+/* Botón "Jugar": llamativo a propósito, distinto del CTA principal y del ghost.
+   --azul/--verde son el acento de MODO CLARO (ver comentarios arriba), así que
+   usarlos fijo hacía que el botón se viera "de día" incluso en modo oscuro.
+   Aquí se define para modo oscuro (naranja + rojo, propio de esa paleta) y se
+   sobreescribe abajo para modo claro (azul + verde, su acento real). */
 .btn-games {
-  background: linear-gradient(135deg, var(--azul), var(--verde));
+  background: linear-gradient(135deg, #E8530A, #E24B4A);
   color: #fff;
-  box-shadow: 0 10px 26px rgba(24, 95, 165, 0.35);
+  box-shadow: 0 10px 26px rgba(232, 83, 10, 0.35);
 }
-.btn-games:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(24, 95, 165, 0.45); }
+.btn-games:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(232, 83, 10, 0.45); }
 
 /* ══════════ SECCIONES = BANDAS ALTERNAS A TODO EL ANCHO ══════════ */
 .section {
@@ -714,6 +717,8 @@ body { background: #0F1116; color: var(--texto-inv); }
 /* Botón primario y llamados a la acción en VERDE */
 [data-theme="light"] .btn-primary { background: var(--verde); color: #fff; box-shadow: 0 10px 28px rgba(29, 158, 117, 0.35); }
 [data-theme="light"] .btn-primary:hover { background: var(--verde-osc); }
+[data-theme="light"] .btn-games { background: linear-gradient(135deg, var(--azul), var(--verde)); box-shadow: 0 10px 26px rgba(24, 95, 165, 0.35); }
+[data-theme="light"] .btn-games:hover { box-shadow: 0 14px 32px rgba(24, 95, 165, 0.45); }
 [data-theme="light"] .to-top { background: var(--verde); color: #fff; box-shadow: 0 10px 28px rgba(29, 158, 117, 0.40); }
 [data-theme="light"] .to-top:hover { background: var(--verde-osc); }
 [data-theme="light"] .tab.active { background: var(--verde); color: #fff; border-color: var(--verde); }
