@@ -41,10 +41,15 @@ const SENALES = {
     label: "Reglamentarias",
     desc: "Indican prohibiciones, restricciones y obligaciones. Su incumplimiento es una infracción. Fondo blanco con borde rojo.",
     items: [
-      { img: "../assets/senales/Pare.png", nombre: "Pare", desc: "Detente por completo antes de la línea. Reanuda solo cuando sea seguro." },
-      { img: "../assets/senales/prohibido_adelantar.png", nombre: "Prohibido adelantar", desc: "No puedes rebasar otros vehículos en este tramo." },
+      { img: "../assets/senales/Pare.png", nombre: "Pare", desc: "Detente por completo antes de continuar. Reanuda la marcha únicamente cuando sea seguro." },
+      { img: "../assets/senales/Ceda_el_paso.png", nombre: "Ceda el paso", desc: "Reduce la velocidad y permite el paso a los vehículos que tienen prioridad antes de avanzar." },
+      { img: "../assets/senales/No_pase.png", nombre: "No pase", desc: "El ingreso está prohibido desde este sentido de circulación." },
+      { img: "../assets/senales/Prohibido_girar_izquierda.png", nombre: "Prohibido girar a la izquierda", desc: "No está permitido realizar un giro hacia la izquierda en este punto." },
+      { img: "../assets/senales/Prohibido_girar_derecha.png", nombre: "Prohibido girar a la derecha", desc: "No está permitido realizar un giro hacia la derecha en este punto." },
+      { img: "../assets/senales/Prohibido_parquear.png", nombre: "Prohibido parquear", desc: "No está permitido estacionar vehículos en esta zona." },
       { img: "../assets/senales/Prohibido_girar_U.png", nombre: "Prohibido giro en U", desc: "No está permitido devolverse cambiando de sentido." },
-      { img: "../assets/senales/velocidad_maxima.png", nombre: "Velocidad máxima", desc: "No superes la velocidad indicada en la señal." },
+      { img: "../assets/senales/prohibido_adelantar.png", nombre: "Prohibido adelantar", desc: "No puedes rebasar otros vehículos en este tramo." },
+      { img: "../assets/senales/Velocidad_maxima_30.png", nombre: "Velocidad máxima", desc: "No superes los <strong>30 km/h</strong> indicados en la señal." },
     ],
   },
   preventivas: {
