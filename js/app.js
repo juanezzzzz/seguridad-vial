@@ -174,22 +174,70 @@ const ACCIDENTE = [
 const ZONAS = [
   { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Calle 40",
     resumen: "El corredor con mayor flujo vehicular de la ciudad.",
-    detalle: "Concentra el mayor tráfico de Yopal, con cruces de alto riesgo en las carreras 11, 19 y 20. La Alcaldía ha intervenido varios tramos con bacheo y cierres temporales para mitigar accidentes, sobre todo en época de lluvias." },
+    detalle: "Concentra el mayor tráfico de Yopal, con cruces de alto riesgo en las carreras 11, 19 y 20. La Alcaldía ha intervenido varios tramos con bacheo y cierres temporales para mitigar accidentes, sobre todo en época de lluvias.",
+    lat: 5.32238, lng: -72.38661 }, // Cra 20 & Calle 40 (intersección verificada)
   { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Carrera 10, sector del puente",
     resumen: "Accidentes recurrentes cerca del puente.",
-    detalle: "La curva cercana al puente, cerca de la calle 30, es uno de los tramos con más reportes de accidentes de este corredor." },
+    detalle: "La curva cercana al puente, cerca de la calle 30, es uno de los tramos con más reportes de accidentes de este corredor.",
+    lat: 5.32695, lng: -72.40318 }, // Cra 10 & Calle 30 (intersección verificada)
   { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Calle 10 con Carrera 23",
     resumen: "Conflictos entre vehículos y peatones.",
-    detalle: "La cercanía a zonas comerciales genera choques frecuentes entre vehículos y peatones, sobre todo en las horas de mayor movimiento comercial." },
+    detalle: "La cercanía a zonas comerciales genera choques frecuentes entre vehículos y peatones, sobre todo en las horas de mayor movimiento comercial.",
+    lat: 5.34837, lng: -72.39711 }, // Cra 23 & Calle 10 (intersección verificada)
   { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Carrera 20",
     resumen: "Eje comercial con tráfico mixto.",
-    detalle: "Buses, motos y peatones comparten la vía; el parqueo indebido sobre la calzada reduce la capacidad y complica la circulación frente a los locales comerciales." },
+    detalle: "Buses, motos y peatones comparten la vía; el parqueo indebido sobre la calzada reduce la capacidad y complica la circulación frente a los locales comerciales.",
+    lat: 5.33883, lng: -72.39566 }, // Cra 20 & Calle 20 (punto representativo del corredor)
   { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Centro de Yopal",
     resumen: "Alta concentración de bancos y comercio.",
-    detalle: "La actividad bancaria y comercial genera doble fila, motos parqueadas sobre andenes e invasión del espacio público, lo que empuja a los peatones a caminar por la calzada." },
+    detalle: "La actividad bancaria y comercial genera doble fila, motos parqueadas sobre andenes e invasión del espacio público, lo que empuja a los peatones a caminar por la calzada.",
+    lat: 5.34930, lng: -72.40077 }, // Parque Principal de Yopal (referencia del centro)
   { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Zonas escolares en horas pico",
     resumen: "Alto flujo peatonal cerca de colegios.",
-    detalle: "Entre las 6:30–8:30 a.m. y las 5:00–7:00 p.m., el ingreso y salida de instituciones educativas aumenta el riesgo por la alta presencia de niños y peatones cerca de la vía." },
+    detalle: "Entre las 6:30–8:30 a.m. y las 5:00–7:00 p.m., el ingreso y salida de instituciones educativas aumenta el riesgo por la alta presencia de niños y peatones cerca de la vía.",
+    lat: 5.34719, lng: -72.39613 }, // Institución educativa en el centro (punto representativo)
+
+  // Puntos reportados por la comunidad (no provienen de un documento oficial verificado).
+  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Carrera 19 con Calle 30",
+    resumen: "Una de las intersecciones con mayor número de siniestros.",
+    detalle: "El alto flujo de motocicletas, buses y vehículos particulares provoca choques frecuentes, especialmente en horas pico.",
+    fuente: "Reportado por la comunidad",
+    lat: 5.33038, lng: -72.39228 }, // Cra 19 & Calle 30 (intersección verificada)
+  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Glorieta Calle 40 con Carrera 5",
+    resumen: "Punto de gran congestión donde convergen varias vías.",
+    detalle: "Se presentan conflictos por cambios de carril, exceso de velocidad y maniobras indebidas.",
+    fuente: "Reportado por la comunidad",
+    lat: 5.31872, lng: -72.40433 }, // Calle 40 & Cra 5 (intersección/glorieta verificada)
+  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Terminal de Transporte y alrededores",
+    resumen: "Alto riesgo para peatones por el flujo constante de vehículos de transporte público.",
+    detalle: "La entrada y salida constante de buses, taxis y motocicletas genera congestión y aumenta el riesgo para peatones y conductores.",
+    fuente: "Reportado por la comunidad",
+    lat: 5.33533, lng: -72.39047 }, // Terminal de Transporte de Yopal (ubicación verificada)
+  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Carrera 29",
+    resumen: "Corredor con alta circulación de motocicletas y vehículos pesados.",
+    detalle: "El exceso de velocidad y las incorporaciones incrementan el riesgo de accidentes.",
+    fuente: "Reportado por la comunidad",
+    lat: 5.34335, lng: -72.38774 }, // Cra 29 & Calle 20 (punto representativo del corredor)
+  { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Barrio El Triunfo",
+    resumen: "Sector con alta incidencia de siniestros viales.",
+    detalle: "El flujo mixto de vehículos y peatones, junto con problemas de señalización, eleva el riesgo en el sector.",
+    fuente: "Reportado por la comunidad",
+    lat: 5.34051, lng: -72.38286 }, // Barrio El Triunfo (parque, referencia verificada)
+  { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Carrera 11",
+    resumen: "Importante corredor norte-sur con numerosos cruces comerciales.",
+    detalle: "En horas pico se presentan congestiones y giros peligrosos.",
+    fuente: "Reportado por la comunidad",
+    lat: 5.33403, lng: -72.40283 }, // Punto sobre la Cra 11 (referencia verificada)
+  { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Carrera 21",
+    resumen: "Alta presencia de motocicletas y transporte público.",
+    detalle: "Las maniobras de adelantamiento y el estacionamiento sobre la vía afectan la seguridad.",
+    fuente: "Reportado por la comunidad",
+    lat: 5.33930, lng: -72.39481 }, // Cra 21 & Calle 20 (punto representativo del corredor)
+  { nivel: "Riesgo medio", color: "#EF9F27", nombre: "Calle 30",
+    resumen: "Conecta varios sectores y concentra intersecciones semaforizadas.",
+    detalle: "Gran cantidad de cruces semaforizados aumenta el riesgo en horas de mayor tráfico.",
+    fuente: "Reportado por la comunidad",
+    lat: 5.33099, lng: -72.39130 }, // Calle 30 & Cra 20 (punto central del corredor)
 ];
 
 // ── Números de emergencia ──────────────────────────────
@@ -375,6 +423,7 @@ function renderZonas() {
       <div class="zona-panel">
         <div class="zona-panel-inner">
           <p class="zona-detalle">${z.detalle}</p>
+          ${z.fuente ? `<p class="zona-fuente">${z.fuente}</p>` : ""}
         </div>
       </div>
     </article>`).join(""));
@@ -402,8 +451,11 @@ function renderMapaZonas() {
 
   const map = L.map(el, { scrollWheelZoom: false, attributionControl: true })
     .setView([5.3378, -72.3959], 14); // Yopal, Casanare
+<<<<<<< Updated upstream
   window.mapaZonasRef = map; // TEMP-EDITOR: quitar antes de subir al repo
 
+=======
+>>>>>>> Stashed changes
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: "&copy; OpenStreetMap",
