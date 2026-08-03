@@ -170,7 +170,6 @@ const ACCIDENTE = [
 // ── Zonas / puntos de riesgo (Yopal, Casanare) ─────────
 // Corredores identificados por la Secretaría de Movilidad de Yopal y
 // reportes de prensa local como puntos de mayor congestión/accidentalidad.
-// Para que un punto salga en el mapa, agrégale lat/lng con el editor temporal.
 const ZONAS = [
   { nivel: "Riesgo alto", color: "#E24B4A", nombre: "Calle 40",
     resumen: "El corredor con mayor flujo vehicular de la ciudad.",
@@ -451,11 +450,6 @@ function renderMapaZonas() {
 
   const map = L.map(el, { scrollWheelZoom: false, attributionControl: true })
     .setView([5.3378, -72.3959], 14); // Yopal, Casanare
-<<<<<<< Updated upstream
-  window.mapaZonasRef = map; // TEMP-EDITOR: quitar antes de subir al repo
-
-=======
->>>>>>> Stashed changes
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: "&copy; OpenStreetMap",
