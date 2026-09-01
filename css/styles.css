@@ -300,7 +300,7 @@ img { max-width: 100%; display: block; }
 .card-icon .ic, .doc-icon .ic { width: 27px; height: 27px; color: var(--accent, var(--amarillo)); }
 .emerg-icon .ic { width: 30px; height: 30px; color: var(--accent, var(--amarillo)); }
 .sign-ico .ic { width: 22px; height: 22px; color: #fff; }
-.sign-triangle .sign-ico { align-items: end; padding-bottom: 6px; }
+.sign-triangle .sign-ico { align-items: start; padding-top: 9px; }
 .sign-octagon .sign-ico .ic { width: 20px; height: 20px; }
 
 /* ══ INSIGNIA DE SEÑAL (hub "Guía completa" del home): misma pieza que en /juegos,
@@ -475,6 +475,7 @@ img { max-width: 100%; display: block; }
 .card.emerg { text-align: center; }
 .emerg-icon { display: grid; place-items: center; width: 58px; height: 58px; margin: 0 auto 10px; border-radius: 16px; font-size: 1.9rem;
   overflow: hidden; background: color-mix(in srgb, var(--accent) 15%, transparent); }
+.emerg-icon img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
 .emerg-num { font-size: 2.3rem; font-weight: 800; color: var(--accent); letter-spacing: -1px; }
 .emerg-name { font-weight: 700; margin-top: 4px; }
 .emerg-sub { color: var(--muted); font-size: 0.85rem; }

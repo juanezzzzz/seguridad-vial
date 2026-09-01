@@ -289,10 +289,10 @@ const ZONAS = [
 
 // ── Números de emergencia ──────────────────────────────
 const EMERGENCIAS = [
-  { ic: "phone-call", name: "Emergencias", num: "123", sub: "Línea única nacional", color: "#E24B4A" },
-  { ic: "ambulance", name: "Ambulancias", num: "125", sub: "Cruz Roja", color: "#1D9E75" },
-  { ic: "fire-extinguisher", name: "Bomberos", num: "119", sub: "Cuerpo de bomberos", color: "#EF9F27" },
-  { ic: "shield", name: "Policía", num: "112", sub: "Policía Nacional", color: "#185FA5" },
+  { img: "assets/emergencias/Emergencias.png", name: "Emergencias", num: "123", sub: "Línea única nacional", color: "#E24B4A" },
+  { img: "assets/emergencias/Ambulancia.png", name: "Ambulancias", num: "125", sub: "Cruz Roja", color: "#1D9E75" },
+  { img: "assets/emergencias/Bomberos.png", name: "Bomberos", num: "119", sub: "Cuerpo de bomberos", color: "#EF9F27" },
+  { img: "assets/emergencias/Policia.png", name: "Policía", num: "112", sub: "Policía Nacional", color: "#185FA5" },
 ];
 
 // ── Reportes ciudadanos (PQR) — qué puedes reportar ────
@@ -528,7 +528,7 @@ function renderMapaZonas() {
 function renderEmergencias() {
   html($("#emergGrid"), EMERGENCIAS.map(e => `
     <article class="card emerg reveal" style="--accent:${e.color}">
-      <div class="emerg-icon">${svgIcon(e.ic)}</div>
+      <div class="emerg-icon">${e.img ? `<img src="${e.img}" alt="${e.name}" loading="lazy" />` : svgIcon(e.ic)}</div>
       <div class="emerg-num">${e.num}</div>
       <div class="emerg-name">${e.name}</div>
       <div class="emerg-sub">${e.sub}</div>
