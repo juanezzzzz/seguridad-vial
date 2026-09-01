@@ -350,9 +350,10 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 .card.signal:hover .signal-img { transform: scale(1.06); }
-.signal-img img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
-/* Señales anchas (informativas de destino, fondo verde): más espacio horizontal */
-.signal-img.wide { width: 176px; height: 128px; }
+.signal-img img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+/* Señales de destino (fondo verde): rectangulares y de proporciones variables,
+   necesitan un recuadro más grande para que quepan completas y centradas. */
+.signal-img.wide { width: 190px; height: 150px; padding: 14px; }
 .signal-emoji {
   width: 118px; height: 118px; margin: 0 auto 16px; display: grid; place-items: center;
   font-size: 3.4rem; background: linear-gradient(135deg, #1e5fa5, #0c447c); border-radius: 16px;

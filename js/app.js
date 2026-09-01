@@ -146,10 +146,12 @@ const SENALES = {
     label: "Informativas (destinos)",
     desc: "Fondo verde. Guían por la red vial: anuncian con antelación los cruces, las salidas, los destinos y las distancias hacia ciudades y municipios.",
     items: [
-      { img: WM + "b/b7/Colombia_road_sign_SI-05.svg", nombre: "Señal de dirección", desc: "Indica hacia qué lado queda cada destino en el cruce que se aproxima." },
       { img: WM + "c/c4/Colombia_SI-05D.svg", nombre: "Preseñalización de destino", desc: "Anuncia con antelación el próximo cruce y los destinos a los que conduce." },
+      { img: WM + "b/b7/Colombia_road_sign_SI-05.svg", nombre: "Señal de dirección", desc: "En el cruce, indica hacia qué lado queda cada destino." },
+      { img: WM + "a/ab/Colombia_road_sign_SI-05B.svg", nombre: "Destinos en glorieta", desc: "En una glorieta, muestra por cuál salida se llega a cada destino." },
       { img: WM + "3/3f/Colombia_road_sign_SI-05A.svg", nombre: "Salida inmediata", desc: "La salida hacia el destino indicado está justo a continuación." },
-      { img: WM + "f/f7/Colombia_SI-06_%282_destinos%29.svg", nombre: "Señal de confirmación", desc: "Después del cruce, confirma la ruta tomada y la distancia que falta a cada destino." },
+      { img: WM + "a/ac/Colombia_SI-06_%281_destino%29.svg", nombre: "Destino y distancia", desc: "Indica un destino y los kilómetros que faltan para llegar." },
+      { img: WM + "f/f7/Colombia_SI-06_%282_destinos%29.svg", nombre: "Señal de confirmación", desc: "Después del cruce, confirma la ruta tomada y la distancia a cada destino." },
     ],
   },
 };
