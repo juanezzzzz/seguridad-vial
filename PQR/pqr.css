@@ -107,7 +107,10 @@ img { max-width: 100%; display: block; }
   border: 1.5px solid var(--linea); background: var(--card); cursor: pointer; text-align: left;
   font-family: inherit; font-size: 0.9rem; font-weight: 600; color: var(--texto); transition: var(--trans);
 }
-.type-btn .type-ico { font-size: 1.4rem; }
+.type-btn .type-ico { font-size: 1.4rem; display: inline-flex; }
+.ic { width: 24px; height: 24px; flex-shrink: 0; vertical-align: middle; }
+.type-btn .type-ico .ic { width: 22px; height: 22px; color: var(--amarillo); }
+.type-btn.selected .type-ico .ic { color: #fff; }
 .type-btn:hover { border-color: var(--amarillo); transform: translateY(-2px); }
 .type-btn.selected { border-color: var(--amarillo); background: color-mix(in srgb, var(--amarillo) 16%, transparent); color: #fff; box-shadow: var(--sombra-md); }
 
@@ -169,6 +172,7 @@ img { max-width: 100%; display: block; }
 .report-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--grav); }
 .report-card:hover { transform: translateY(-3px); box-shadow: var(--sombra-md); border-color: var(--linea); }
 .rc-ico { display: grid; place-items: center; min-width: 48px; height: 48px; border-radius: 12px; font-size: 1.5rem; background: var(--card); }
+.rc-ico .ic { width: 24px; height: 24px; color: var(--grav, var(--amarillo)); }
 .rc-body { flex: 1; min-width: 0; }
 .rc-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
 .rc-tipo { font-weight: 700; font-size: 1.02rem; }

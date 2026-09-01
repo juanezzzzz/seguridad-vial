@@ -2,6 +2,49 @@
 //  YopVial — Guía de Seguridad Vial · lógica y contenido
 // ═══════════════════════════════════════════════════════
 
+// ── Iconos SVG (estilo Lucide, ISC) ────────────────────
+// Reemplazan los PNG de assets/. Trazo de 24×24 que hereda el color
+// con `currentColor`; el tamaño se controla desde CSS (.ic).
+const ICON_PATHS = {
+  "scroll-text": '<path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/>',
+  "signpost": '<path d="M12 13v8"/><path d="M12 3v3"/><path d="M2.354 10.354a1.207 1.207 0 0 1 0-1.708l2.06-2.06A2 2 0 0 1 5.828 6h12.344a2 2 0 0 1 1.414.586l2.06 2.06a1.207 1.207 0 0 1 0 1.708l-2.06 2.06a2 2 0 0 1-1.414.586H5.828a2 2 0 0 1-1.414-.586z"/>',
+  "gauge": '<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>',
+  "files": '<path d="M15 2h-4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"/><path d="M16.706 2.706A2.4 2.4 0 0 0 15 2v5a1 1 0 0 0 1 1h5a2.4 2.4 0 0 0-.706-1.706z"/><path d="M5 7a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h8a2 2 0 0 0 1.732-1"/>',
+  "scale": '<path d="M12 3v18"/><path d="m19 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"/><path d="m5 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M7 21h10"/>',
+  "users": '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/>',
+  "siren": '<path d="M7 18v-6a5 5 0 1 1 10 0v6"/><path d="M5 21a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M21 12h1"/><path d="M18.5 4.5 18 5"/><path d="M2 12h1"/><path d="M12 2v1"/><path d="m4.929 4.929.707.707"/><path d="M12 12v6"/>',
+  "triangle-alert": '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  "hard-hat": '<path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/>',
+  "wine-off": '<path d="M8 22h8"/><path d="M7 10h3m7 0h-1.343"/><path d="M12 15v7"/><path d="M7.307 7.307A12.33 12.33 0 0 0 7 10a5 5 0 0 0 7.391 4.391M8.638 2.981C8.75 2.668 8.872 2.34 9 2h6c1.5 4 2 6 2 8 0 .407-.05.809-.145 1.198"/><line x1="2" x2="22" y1="2" y2="22"/>',
+  "phone-off": '<path d="M10.1 13.9a14 14 0 0 0 3.732 2.668 1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2 18 18 0 0 1-12.728-5.272"/><path d="M22 2 2 22"/><path d="M4.76 13.582A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 .244.473"/>',
+  "shield-check": '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  "traffic-cone": '<path d="M16.05 10.966a5 2.5 0 0 1-8.1 0"/><path d="m16.923 14.049 4.48 2.04a1 1 0 0 1 .001 1.831l-8.574 3.9a2 2 0 0 1-1.66 0l-8.574-3.91a1 1 0 0 1 0-1.83l4.484-2.04"/><path d="M16.949 14.14a5 2.5 0 1 1-9.9 0L10.063 3.5a2 2 0 0 1 3.874 0z"/><path d="M9.194 6.57a5 2.5 0 0 0 5.61 0"/>',
+  "school": '<path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M18 4.933V21"/><path d="m4 6 7.106-3.79a2 2 0 0 1 1.788 0L20 6"/><path d="m6 11-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11"/><path d="M6 4.933V21"/><circle cx="12" cy="9" r="2"/>',
+  "id-card": '<path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/>',
+  "badge-check": '<path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m16 9-5.5 5.5L8 12"/>',
+  "wrench": '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/>',
+  "file-text": '<path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  "car-front": '<path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8"/><path d="M7 14h.01"/><path d="M17 14h.01"/><rect width="18" height="8" x="3" y="10" rx="2"/><path d="M5 18v2"/><path d="M19 18v2"/>',
+  "bike": '<circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/>',
+  "footprints": '<path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/>',
+  "phone-call": '<path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>',
+  "ambulance": '<path d="M10 10H6"/><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.28a1 1 0 0 0-.684-.948l-1.923-.641a1 1 0 0 1-.578-.502l-1.539-3.076A1 1 0 0 0 16.382 8H14"/><path d="M8 8v4"/><path d="M9 18h6"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
+  "fire-extinguisher": '<path d="M15 6.5V3a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v3.5"/><path d="M9 18h8"/><path d="M18 3h-3"/><path d="M11 3a6 6 0 0 0-6 6v11"/><path d="M5 13h4"/><path d="M17 10a4 4 0 0 0-8 0v10a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2Z"/>',
+  "shield": '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+  "construction": '<rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="m8 6 8 8"/>',
+  "lightbulb": '<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',
+  "circle-ellipsis": '<circle cx="12" cy="12" r="10"/><path d="M17 12h.01"/><path d="M12 12h.01"/><path d="M7 12h.01"/>',
+  // Personalizados en el mismo estilo (no existen en Lucide)
+  "motorbike": '<circle cx="5.5" cy="16.5" r="3"/><circle cx="18.5" cy="16.5" r="3"/><path d="M5.5 16.5 10 8h4l2.5 4.5"/><path d="M10 8H7"/><path d="M14 8l2-3h3"/><path d="M8.5 12.5h7"/>',
+  "traffic-light": '<rect x="6" y="2" width="12" height="20" rx="6"/><circle cx="12" cy="7" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="12" cy="17" r="1.75"/><path d="M18 12h3"/>',
+};
+
+function svgIcon(name, extraClass) {
+  const p = ICON_PATHS[name];
+  if (!p) return "";
+  return `<svg class="ic${extraClass ? " " + extraClass : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+}
+
 // ── Estadísticas del hero ──────────────────────────────
 const STATS = [
   { num: "90%", label: "de los siniestros son evitables con conducción responsable" },
@@ -15,24 +58,24 @@ const STATS = [
 // vial (rombo = preventiva, círculo = reglamentaria, triángulo = advertencia,
 // octágono = pare/sanción, rectángulo redondeado = informativa).
 const GUIA = [
-  { shape: "circle", icon: "📜", img: "assets/guia/normas.png", href: "guia/normas.html", titulo: "Normas clave", desc: "Las reglas básicas que todo actor vial debe cumplir para circular seguro.", color: "#3C3489" },
-  { shape: "diamond", icon: "🚦", img: "assets/guia/senales.png", href: "guia/senales.html", titulo: "Señales de tránsito", desc: "Reglamentarias, preventivas e informativas, con imágenes reales.", color: "#185FA5" },
-  { shape: "circle", icon: "⏱️", img: "assets/guia/velocidad.png", href: "guia/velocidad.html", titulo: "Límites de velocidad", desc: "Cuánto puedes ir según el tipo de zona por la que circulas.", color: "#EAB308" },
-  { shape: "square", icon: "🪪", img: "assets/guia/documentos.png", href: "guia/documentos.html", titulo: "Documentos obligatorios", desc: "Licencia, SOAT, técnico-mecánica y tarjeta de propiedad.", color: "#1D9E75" },
-  { shape: "octagon", icon: "⚖️", img: "assets/guia/infracciones.png", href: "guia/infracciones.html", titulo: "Infracciones", desc: "Clasificación por gravedad, con la ley que aplica a cada una.", color: "#E24B4A" },
-  { shape: "square", icon: "🧭", img: "assets/guia/consejos.png", href: "guia/consejos.html", titulo: "Consejos por rol", desc: "Conductores, motociclistas, peatones y ciclistas.", color: "#0EA5A5" },
-  { shape: "triangle", icon: "🚑", img: "assets/guia/accidentes.png", href: "guia/accidentes.html", titulo: "En caso de accidente", desc: "Los pasos a seguir, en orden, si ocurre un siniestro.", color: "#E8530A" },
-  { shape: "diamond", icon: "⚠️", img: "assets/guia/puntos-riesgo.png", href: "guia/zonas.html", titulo: "Puntos de mayor riesgo", desc: "Los corredores de Yopal con más congestión y accidentalidad.", color: "#E24B4A" },
+  { shape: "circle", ic: "scroll-text", href: "guia/normas.html", titulo: "Normas clave", desc: "Las reglas básicas que todo actor vial debe cumplir para circular seguro.", color: "#3C3489" },
+  { shape: "diamond", ic: "signpost", href: "guia/senales.html", titulo: "Señales de tránsito", desc: "Reglamentarias, preventivas e informativas, con imágenes reales.", color: "#185FA5" },
+  { shape: "circle", ic: "gauge", href: "guia/velocidad.html", titulo: "Límites de velocidad", desc: "Cuánto puedes ir según el tipo de zona por la que circulas.", color: "#EAB308" },
+  { shape: "square", ic: "files", href: "guia/documentos.html", titulo: "Documentos obligatorios", desc: "Licencia, SOAT, técnico-mecánica y tarjeta de propiedad.", color: "#1D9E75" },
+  { shape: "octagon", ic: "scale", href: "guia/infracciones.html", titulo: "Infracciones", desc: "Clasificación por gravedad, con la ley que aplica a cada una.", color: "#E24B4A" },
+  { shape: "square", ic: "users", href: "guia/consejos.html", titulo: "Consejos por rol", desc: "Conductores, motociclistas, peatones y ciclistas.", color: "#0EA5A5" },
+  { shape: "triangle", ic: "siren", href: "guia/accidentes.html", titulo: "En caso de accidente", desc: "Los pasos a seguir, en orden, si ocurre un siniestro.", color: "#E8530A" },
+  { shape: "diamond", ic: "triangle-alert", href: "guia/zonas.html", titulo: "Puntos de mayor riesgo", desc: "Los corredores de Yopal con más congestión y accidentalidad.", color: "#E24B4A" },
 ];
 
 // ── Normas ─────────────────────────────────────────────
 const NORMAS = [
-  { icon: "🪖", img: "../assets/normas/casco.png", titulo: "Casco obligatorio", desc: "Conductor y parrillero deben usar casco certificado y bien abrochado, sin excepción.", badge: "Falta grave", color: "#E24B4A" },
-  { icon: "🍺", img: "../assets/normas/alcohol.png", titulo: "Alcohol cero al conducir", desc: "Conducir con cualquier grado de alcohol en la sangre está prohibido. Multa y retención del vehículo.", badge: "Multa alta", color: "#E8530A" },
-  { icon: "📵", img: "../assets/normas/celular.png", titulo: "Sin celular al volante", desc: "Usar el teléfono sin manos libres genera comparendo y pone en riesgo tu vida y la de otros.", badge: "Comparendo", color: "#BA7517" },
-  { icon: "🔒", img: "../assets/normas/cinturon.png", titulo: "Cinturón siempre", desc: "Conductor y todos los pasajeros deben llevar el cinturón abrochado, incluso en trayectos cortos.", badge: "Obligatorio", color: "#1D9E75" },
-  { icon: "🚦", img: "../assets/normas/senales.png", titulo: "Respeta las señales", desc: "Semáforos, cebras peatonales y señales verticales son de cumplimiento obligatorio.", badge: "Obligatorio", color: "#3C3489" },
-  { icon: "🏫", img: "../assets/normas/zonas-escolares.png", titulo: "Zonas escolares", desc: "Velocidad máxima de 30 km/h frente a colegios e instituciones en horario escolar.", badge: "30 km/h máx.", color: "#185FA5" },
+  { ic: "hard-hat", titulo: "Casco obligatorio", desc: "Conductor y parrillero deben usar casco certificado y bien abrochado, sin excepción.", badge: "Falta grave", color: "#E24B4A" },
+  { ic: "wine-off", titulo: "Alcohol cero al conducir", desc: "Conducir con cualquier grado de alcohol en la sangre está prohibido. Multa y retención del vehículo.", badge: "Multa alta", color: "#E8530A" },
+  { ic: "phone-off", titulo: "Sin celular al volante", desc: "Usar el teléfono sin manos libres genera comparendo y pone en riesgo tu vida y la de otros.", badge: "Comparendo", color: "#BA7517" },
+  { ic: "shield-check", titulo: "Cinturón siempre", desc: "Conductor y todos los pasajeros deben llevar el cinturón abrochado, incluso en trayectos cortos.", badge: "Obligatorio", color: "#1D9E75" },
+  { ic: "traffic-cone", titulo: "Respeta las señales", desc: "Semáforos, cebras peatonales y señales verticales son de cumplimiento obligatorio.", badge: "Obligatorio", color: "#3C3489" },
+  { ic: "school", titulo: "Zonas escolares", desc: "Velocidad máxima de 30 km/h frente a colegios e instituciones en horario escolar.", badge: "30 km/h máx.", color: "#185FA5" },
 ];
 
 // ── Señales de tránsito (con imágenes reales) ──────────
@@ -86,10 +129,10 @@ const VELOCIDAD = [
 
 // ── Documentos obligatorios ────────────────────────────
 const DOCUMENTOS = [
-  { icon: "🪪", img: "../assets/documentos/Licencia_conduccion.png", titulo: "Licencia de conducción", desc: "Vigente, de la categoría adecuada al vehículo y sin suspensiones activas.", color: "#3C3489" },
-  { icon: "🛡️", img: "../assets/documentos/Soat.png", titulo: "SOAT vigente", desc: "Seguro Obligatorio de Accidentes de Tránsito. Válido en formato físico o digital.", color: "#1D9E75" },
-  { icon: "🔧", img: "../assets/documentos/Tecnico_mecanica.png", titulo: "Revisión técnico-mecánica", desc: "Obligatoria para vehículos con más de 2 años (autos) o según normativa.", color: "#E8530A" },
-  { icon: "📄", img: "../assets/documentos/Tarjeta_propiedad.png", titulo: "Tarjeta de propiedad", desc: "Licencia de tránsito que acredita al propietario del vehículo.", color: "#185FA5" },
+  { ic: "id-card", titulo: "Licencia de conducción", desc: "Vigente, de la categoría adecuada al vehículo y sin suspensiones activas.", color: "#3C3489" },
+  { ic: "badge-check", titulo: "SOAT vigente", desc: "Seguro Obligatorio de Accidentes de Tránsito. Válido en formato físico o digital.", color: "#1D9E75" },
+  { ic: "wrench", titulo: "Revisión técnico-mecánica", desc: "Obligatoria para vehículos con más de 2 años (autos) o según normativa.", color: "#E8530A" },
+  { ic: "file-text", titulo: "Tarjeta de propiedad", desc: "Licencia de tránsito que acredita al propietario del vehículo.", color: "#185FA5" },
 ];
 
 // ── Infracciones ───────────────────────────────────────
@@ -127,7 +170,7 @@ const INFRACCIONES = [
 // ── Consejos por actor vial ────────────────────────────
 const CONSEJOS = {
   conductores: {
-    label: "Conductores", img: "../assets/consejos/Conductores.png",
+    label: "Conductores", ic: "car-front",
     items: [
       { t: "Mantén la distancia de seguridad", d: "Conserva al menos 3 segundos respecto al vehículo de adelante; auméntalos si llueve o hay niebla." },
       { t: "No manejes cansado", d: "La fatiga reduce tus reflejos igual que el alcohol. Descansa cada 2 horas en viajes largos." },
@@ -136,7 +179,7 @@ const CONSEJOS = {
     ],
   },
   motociclistas: {
-    label: "Motociclistas", img: "../assets/consejos/Motociclistas.png",
+    label: "Motociclistas", ic: "motorbike",
     items: [
       { t: "Casco certificado y abrochado", d: "Tuyo y del parrillero. Es tu principal protección ante una caída." },
       { t: "Hazte visible", d: "Usa luces encendidas siempre y ropa reflectiva. Evita los puntos ciegos de los carros." },
@@ -145,7 +188,7 @@ const CONSEJOS = {
     ],
   },
   peatones: {
-    label: "Peatones", img: "../assets/consejos/Peatones.png",
+    label: "Peatones", ic: "footprints",
     items: [
       { t: "Cruza por las cebras", d: "Usa siempre los cruces peatonales y los puentes. Nunca entre vehículos estacionados." },
       { t: "Mira antes de cruzar", d: "Izquierda, derecha y de nuevo izquierda. Haz contacto visual con los conductores." },
@@ -154,7 +197,7 @@ const CONSEJOS = {
     ],
   },
   ciclistas: {
-    label: "Ciclistas", img: "../assets/consejos/Ciclistas.png",
+    label: "Ciclistas", ic: "bike",
     items: [
       { t: "Usa casco y elementos reflectivos", d: "Casco siempre, y luz blanca adelante y roja atrás en la noche." },
       { t: "Respeta las señales", d: "Detente en los semáforos y señales igual que cualquier vehículo." },
@@ -246,21 +289,21 @@ const ZONAS = [
 
 // ── Números de emergencia ──────────────────────────────
 const EMERGENCIAS = [
-  { icon: "🚨", img: "assets/emergencias/Emergencias.png", name: "Emergencias", num: "123", sub: "Línea única nacional", color: "#E24B4A" },
-  { icon: "🚑", img: "assets/emergencias/Ambulancia.png", name: "Ambulancias", num: "125", sub: "Cruz Roja", color: "#1D9E75" },
-  { icon: "🚒", img: "assets/emergencias/Bomberos.png", name: "Bomberos", num: "119", sub: "Cuerpo de bomberos", color: "#EF9F27" },
-  { icon: "🚓", img: "assets/emergencias/Policia.png", name: "Policía", num: "112", sub: "Policía Nacional", color: "#185FA5" },
+  { ic: "phone-call", name: "Emergencias", num: "123", sub: "Línea única nacional", color: "#E24B4A" },
+  { ic: "ambulance", name: "Ambulancias", num: "125", sub: "Cruz Roja", color: "#1D9E75" },
+  { ic: "fire-extinguisher", name: "Bomberos", num: "119", sub: "Cuerpo de bomberos", color: "#EF9F27" },
+  { ic: "shield", name: "Policía", num: "112", sub: "Policía Nacional", color: "#185FA5" },
 ];
 
 // ── Reportes ciudadanos (PQR) — qué puedes reportar ────
 // Contenido estático (mismas categorías que PQR/pqr.js), sin leer datos reales.
 const PQR_TIPOS = [
-  { icon: "🕳️", img: "assets/peligros/bache.png", titulo: "Hueco / bache", desc: "Baches, grietas o hundimientos peligrosos en la calzada.", color: "#E24B4A" },
-  { icon: "🚦", img: "assets/peligros/semaforo.png", titulo: "Semáforo dañado", desc: "Semáforos apagados, intermitentes o que no cambian correctamente.", color: "#EF9F27" },
-  { icon: "🚧", img: "assets/peligros/senalizacion.png", titulo: "Señalización", desc: "Señales caídas, tapadas, borradas o mal ubicadas.", color: "#185FA5" },
-  { icon: "💥", img: "assets/peligros/accidente.png", titulo: "Accidente", desc: "Choques o siniestros que debas reportar a la autoridad.", color: "#3C3489" },
-  { icon: "💡", img: "assets/peligros/alumbrado.png", titulo: "Alumbrado público", desc: "Postes o luminarias apagadas que reducen la visibilidad nocturna.", color: "#1D9E75" },
-  { icon: "📌", img: "assets/peligros/otro.png", titulo: "Otro", desc: "Cualquier otra situación que ponga en riesgo a los actores viales.", color: "#E8530A" },
+  { ic: "construction", titulo: "Hueco / bache", desc: "Baches, grietas o hundimientos peligrosos en la calzada.", color: "#E24B4A" },
+  { ic: "traffic-light", titulo: "Semáforo dañado", desc: "Semáforos apagados, intermitentes o que no cambian correctamente.", color: "#EF9F27" },
+  { ic: "signpost", titulo: "Señalización", desc: "Señales caídas, tapadas, borradas o mal ubicadas.", color: "#185FA5" },
+  { ic: "car-front", titulo: "Accidente", desc: "Choques o siniestros que debas reportar a la autoridad.", color: "#3C3489" },
+  { ic: "lightbulb", titulo: "Alumbrado público", desc: "Postes o luminarias apagadas que reducen la visibilidad nocturna.", color: "#1D9E75" },
+  { ic: "circle-ellipsis", titulo: "Otro", desc: "Cualquier otra situación que ponga en riesgo a los actores viales.", color: "#E8530A" },
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -280,9 +323,7 @@ function renderStats() {
 function renderGuia() {
   html($("#guiaGrid"), GUIA.map(g => `
     <a class="card reveal" href="${g.href}" style="--accent:${g.color}">
-      ${g.img
-        ? `<img class="guia-ico" src="${g.img}" alt="${g.titulo}" loading="lazy" />`
-        : `<div class="sign sign-${g.shape}"><span class="sign-shape"></span><span class="sign-ico">${g.icon}</span></div>`}
+      <div class="sign sign-${g.shape}"><span class="sign-shape"></span><span class="sign-ico">${svgIcon(g.ic)}</span></div>
       <h3>${g.titulo}</h3>
       <p>${g.desc}</p>
       <span class="badge" style="--accent:${g.color}">Ver guía →</span>
@@ -292,7 +333,7 @@ function renderGuia() {
 function renderNormas() {
   html($("#normasGrid"), NORMAS.map(n => `
     <article class="card reveal" style="--accent:${n.color}">
-      <div class="card-icon">${n.img ? `<img src="${n.img}" alt="${n.titulo}" loading="lazy" />` : n.icon}</div>
+      <div class="card-icon">${svgIcon(n.ic)}</div>
       <h3>${n.titulo}</h3>
       <p>${n.desc}</p>
       <span class="badge" style="--accent:${n.color}">${n.badge}</span>
@@ -334,7 +375,7 @@ function renderVelocidad() {
 function renderDocumentos() {
   html($("#documentosGrid"), DOCUMENTOS.map(d => `
     <div class="doc reveal" style="--accent:${d.color}">
-      <div class="doc-icon">${d.img ? `<img src="${d.img}" alt="${d.titulo}" loading="lazy" />` : d.icon}</div>
+      <div class="doc-icon">${svgIcon(d.ic)}</div>
       <div>
         <h3>${d.titulo}</h3>
         <p>${d.desc}</p>
@@ -387,7 +428,7 @@ function renderConsejos(activeKey = "conductores") {
   const keys = Object.keys(CONSEJOS);
   html($("#consejosTabs"), keys.map(k => {
     const c = CONSEJOS[k];
-    const ico = c.img ? `<img class="tab-ico" src="${c.img}" alt="" loading="lazy" />` : "";
+    const ico = c.ic ? svgIcon(c.ic, "tab-ico") : "";
     return `<button class="tab ${k === activeKey ? "active" : ""}" data-tab="${k}">${ico}${c.label}</button>`;
   }).join(""));
 
@@ -487,7 +528,7 @@ function renderMapaZonas() {
 function renderEmergencias() {
   html($("#emergGrid"), EMERGENCIAS.map(e => `
     <article class="card emerg reveal" style="--accent:${e.color}">
-      <div class="emerg-icon">${e.img ? `<img src="${e.img}" alt="${e.name}" loading="lazy" />` : e.icon}</div>
+      <div class="emerg-icon">${svgIcon(e.ic)}</div>
       <div class="emerg-num">${e.num}</div>
       <div class="emerg-name">${e.name}</div>
       <div class="emerg-sub">${e.sub}</div>
@@ -497,7 +538,7 @@ function renderEmergencias() {
 function renderPqrTipos() {
   html($("#pqrTiposGrid"), PQR_TIPOS.map(t => `
     <article class="card reveal" style="--accent:${t.color}">
-      <div class="card-icon">${t.img ? `<img src="${t.img}" alt="${t.titulo}" loading="lazy" />` : t.icon}</div>
+      <div class="card-icon">${svgIcon(t.ic)}</div>
       <h3>${t.titulo}</h3>
       <p>${t.desc}</p>
     </article>`).join(""));

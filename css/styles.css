@@ -294,13 +294,14 @@ img { max-width: 100%; display: block; }
   transition: transform var(--trans);
 }
 .card:hover .card-icon { transform: scale(1.08) rotate(-4deg); }
-/* Cuando la norma tiene imagen: thumbnail enmarcado más grande */
-.card-icon:has(img) {
-  width: 84px; height: 84px; border-radius: 16px; padding: 6px;
-  background: #fff; border: 1px solid var(--linea); overflow: hidden;
-}
-.card-icon img { width: 100%; height: 100%; object-fit: contain; }
-.card:hover .card-icon:has(img) { transform: scale(1.06) rotate(0); }
+
+/* ══ ICONOS SVG (estilo Lucide): heredan color con currentColor ══ */
+.ic { width: 24px; height: 24px; flex-shrink: 0; vertical-align: middle; }
+.card-icon .ic, .doc-icon .ic { width: 27px; height: 27px; color: var(--accent, var(--amarillo)); }
+.emerg-icon .ic { width: 30px; height: 30px; color: var(--accent, var(--amarillo)); }
+.sign-ico .ic { width: 22px; height: 22px; color: #fff; }
+.sign-triangle .sign-ico { align-items: end; padding-bottom: 6px; }
+.sign-octagon .sign-ico .ic { width: 20px; height: 20px; }
 
 /* ══ INSIGNIA DE SEÑAL (hub "Guía completa" del home): misma pieza que en /juegos,
    la forma real de cada categoría de señalización vial identifica cada tema. ══ */
@@ -333,7 +334,7 @@ img { max-width: 100%; display: block; }
   transition: var(--trans);
 }
 .tab:has(.tab-ico) { padding: 8px 20px 8px 12px; }
-.tab-ico { width: 24px; height: 19px; object-fit: contain; flex-shrink: 0; }
+.tab-ico { width: 17px; height: 17px; flex-shrink: 0; }
 .tab:hover { border-color: var(--amarillo); color: var(--texto); transform: translateY(-2px); }
 .tab.active { background: var(--carbon); color: var(--amarillo); border-color: var(--carbon); box-shadow: var(--sombra); }
 .tab-desc { color: var(--muted); margin-bottom: 24px; max-width: 700px; font-size: 0.98rem;
@@ -382,15 +383,9 @@ img { max-width: 100%; display: block; }
 .doc:hover { transform: translateX(6px); background: var(--surface); box-shadow: var(--sombra-md); }
 .doc-icon {
   display: grid; place-items: center; min-width: 50px; height: 50px; border-radius: 12px; font-size: 1.6rem;
-  overflow: hidden;   /* evita que las esquinas de la imagen se asomen del marco */
+  overflow: hidden;
   background: color-mix(in srgb, var(--accent) 15%, transparent);
 }
-/* Cuando el documento tiene imagen: mini-thumbnail enmarcado que muestra el documento completo */
-.doc-icon:has(img) {
-  min-width: 78px; width: 78px; height: 56px; padding: 4px; border-radius: 10px;
-  background: #fff; border: 1px solid var(--linea);
-}
-.doc-icon img { width: 100%; height: 100%; object-fit: contain; }
 .doc h3 { font-size: 1.05rem; margin-bottom: 4px; }
 .doc p { color: var(--muted); font-size: 0.92rem; }
 
@@ -480,7 +475,6 @@ img { max-width: 100%; display: block; }
 .card.emerg { text-align: center; }
 .emerg-icon { display: grid; place-items: center; width: 58px; height: 58px; margin: 0 auto 10px; border-radius: 16px; font-size: 1.9rem;
   overflow: hidden; background: color-mix(in srgb, var(--accent) 15%, transparent); }
-.emerg-icon img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
 .emerg-num { font-size: 2.3rem; font-weight: 800; color: var(--accent); letter-spacing: -1px; }
 .emerg-name { font-weight: 700; margin-top: 4px; }
 .emerg-sub { color: var(--muted); font-size: 0.85rem; }

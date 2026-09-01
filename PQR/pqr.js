@@ -14,13 +14,28 @@ async function getClient() {
   return _sb;
 }
 
+// ── Iconos SVG (estilo Lucide, ISC) — heredan color con currentColor ──
+const ICON_PATHS = {
+  "construction": '<rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="m8 6 8 8"/>',
+  "traffic-light": '<rect x="6" y="2" width="12" height="20" rx="6"/><circle cx="12" cy="7" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="12" cy="17" r="1.75"/><path d="M18 12h3"/>',
+  "signpost": '<path d="M12 13v8"/><path d="M12 3v3"/><path d="M2.354 10.354a1.207 1.207 0 0 1 0-1.708l2.06-2.06A2 2 0 0 1 5.828 6h12.344a2 2 0 0 1 1.414.586l2.06 2.06a1.207 1.207 0 0 1 0 1.708l-2.06 2.06a2 2 0 0 1-1.414.586H5.828a2 2 0 0 1-1.414-.586z"/>',
+  "car-front": '<path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8"/><path d="M7 14h.01"/><path d="M17 14h.01"/><rect width="18" height="8" x="3" y="10" rx="2"/><path d="M5 18v2"/><path d="M19 18v2"/>',
+  "lightbulb": '<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',
+  "circle-ellipsis": '<circle cx="12" cy="12" r="10"/><path d="M17 12h.01"/><path d="M12 12h.01"/><path d="M7 12h.01"/>',
+};
+function svgIcon(name, extraClass) {
+  const p = ICON_PATHS[name];
+  if (!p) return "";
+  return `<svg class="ic${extraClass ? " " + extraClass : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+}
+
 const TIPOS = {
-  hueco:      { ico: "🕳️", label: "Hueco / bache" },
-  semaforo:   { ico: "🚦", label: "Semáforo dañado" },
-  senal:      { ico: "🚧", label: "Señalización" },
-  accidente:  { ico: "💥", label: "Accidente" },
-  alumbrado:  { ico: "💡", label: "Alumbrado público" },
-  otro:       { ico: "📌", label: "Otro" },
+  hueco:      { ico: "construction",     label: "Hueco / bache" },
+  semaforo:   { ico: "traffic-light",    label: "Semáforo dañado" },
+  senal:      { ico: "signpost",         label: "Señalización" },
+  accidente:  { ico: "car-front",        label: "Accidente" },
+  alumbrado:  { ico: "lightbulb",        label: "Alumbrado público" },
+  otro:       { ico: "circle-ellipsis",  label: "Otro" },
 };
 
 const GRAV = {
@@ -132,7 +147,7 @@ async function switchView(view) {
 function renderTypeGrid() {
   $("#typeGrid").innerHTML = Object.entries(TIPOS).map(([key, t]) => `
     <button type="button" class="type-btn" data-tipo="${key}">
-      <span class="type-ico">${t.ico}</span><span>${t.label}</span>
+      <span class="type-ico">${svgIcon(t.ico)}</span><span>${t.label}</span>
     </button>`).join("");
 
   $$("#typeGrid .type-btn").forEach(btn => btn.onclick = () => {
@@ -291,7 +306,7 @@ function reportCardHTML(r) {
   const g = GRAV[r.gravedad] || GRAV.media;
   return `
     <article class="report-card" data-id="${r.id}" style="--grav:${g.color}">
-      <div class="rc-ico">${t.ico}</div>
+      <div class="rc-ico">${svgIcon(t.ico)}</div>
       <div class="rc-body">
         <div class="rc-top">
           <span class="rc-tipo">${t.label}</span>
@@ -341,8 +356,8 @@ function openModal(id) {
   const g = GRAV[r.gravedad] || GRAV.media;
 
   $("#modal").innerHTML = `
-    <div class="modal-head">
-      <div class="rc-ico">${t.ico}</div>
+    <div class="modal-head" style="--grav:${g.color}">
+      <div class="rc-ico">${svgIcon(t.ico)}</div>
       <div class="modal-title">
         <h2>${t.label}</h2>
         <span class="rc-id">${escapeHtml(r.folio)}</span>
