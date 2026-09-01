@@ -39,7 +39,7 @@ Página corta y directa: hero, un **hub "Guía completa"** con una tarjeta por t
 ### Guía por temas (`guia/`)
 Cada tema vive en su propia página (para no hacer del home un scroll interminable), reutilizando el mismo contenido y estilos del landing:
 - **Normas** clave de tránsito.
-- **Señales** (reglamentarias, preventivas e informativas) con imágenes reales, por pestañas.
+- **Señales** con imágenes reales, en cuatro pestañas: reglamentarias, preventivas, informativas de servicios (fondo azul) e informativas de destinos (fondo verde).
 - **Límites de velocidad** por tipo de zona.
 - **Documentos obligatorios** para circular.
 - **Clasificación de infracciones** con acordeón: descripción y ley de cada una.
@@ -158,4 +158,4 @@ node scripts/smoke-test.js
 
 Proyecto educativo de seguridad vial. Contenido basado en la Ley 769 de 2002 (Código Nacional de Tránsito de Colombia). Con fines educativos.
 
-Parte de las señales en `assets/senales/` son SVG propios; algunas provienen de Wikimedia Commons (categoría *SVG road signs of Colombia*, dominio público — «PD ineligible»).
+Las señales de la guía combinan imágenes locales en `assets/senales/` con SVG oficiales enlazados desde Wikimedia Commons (*SVG road signs in Colombia*, dominio público — «PD ineligible»).

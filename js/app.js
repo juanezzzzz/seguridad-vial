@@ -79,6 +79,10 @@ const NORMAS = [
 ];
 
 // ── Señales de tránsito (con imágenes reales) ──────────
+// Señales oficiales colombianas (SVG de Wikimedia Commons, dominio público).
+// Se enlazan por URL para usar siempre la versión vectorial oficial.
+const WM = "https://upload.wikimedia.org/wikipedia/commons/";
+
 const SENALES = {
   reglamentarias: {
     label: "Reglamentarias",
@@ -93,13 +97,13 @@ const SENALES = {
       { img: "../assets/senales/Prohibido_girar_U.png", nombre: "Prohibido giro en U", desc: "No está permitido devolverse cambiando de sentido." },
       { img: "../assets/senales/prohibido_adelantar.png", nombre: "Prohibido adelantar", desc: "No puedes rebasar otros vehículos en este tramo." },
       { img: "../assets/senales/Velocidad_maxima_30.png", nombre: "Velocidad máxima", desc: "No superes los <strong>30 km/h</strong> indicados en la señal." },
-      { img: "../assets/senales/Siga_de_frente.svg", nombre: "Siga de frente", desc: "En esta intersección solo se permite continuar en línea recta." },
-      { img: "../assets/senales/Giro_izquierda_obligatorio.svg", nombre: "Giro a la izquierda obligatorio", desc: "Debes girar hacia la izquierda; no está permitido seguir de frente." },
-      { img: "../assets/senales/Doble_sentido.svg", nombre: "Doble sentido", desc: "La vía tiene circulación en ambos sentidos. Conserva tu derecha." },
-      { img: "../assets/senales/Prohibido_peatones.svg", nombre: "Prohibido el paso de peatones", desc: "Los peatones no pueden transitar ni cruzar por este tramo." },
-      { img: "../assets/senales/Luces_bajas.svg", nombre: "Encienda las luces bajas", desc: "Túnel o tramo de baja visibilidad: usa las luces de cruce." },
-      { img: "../assets/senales/Altura_maxima.svg", nombre: "Altura máxima", desc: "Los vehículos que superen la altura indicada no pueden pasar." },
-      { img: "../assets/senales/Peso_maximo.svg", nombre: "Peso máximo", desc: "Prohibido el paso a vehículos que excedan el peso señalado." },
+      { img: WM + "e/ee/Colombia_road_sign_SR-03.svg", nombre: "Siga de frente", desc: "En esta intersección solo se permite continuar en línea recta." },
+      { img: WM + "e/ee/Colombia_road_sign_SR-05.svg", nombre: "Giro a la izquierda obligatorio", desc: "Debes girar hacia la izquierda; no está permitido seguir de frente." },
+      { img: WM + "c/cf/Colombia_road_sign_SR-11.svg", nombre: "Doble sentido", desc: "La vía tiene circulación en ambos sentidos. Conserva tu derecha." },
+      { img: WM + "f/f8/Colombia_road_sign_SR-20.svg", nombre: "Prohibido el paso de peatones", desc: "Los peatones no pueden transitar ni cruzar por este tramo." },
+      { img: WM + "2/28/Colombia_road_sign_SR-35.svg", nombre: "Encienda las luces bajas", desc: "Túnel o tramo de baja visibilidad: usa las luces de cruce." },
+      { img: WM + "f/fb/Colombia_road_sign_SR-32.svg", nombre: "Altura máxima", desc: "Los vehículos que superen la altura indicada no pueden pasar." },
+      { img: WM + "3/39/Colombia_road_sign_SR-31.svg", nombre: "Peso máximo", desc: "Prohibido el paso a vehículos que excedan el peso bruto señalado." },
     ],
   },
   preventivas: {
@@ -111,31 +115,41 @@ const SENALES = {
       { img: "../assets/senales/Pendiente_Desendente.png", nombre: "Pendiente descendente", desc: "Bajada pronunciada. Usa freno motor y controla la velocidad." },
       { img: "../assets/senales/Conservar_Espacio.png", nombre: "Conservar la derecha", desc: "Mantente en tu carril y conserva la distancia adecuada." },
       { img: "../assets/senales/Separador_transito.png", nombre: "Separador de tránsito", desc: "Divisor de calzada adelante. Circula por el lado correcto." },
-      { img: "../assets/senales/Curva_izquierda.svg", nombre: "Curva a la izquierda", desc: "Curva cerrada hacia la izquierda. Reduce la velocidad antes de entrar." },
-      { img: "../assets/senales/Curva_derecha.svg", nombre: "Curva a la derecha", desc: "Curva cerrada hacia la derecha. Reduce la velocidad antes de entrar." },
-      { img: "../assets/senales/Interseccion.svg", nombre: "Intersección", desc: "Cruce de vías adelante. Anticípate a los vehículos que se incorporan." },
-      { img: "../assets/senales/Semaforo_adelante.svg", nombre: "Semáforo adelante", desc: "Hay un semáforo próximo. Prepárate para detenerte si cambia a rojo." },
-      { img: "../assets/senales/Resalto.svg", nombre: "Reductor de velocidad", desc: "Resalto o policía acostado en la vía. Disminuye la velocidad." },
-      { img: "../assets/senales/Zona_escolar.svg", nombre: "Zona escolar", desc: "Colegio cercano: circula a 30 km/h y atento a los niños." },
-      { img: "../assets/senales/Ciclista_via.svg", nombre: "Ciclistas en la vía", desc: "Tramo con circulación frecuente de bicicletas. Comparte la vía." },
+      { img: WM + "b/b3/Colombia_road_sign_SP-01.svg", nombre: "Curva a la izquierda", desc: "Curva cerrada hacia la izquierda. Reduce la velocidad antes de entrar." },
+      { img: WM + "a/ac/Colombia_road_sign_SP-02.svg", nombre: "Curva a la derecha", desc: "Curva cerrada hacia la derecha. Reduce la velocidad antes de entrar." },
+      { img: WM + "8/89/Colombia_road_sign_SP-11.svg", nombre: "Intersección", desc: "Cruce de vías adelante. Anticípate a los vehículos que se incorporan." },
+      { img: WM + "c/c0/Colombia_road_sign_SP-23.svg", nombre: "Semáforo adelante", desc: "Hay un semáforo próximo. Prepárate para detenerte si cambia a rojo." },
+      { img: WM + "8/86/Colombia_road_sign_SP-25.svg", nombre: "Reductor de velocidad", desc: "Resalto o policía acostado en la vía. Disminuye la velocidad." },
+      { img: WM + "1/16/Colombia_road_sign_SP-47.svg", nombre: "Zona escolar", desc: "Colegio cercano: circula a 30 km/h y atento a los niños." },
+      { img: WM + "b/b8/Colombia_road_sign_SP-49_%28capybara%29.svg", nombre: "Animales en la vía", desc: "Tramo con paso frecuente de animales (aquí, un chigüiro). Reduce la velocidad." },
     ],
   },
   informativas: {
-    label: "Informativas",
-    desc: "Guían y entregan información útil sobre servicios, destinos y distancias. Fondo azul o verde.",
+    label: "Informativas (servicios)",
+    desc: "Fondo azul. Señalan servicios y lugares útiles para el conductor dentro de la zona: parqueo, salud, combustible, comida, descanso.",
     items: [
       { img: "../assets/senales/Parqueadero.png", nombre: "Parqueadero", desc: "Zona autorizada para estacionar tu vehículo." },
       { img: "../assets/senales/Hospital.png", nombre: "Hospital", desc: "Centro de atención médica cercano." },
       { img: "../assets/senales/Estacion_servicio.png", nombre: "Estación de servicio", desc: "Punto de suministro de combustible adelante." },
       { img: "../assets/senales/Zona_servicios.png", nombre: "Zona de servicios", desc: "Restaurantes, baños y descanso disponibles." },
       { img: "../assets/senales/Telefono_emergencia.png", nombre: "Teléfono de emergencia", desc: "Punto de comunicación para auxilio." },
-      { img: "../assets/senales/Primeros_auxilios.svg", nombre: "Primeros auxilios", desc: "Puesto de atención médica básica cercano." },
-      { img: "../assets/senales/Restaurante.svg", nombre: "Restaurante", desc: "Servicio de comidas disponible en el sector." },
-      { img: "../assets/senales/Hospedaje.svg", nombre: "Hospedaje", desc: "Hotel u hospedaje disponible adelante." },
-      { img: "../assets/senales/Servicios_sanitarios.svg", nombre: "Servicios sanitarios", desc: "Baños públicos disponibles en este punto." },
-      { img: "../assets/senales/Paradero_bus.svg", nombre: "Paradero de bus", desc: "Zona autorizada para el ascenso y descenso de pasajeros de bus." },
-      { img: "../assets/senales/Ciclorruta.svg", nombre: "Ciclorruta", desc: "Carril exclusivo para bicicletas. Los vehículos no deben invadirlo." },
-      { img: "../assets/senales/Aeropuerto.svg", nombre: "Aeropuerto", desc: "Ruta hacia el aeropuerto de la zona." },
+      { img: WM + "6/6c/Colombia_road_sign_SI-16.svg", nombre: "Primeros auxilios", desc: "Puesto de atención médica básica cercano." },
+      { img: WM + "c/cf/Colombia_road_sign_SI-18.svg", nombre: "Restaurante", desc: "Servicio de comidas disponible en el sector." },
+      { img: WM + "f/fb/Colombia_road_sign_SI-15.svg", nombre: "Hospedaje", desc: "Hotel u hospedaje disponible adelante." },
+      { img: WM + "9/9a/Colombia_road_sign_SI-17.svg", nombre: "Servicios sanitarios", desc: "Baños públicos disponibles en este punto." },
+      { img: WM + "4/4d/Colombia_road_sign_SI-08.svg", nombre: "Paradero de bus", desc: "Zona autorizada para el ascenso y descenso de pasajeros de bus." },
+      { img: WM + "9/95/Colombia_road_sign_SI-11.svg", nombre: "Ciclorruta", desc: "Carril exclusivo para bicicletas. Los vehículos no deben invadirlo." },
+      { img: WM + "f/f6/Colombia_road_sign_SI-14.svg", nombre: "Aeropuerto", desc: "Ruta hacia el aeropuerto de la zona." },
+    ],
+  },
+  destinos: {
+    label: "Informativas (destinos)",
+    desc: "Fondo verde. Guían por la red vial: anuncian con antelación los cruces, las salidas, los destinos y las distancias hacia ciudades y municipios.",
+    items: [
+      { img: WM + "b/b7/Colombia_road_sign_SI-05.svg", nombre: "Señal de dirección", desc: "Indica hacia qué lado queda cada destino en el cruce que se aproxima." },
+      { img: WM + "c/c4/Colombia_SI-05D.svg", nombre: "Preseñalización de destino", desc: "Anuncia con antelación el próximo cruce y los destinos a los que conduce." },
+      { img: WM + "3/3f/Colombia_road_sign_SI-05A.svg", nombre: "Salida inmediata", desc: "La salida hacia el destino indicado está justo a continuación." },
+      { img: WM + "f/f7/Colombia_SI-06_%282_destinos%29.svg", nombre: "Señal de confirmación", desc: "Después del cruce, confirma la ruta tomada y la distancia que falta a cada destino." },
     ],
   },
 };
@@ -367,9 +381,10 @@ function renderSenales(activeKey = "reglamentarias") {
     <button class="tab ${k === activeKey ? "active" : ""}" data-tab="${k}">${SENALES[k].label}</button>`).join(""));
 
   const grupo = SENALES[activeKey];
+  const wide = activeKey === "destinos" ? " wide" : "";
   const cards = grupo.items.map(s => {
     const visual = s.img
-      ? `<div class="signal-img"><img src="${s.img}" alt="${s.nombre}" loading="lazy" /></div>`
+      ? `<div class="signal-img${wide}"><img src="${s.img}" alt="${s.nombre}" loading="lazy" /></div>`
       : `<div class="signal-emoji">${s.emoji}</div>`;
     return `<article class="card signal reveal">
       ${visual}
