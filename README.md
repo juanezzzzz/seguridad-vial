@@ -1,17 +1,5 @@
 # 🦫 YopVial — Seguridad Vial
 
-> # ⚠️🚨 ANTES DE DESPLEGAR — LEER 🚨⚠️
->
-> **Este repo trae un EDITOR TEMPORAL para colocar los puntos del mapa de zonas de riesgo.
-> HAY QUE BORRARLO ANTES DE PUBLICAR EL SITIO** (si no, cualquier visitante verá el panel de edición).
->
-> Para quitarlo, elimina TODO lo marcado con `TEMP-EDITOR` (3 lugares):
-> 1. **Borra el archivo** `js/editor-zonas.js`
-> 2. En `guia/zonas.html`, **quita** la línea `<script src="../js/editor-zonas.js"></script>`
-> 3. En `js/app.js`, **quita** la línea `window.mapaZonasRef = map;`
->
-> Búscalo rápido con: `grep -rn "TEMP-EDITOR" .`
-
 Guía educativa e interactiva de **seguridad y movilidad vial**, basada en el Código Nacional de Tránsito de Colombia (Ley 769 de 2002). Incluye contenido didáctico organizado por temas, un módulo de **reportes ciudadanos (PQR)** con base de datos real y una sección de **8 juegos interactivos** para aprender jugando.
 
 > Mascota: **Yop**, una capibara con casco y chaleco de seguridad. Por un camino seguro. 🚦
@@ -46,20 +34,20 @@ Desplegado en GitHub Pages: **https://juanezzzzz.github.io/seguridad-vial/**
 ## ✨ Qué incluye
 
 ### Landing (`index.html`)
-Página corta y directa: hero, un **hub "Guía completa"** con una tarjeta por tema (cada una con la insignia de una señal vial real: forma + color según la categoría), números de emergencia siempre visibles, y acceso rápido a Reportes y Juegos.
+Página corta y directa: hero, un **hub "Guía completa"** con una tarjeta por tema (cada una con la insignia de una señal vial real: forma + color según la categoría, con un ícono SVG dentro), números de emergencia siempre visibles, y acceso rápido a Reportes y Juegos.
 
 ### Guía por temas (`guia/`)
 Cada tema vive en su propia página (para no hacer del home un scroll interminable), reutilizando el mismo contenido y estilos del landing:
 - **Normas** clave de tránsito.
 - **Señales** (reglamentarias, preventivas e informativas) con imágenes reales, por pestañas.
 - **Límites de velocidad** por tipo de zona.
-- **Documentos obligatorios** para circular (con imágenes).
+- **Documentos obligatorios** para circular.
 - **Clasificación de infracciones** con acordeón: descripción y ley de cada una.
 - **Consejos** por tipo de actor vial (conductores, motociclistas, peatones, ciclistas).
 - **Qué hacer en caso de accidente**, paso a paso.
 - **Puntos de mayor riesgo**.
 
-Todas comparten `js/app.js` (contenido y renderizado) y `css/styles.css` (modo claro/oscuro, paleta verde + azul / amarillo + carbón).
+Todas comparten `js/app.js` (contenido, renderizado y set de íconos SVG estilo Lucide, embebidos) y `css/styles.css` (modo claro/oscuro, paleta verde + azul / amarillo + carbón).
 
 ### Reportes ciudadanos — PQR (`PQR/`)
 Módulo de participación ciudadana para reportar huecos, semáforos dañados, señalización, accidentes, etc.
@@ -97,7 +85,7 @@ Todos los juegos guardan su mejor marca en `localStorage` y comparten tema/silen
 seguridad-vial/
 ├── index.html            # Landing (hero + hub de la guía + emergencias + reportes)
 ├── css/styles.css        # Estilos compartidos por landing y guia/ (temas claro/oscuro)
-├── js/app.js             # Contenido y renderizado, compartido por landing y guia/
+├── js/app.js             # Contenido, renderizado e íconos SVG, compartido por landing y guia/
 ├── guia/                 # Un tema por página
 │   ├── normas.html
 │   ├── senales.html
@@ -107,7 +95,7 @@ seguridad-vial/
 │   ├── consejos.html
 │   ├── accidentes.html
 │   └── zonas.html
-├── assets/               # Imágenes: logo, señales, documentos, emergencias, consejos, capturas
+├── assets/               # Imágenes: logo, señales reales, líneas de emergencia, capturas
 │   └── ruta-nocturna/    # Arte SVG propio del juego "Ruta nocturna"
 ├── PQR/                  # Módulo de reportes ciudadanos
 │   ├── reportes.html
