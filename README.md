@@ -157,3 +157,5 @@ node scripts/smoke-test.js
 ## 📄 Créditos
 
 Proyecto educativo de seguridad vial. Contenido basado en la Ley 769 de 2002 (Código Nacional de Tránsito de Colombia). Con fines educativos.
+
+Parte de las señales en `assets/senales/` son SVG propios; algunas provienen de Wikimedia Commons (categoría *SVG road signs of Colombia*, dominio público — «PD ineligible»).
